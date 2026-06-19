@@ -1,50 +1,29 @@
 # DataForSEO Skills
 
-Agent skills for building DataForSEO API integrations and producing evidence-based SEO analyses and reports with explicit endpoint verification, credential safety, and cost controls.
-
 This repository is intended to grow into a collection of skills that perform SEO analyses and generate corresponding SEO reports. Each analysis and reporting skill uses the DataForSEO MCP server and follows the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/) and [DataForSEO White Papers and knowledge base](https://dataforseo.com/knowledgebase).
 
-Use these skills when an agent must select a DataForSEO endpoint, implement or review an integration, troubleshoot provider responses, or turn current OnPage evidence into a technical SEO report. The repository ships `dataforseo-api` for integration work and `technical-seo-page-audit` for single-URL audits and prioritized Markdown reports.
+## Available skills
 
+### `dataforseo-api`
 
-## What this skill solves
+Plans, implements, reviews, and troubleshoots DataForSEO API integrations. It covers endpoint selection, live and task-based request lifecycles, response validation, retries, rate limits, cost controls, and credential safety.
 
-- Selects and verifies DataForSEO API workflows against current official documentation.
-- Handles live and task-based request lifecycles, provider errors, retries, and normalization.
-- Keeps credentials out of source control and makes billable activity explicit.
-- Audits one page for availability, indexability, redirects, links, metadata, schema signals, and performance.
-- Produces a provider-derived Technical Score and a dated Markdown report with P0-P3 fixes.
-
-## Use when
-
-- Implementing a DataForSEO client, connector, job, or data pipeline.
-- Reviewing endpoint choice, task polling, pagination, rate limiting, or error handling.
-- Diagnosing unexpected DataForSEO responses, empty results, or failed tasks.
-- Auditing a specific URL for technical SEO defects and implementation priorities.
-- Generating a detailed technical SEO page report with the DataForSEO MCP server.
-
-## Expected outputs
-
-- A documented endpoint and request strategy with assumptions and request volume.
-- Integration code and sanitized tests when file changes are requested.
-- A troubleshooting report or operational runbook for existing integrations.
-- A dated technical SEO Markdown report with a 0-100 Technical Score and evidence-backed fixes.
-
-## Context requirements
-
-- The desired dataset, targets, locations, languages, freshness, and output format.
-- The host language, framework, and existing integration code when applicable.
-- DataForSEO credentials only for explicitly authorized live requests, supplied via environment variables.
-- For page audits, an absolute HTTP(S) page URL and filesystem write access.
-
-## Example prompts
+Example prompt:
 
 ```text
-Implement a Python client for our DataForSEO task-based workflow with bounded polling and normalized errors.
 Review this DataForSEO integration for accidental billable retries, leaked credentials, and incomplete task-state handling.
-Diagnose why these successful HTTP responses contain no usable results and propose tests with sanitized fixtures.
-Audit https://example.com/products/widget for technical SEO and save the detailed Markdown report in the default location.
-Check this page for indexability, broken-link signals, redirects, missing metadata, schema gaps, and performance problems.
+```
+
+### `technical-seo-page-audit`
+
+Audits one specific page through the official DataForSEO MCP OnPage tools. It checks availability, indexability, redirects, broken-link and resource signals, metadata, headings, canonicalization, structured-data gaps, page speed, Core Web Vitals, and related technical SEO issues. It returns the DataForSEO-derived Technical Score from 0 to 100, prioritizes fixes from P0 to P3, and writes a detailed dated Markdown report to the requested directory or `/SEO/` by default.
+
+If the prompt does not contain a URL, the skill asks for one before making billable DataForSEO requests.
+
+Example prompt:
+
+```text
+Audit https://example.com/products/widget for technical SEO, prioritize the fixes, and save the detailed Markdown report in the default location.
 ```
 
 ## Related skills

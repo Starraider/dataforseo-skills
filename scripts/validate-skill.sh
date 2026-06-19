@@ -92,6 +92,7 @@ if composer.get("type") != "ai-agent-skill":
     errors.append("composer type must be ai-agent-skill")
 if composer.get("license") != "(MIT AND CC-BY-SA-4.0)":
     errors.append("composer license is invalid")
+composer_skills = composer.get("extra", {}).get("ai-agent-skill", [])
 if isinstance(composer_skills, str):
     composer_skills = [composer_skills]
 for path in composer_skills:
