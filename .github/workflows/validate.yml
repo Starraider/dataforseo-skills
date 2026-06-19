@@ -1,0 +1,15 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    uses: netresearch/skill-repo-skill/.github/workflows/validate.yml@main
+

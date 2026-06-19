@@ -1,0 +1,39 @@
+{
+  "skill_name": "technical-seo-page-audit",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run a technical SEO page audit for https://example.com/products/widget?campaign=spring and save the report in the default location.",
+      "expected_output": "Uses both required DataForSEO MCP OnPage tools, reports a provider-derived 0-100 Technical Score, prioritizes evidence-backed fixes, and saves a detailed report under /SEO with a safe dated filename that omits the query string.",
+      "files": [],
+      "assertions": [
+        "The workflow calls on_page_instant_pages and on_page_lighthouse through DataForSEO MCP.",
+        "The report uses the DataForSEO onpage_score rather than a Lighthouse score as Technical Score.",
+        "The saved filename starts with the local ISO date and Techical-Report and excludes the URL query string.",
+        "Findings include evidence, impact, fix, effort, and validation and are prioritized P0 through P3."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Please audit a page for technical SEO and give me a Markdown report.",
+      "expected_output": "Prompts for the missing absolute page URL before making any billable DataForSEO MCP call.",
+      "files": [],
+      "assertions": [
+        "The workflow asks for the URL and waits.",
+        "No DataForSEO call or report is produced before a valid URL is supplied."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Audit https://shop.example.org/category/shoes for technical SEO. Put the Markdown report in ./client-reports.",
+      "expected_output": "Audits only the supplied page with DataForSEO MCP, distinguishes redirects from redirect chains, handles broken-link evidence conservatively, and saves the detailed report to the requested directory.",
+      "files": [],
+      "assertions": [
+        "The requested ./client-reports directory overrides /SEO.",
+        "A redirect chain is claimed only when multiple hops are present in returned evidence.",
+        "Broken destination URLs are not invented when only a boolean broken-links signal is available.",
+        "Schema recommendations are conditional on returned markup evidence and visible page content."
+      ]
+    }
+  ]
+}

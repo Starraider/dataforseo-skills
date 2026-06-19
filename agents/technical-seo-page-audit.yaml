@@ -1,0 +1,4 @@
+interface:
+  display_name: Technical SEO Page Audit
+  short_description: Audit one URL with DataForSEO and write a prioritized Markdown report.
+  default_prompt: Audit this page with the DataForSEO MCP OnPage tools, calculate the provider-derived Technical Score, prioritize fixes, and save the detailed Markdown report.

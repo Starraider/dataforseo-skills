@@ -1,0 +1,35 @@
+slug: dataforseo-api
+display_name: DataForSEO API
+summary:
+  en: >
+    Plans, implements, reviews, and troubleshoots reliable DataForSEO API integrations with credential, task lifecycle, error, and cost safeguards.
+category: development
+tags:
+  - dataforseo
+  - seo
+  - api-integration
+  - data-pipeline
+use_cases:
+  - Implement a DataForSEO client or data pipeline.
+  - Review task lifecycle, retry, and error handling.
+  - Diagnose provider responses and empty results.
+expected_outputs:
+  - A documented endpoint and request strategy.
+  - Integration code with sanitized tests when requested.
+  - A troubleshooting report or operational runbook.
+context_requirements:
+  - Required dataset, targets, locations, languages, freshness, and output format.
+  - Host language, framework, and existing integration code when applicable.
+  - Environment-supplied credentials for explicitly authorized live requests.
+action_level: runs_commands
+risk_level: medium
+related_skills:
+  - technical-seo-page-audit
+example_prompts:
+  - Implement a Python client for our DataForSEO task-based workflow with bounded polling and normalized errors.
+  - Review this integration for accidental billable retries, leaked credentials, and incomplete task-state handling.
+  - Diagnose why these successful HTTP responses contain no usable results and propose sanitized tests.
+primary_keywords:
+  - dataforseo
+  - api-integration
+  - seo-data

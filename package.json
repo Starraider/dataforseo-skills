@@ -1,0 +1,41 @@
+{
+  "name": "@netresearch/dataforseo-skills",
+  "version": "0.0.0-source",
+  "private": true,
+  "description": "Agent skills for DataForSEO integrations and evidence-based technical SEO audits and reports.",
+  "license": "(MIT AND CC-BY-SA-4.0)",
+  "author": "Netresearch DTT GmbH (https://www.netresearch.de/)",
+  "homepage": "https://github.com/netresearch/dataforseo-skills",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/netresearch/dataforseo-skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/netresearch/dataforseo-skills/issues"
+  },
+  "keywords": [
+    "ai-agent-skill",
+    "dataforseo",
+    "seo",
+    "technical-seo",
+    "seo-audit",
+    "api-integration",
+    "claude-code"
+  ],
+  "aiAgentSkill": [
+    "skills/dataforseo-api/SKILL.md",
+    "skills/technical-seo-page-audit/SKILL.md"
+  ],
+  "files": [
+    "skills/dataforseo-api/",
+    "skills/technical-seo-page-audit/",
+    ".claude-plugin/",
+    "AGENTS.md",
+    "LICENSE-MIT",
+    "LICENSE-CC-BY-SA-4.0",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "@netresearch/agent-skill-coordinator": "^0.1"
+  }
+}

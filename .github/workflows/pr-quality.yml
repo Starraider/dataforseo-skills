@@ -1,0 +1,15 @@
+# This pull_request_target caller must never checkout or execute PR-controlled code.
+name: PR Quality Gates
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions: {}
+
+jobs:
+  pr-quality:
+    uses: netresearch/skill-repo-skill/.github/workflows/pr-quality.yml@main
+    permissions:
+      pull-requests: write
+
