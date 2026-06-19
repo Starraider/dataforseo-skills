@@ -6,7 +6,6 @@ This repository is intended to grow into a collection of skills that perform SEO
 
 Use these skills when an agent must select a DataForSEO endpoint, implement or review an integration, troubleshoot provider responses, or turn current OnPage evidence into a technical SEO report. The repository ships `dataforseo-api` for integration work and `technical-seo-page-audit` for single-URL audits and prioritized Markdown reports.
 
-Install through the Netresearch marketplace with `/plugin marketplace add netresearch/claude-code-marketplace`, or use one of the direct installation methods below.
 
 ## What this skill solves
 
@@ -63,36 +62,30 @@ Before using the SEO analysis and reporting skills:
 - Set up an appropriate [DataForSEO account](https://app.dataforseo.com/register) with access to the APIs required by the selected skill.
 - Provide credentials through the MCP server's secure configuration. Do not store credentials in this repository.
 
-### Marketplace (recommended)
-
-```bash
-/plugin marketplace add netresearch/claude-code-marketplace
-```
-
 Then browse the marketplace and install `dataforseo-api` or `technical-seo-page-audit`.
 
 ### Agent Skills-compatible clients
 
 ```bash
-npx skills add https://github.com/netresearch/dataforseo-skills --skill dataforseo-api
-npx skills add https://github.com/netresearch/dataforseo-skills --skill technical-seo-page-audit
+npx skills add https://github.com/Starraider/dataforseo-skills --skill dataforseo-api
+npx skills add https://github.com/Starraider/dataforseo-skills --skill technical-seo-page-audit
 ```
 
 ### Composer
 
 ```bash
-composer require netresearch/dataforseo-skills
+composer require Starraider/dataforseo-skills
 ```
 
 ### Git clone
 
 ```bash
-git clone https://github.com/netresearch/dataforseo-skills.git
+git clone https://github.com/Starraider/dataforseo-skills.git
 ```
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). Changes to discovery fields must also update the corresponding Netresearch marketplace entry, or document why an override is intentional.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Changes to discovery fields must document why an override is intentional.
 
 ## License
 
@@ -113,4 +106,4 @@ Code, scripts, workflows, and configuration are licensed under [MIT](LICENSE-MIT
 - Proposed GitHub description: `Agent skills for DataForSEO API integrations and evidence-based technical SEO audits and reports.`
 - Proposed GitHub topics: `agent-skill`, `dataforseo`, `seo`, `api-integration`, `data-pipeline`.
 
-Developed and maintained by [Netresearch DTT GmbH](https://www.netresearch.de/).
+Developed and maintained by [Sven Kalbhenn](https://www.skom.de/).

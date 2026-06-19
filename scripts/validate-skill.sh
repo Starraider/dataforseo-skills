@@ -47,8 +47,8 @@ if not isinstance(skill_paths, list) or not skill_paths:
     skill_paths = []
 if plugin.get("license") != "(MIT AND CC-BY-SA-4.0)":
     errors.append("plugin.json has an invalid license")
-if plugin.get("author", {}).get("url", "").rstrip("/") != "https://www.netresearch.de":
-    errors.append("plugin.json author.url must be https://www.netresearch.de")
+if plugin.get("author", {}).get("url", "").rstrip("/") != "https://www.skom.de":
+    errors.append("plugin.json author.url must be https://www.skom.de")
 
 allowed_frontmatter = {
     "name", "description", "license", "compatibility", "metadata", "allowed-tools"
@@ -86,15 +86,12 @@ try:
 except Exception as exc:
     errors.append(f"invalid composer.json: {exc}")
     composer = {}
-if composer.get("name") != "netresearch/dataforseo-skills":
-    errors.append("composer package name must be netresearch/dataforseo-skills")
+if composer.get("name") != "Starraider/dataforseo-skills":
+    errors.append("composer package name must be Starraider/dataforseo-skills")
 if composer.get("type") != "ai-agent-skill":
     errors.append("composer type must be ai-agent-skill")
 if composer.get("license") != "(MIT AND CC-BY-SA-4.0)":
     errors.append("composer license is invalid")
-if "netresearch/composer-agent-skill-plugin" not in composer.get("require", {}):
-    errors.append("composer skill plugin dependency is missing")
-composer_skills = composer.get("extra", {}).get("ai-agent-skill", [])
 if isinstance(composer_skills, str):
     composer_skills = [composer_skills]
 for path in composer_skills:

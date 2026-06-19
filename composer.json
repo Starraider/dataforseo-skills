@@ -1,18 +1,15 @@
 {
-  "name": "netresearch/dataforseo-skills",
+  "name": "Starraider/dataforseo-skills",
   "description": "Agent skills for reliable, cost-aware DataForSEO API integrations and task workflows.",
   "type": "ai-agent-skill",
   "license": "(MIT AND CC-BY-SA-4.0)",
   "authors": [
     {
-      "name": "Netresearch DTT GmbH",
-      "homepage": "https://www.netresearch.de/",
+      "name": "Sven Kalbhenn",
+      "homepage": "https://www.skom.de/",
       "role": "Manufacturer"
     }
   ],
-  "require": {
-    "netresearch/composer-agent-skill-plugin": "*"
-  },
   "extra": {
     "ai-agent-skill": [
       "skills/dataforseo-api/SKILL.md",
