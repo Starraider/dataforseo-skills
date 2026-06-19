@@ -1,10 +1,12 @@
 {
   "name": "dataforseo-api",
-  "version": "0.2.0",
-  "description": "Build DataForSEO integrations and run evidence-based technical SEO page audits with safe billing and reporting workflows.",
+  "version": "0.4.0",
+  "description": "Build DataForSEO integrations and run evidence-based technical SEO, competitor-gap, and keyword-opportunity analyses with safe reporting workflows.",
   "skills": [
     "./skills/dataforseo-api",
-    "./skills/technical-seo-page-audit"
+    "./skills/seo-technical-page-audit",
+    "./skills/seo-competitor-gap-analysis",
+    "./skills/seo-keyword-research"
   ],
   "license": "(MIT AND CC-BY-SA-4.0)",
   "author": {

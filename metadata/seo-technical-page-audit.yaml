@@ -1,5 +1,5 @@
-slug: technical-seo-page-audit
-display_name: Technical SEO Page Audit
+slug: seo-technical-page-audit
+display_name: SEO Technical Page Audit
 summary:
   en: >
     Audits one webpage with the DataForSEO MCP OnPage tools and writes a prioritized Markdown report with a provider-derived 0-100 Technical Score.
@@ -25,6 +25,7 @@ action_level: writes_files
 risk_level: medium
 related_skills:
   - dataforseo-api
+  - seo-keyword-research
 example_prompts:
   - Audit https://example.com/products/widget for technical SEO and save the Markdown report in the default location.
   - Check this landing page for indexability, redirect, metadata, schema, link, and performance problems.

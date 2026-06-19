@@ -1,9 +1,9 @@
 {
-  "skill_name": "technical-seo-page-audit",
+  "skill_name": "seo-technical-page-audit",
   "evals": [
     {
       "id": 1,
-      "prompt": "Run a technical SEO page audit for https://example.com/products/widget?campaign=spring and save the report in the default location.",
+      "prompt": "Run an SEO technical page audit for https://example.com/products/widget?campaign=spring and save the report in the default location.",
       "expected_output": "Uses both required DataForSEO MCP OnPage tools, reports a provider-derived 0-100 Technical Score, prioritizes evidence-backed fixes, and saves a detailed report under /SEO with a safe dated filename that omits the query string.",
       "files": [],
       "assertions": [

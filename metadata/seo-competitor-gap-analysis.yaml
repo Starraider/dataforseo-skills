@@ -1,0 +1,37 @@
+slug: seo-competitor-gap-analysis
+display_name: SEO Competitor Gap Analysis
+summary:
+  en: >
+    Finds true organic-search competitors with DataForSEO MCP, quantifies keyword and traffic gaps, calculates a 0-100 Competitive Score, and writes a detailed Markdown report.
+category: marketing
+tags:
+  - dataforseo
+  - seo-competitors
+  - keyword-gap
+  - seo-report
+use_cases:
+  - Identify up to 20 competing domains by organic SERP overlap.
+  - Compare the top five competitors by shared and unique keywords, traffic, position gaps, and defensive wins.
+  - Classify direct, adjacent, and aspirational competitors and create a dated report.
+expected_outputs:
+  - A 0-100 Competitive Score and strength tier.
+  - Evidence-backed top-five competitor and keyword-gap analysis.
+  - A detailed dated Markdown report saved to the requested directory or /SEO.
+context_requirements:
+  - A target domain or HTTP(S) URL.
+  - The official DataForSEO MCP server with the DATAFORSEO_LABS module enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - dataforseo-api
+  - seo-technical-page-audit
+  - seo-keyword-research
+example_prompts:
+  - Identify the true organic SEO competitors for example.com and save the detailed report in the default location.
+  - Quantify our keyword and traffic gap against the domains that overlap most with our Google rankings.
+  - Find direct, adjacent, and aspirational competitors for shop.example.org in Germany and save the report under ./reports.
+primary_keywords:
+  - seo-competitor-analysis
+  - keyword-gap
+  - competitive-score

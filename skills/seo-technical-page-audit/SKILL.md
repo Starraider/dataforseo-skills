@@ -1,11 +1,11 @@
 ---
-name: technical-seo-page-audit
+name: seo-technical-page-audit
 description: "Use when auditing one specific webpage for technical SEO, page health, indexability, redirects, broken links, metadata, structured data, or performance and producing a prioritized Markdown report with a 0-100 Technical Score."
 license: "(MIT AND CC-BY-SA-4.0). See LICENSE-MIT and LICENSE-CC-BY-SA-4.0"
 compatibility: "Requires the official DataForSEO MCP server with the ONPAGE module enabled and filesystem write access."
 ---
 
-# Technical SEO Page Audit
+# SEO Technical Page Audit
 
 Audit one absolute HTTP(S) URL with current DataForSEO evidence and write a decision-ready report.
 
@@ -23,7 +23,7 @@ Use the official [Instant Pages](https://docs.dataforseo.com/v3/on_page/instant_
 
 ## Report file
 
-Use the requested directory, otherwise `/SEO/`; create it when absent. Derive `<URL>` by removing the scheme, fragment, query, and trailing slash, replacing unsafe character runs with `_`, and limiting it to 140 characters. Write:
+Use the requested directory or `<current-working-directory>/SEO`; create it. Sanitize the target to letters, numbers, dots, hyphens, and underscores; replace other runs with `_`, trim separators, cap at 140 characters. Derive `<URL>` by removing the scheme, fragment, query, and trailing slash, replacing unsafe character runs with `_`, and limiting it to 140 characters. Write:
 
 `<YYYY-MM-DD>_Techical-Report_<URL>.md`
 

@@ -1,0 +1,39 @@
+{
+  "skill_name": "seo-keyword-research",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Research the seed keyword 'electric bikes' and save the detailed keyword analysis in the default location.",
+      "expected_output": "Uses the two seed discovery calls at the requested limits plus one bulk KD call, scores opportunities and the overall keyword set, and writes the dated Markdown report under SEO/.",
+      "files": [],
+      "assertions": [
+        "Related keywords uses limit 200 and keyword suggestions uses limit 100.",
+        "Bulk keyword difficulty is merged before calculating search_volume / (keyword_difficulty + 10).",
+        "The report surfaces the top 20 opportunity-ranked keywords and all five Keyword Score components.",
+        "The filename follows YYYY-MM-DD_Keyword-Analysis_electric_bikes.md in the default SEO directory."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Do keyword research and opportunity scoring for my site.",
+      "expected_output": "Asks for one seed keyword or domain and waits without making a billable call.",
+      "files": [],
+      "assertions": [
+        "The workflow asks for a seed keyword or domain and waits.",
+        "No DataForSEO call or report is produced before an input is supplied."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Analyze the ranking keyword opportunities for https://www.example.org/store?ref=ad --location Germany --language de and save it under ./client-reports.",
+      "expected_output": "Normalizes the domain, retrieves 100 organic ranked keywords, respects scope and output overrides, uses the domain long-tail proxy, and writes a detailed report.",
+      "files": [],
+      "assertions": [
+        "The target is normalized to example.org and ranked keywords uses limit 100 with organic item types.",
+        "Germany, de, and ./client-reports override all defaults.",
+        "Domain-mode long-tail breadth is explicitly labeled as a four-or-more-word ranked-keyword proxy.",
+        "The score is clamped to 0-100, rounded to one decimal, and accompanied by a one-sentence justification."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+slug: seo-keyword-research
+display_name: Keyword Research and Opportunity Scoring
+summary:
+  en: >
+    Finds seed- or domain-based keyword opportunities with DataForSEO MCP, classifies intent, calculates opportunity metrics and a 0-100 Keyword Score, and writes a detailed Markdown report.
+category: marketing
+tags:
+  - dataforseo
+  - keyword-research
+  - search-intent
+  - seo-report
+use_cases:
+  - Discover related and long-tail keywords from a seed term.
+  - Analyze up to 100 organic keywords for which a domain already ranks.
+  - Prioritize keywords by volume and difficulty and produce a dated report.
+expected_outputs:
+  - Search volume, CPC, competition, KD, intent, and opportunity per keyword.
+  - Top 20 opportunities and a reproducible 0-100 Keyword Score.
+  - A detailed dated Markdown report saved to the requested directory or SEO/.
+context_requirements:
+  - One seed keyword or domain.
+  - The official DataForSEO MCP server with the DATAFORSEO_LABS module enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - dataforseo-api
+  - seo-competitor-gap-analysis
+example_prompts:
+  - Research electric bikes, identify the top keyword opportunities, and save the report in the default location.
+  - Analyze the organic keywords example.com already ranks for in Germany and score the opportunity set.
+  - Group related keywords by intent and recommend the top 20 content opportunities.
+primary_keywords:
+  - keyword-research
+  - keyword-opportunity-score
+  - search-intent

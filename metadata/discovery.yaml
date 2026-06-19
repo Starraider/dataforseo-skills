@@ -24,7 +24,9 @@ context_requirements:
 action_level: runs_commands
 risk_level: medium
 related_skills:
-  - technical-seo-page-audit
+  - seo-technical-page-audit
+  - seo-competitor-gap-analysis
+  - seo-keyword-research
 example_prompts:
   - Implement a Python client for our DataForSEO task-based workflow with bounded polling and normalized errors.
   - Review this integration for accidental billable retries, leaked credentials, and incomplete task-state handling.

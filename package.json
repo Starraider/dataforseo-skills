@@ -2,7 +2,7 @@
   "name": "@Starraider/dataforseo-skills",
   "version": "0.0.0-source",
   "private": true,
-  "description": "Agent skills for DataForSEO integrations and evidence-based technical SEO audits and reports.",
+  "description": "Agent skills for DataForSEO integrations, technical SEO audits, competitor-gap reports, and keyword opportunity research.",
   "license": "(MIT AND CC-BY-SA-4.0)",
   "author": "Sven Kalbhenn (https://www.skom.de/)",
   "homepage": "https://github.com/Starraider/dataforseo-skills",
@@ -19,16 +19,24 @@
     "seo",
     "technical-seo",
     "seo-audit",
+    "competitor-analysis",
+    "keyword-gap",
+    "keyword-research",
+    "keyword-opportunity",
     "api-integration",
     "claude-code"
   ],
   "aiAgentSkill": [
     "skills/dataforseo-api/SKILL.md",
-    "skills/technical-seo-page-audit/SKILL.md"
+    "skills/seo-technical-page-audit/SKILL.md",
+    "skills/seo-competitor-gap-analysis/SKILL.md",
+    "skills/seo-keyword-research/SKILL.md"
   ],
   "files": [
     "skills/dataforseo-api/",
-    "skills/technical-seo-page-audit/",
+    "skills/seo-technical-page-audit/",
+    "skills/seo-competitor-gap-analysis/",
+    "skills/seo-keyword-research/",
     ".claude-plugin/",
     "AGENTS.md",
     "LICENSE-MIT",
