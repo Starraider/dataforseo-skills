@@ -26,6 +26,7 @@ risk_level: medium
 related_skills:
   - seo-technical-page-audit
   - seo-keyword-research
+  - seo-rankings
 example_prompts:
   - Identify the true organic SEO competitors for example.com and save the detailed report in the default location.
   - Quantify our keyword and traffic gap against the domains that overlap most with our Google rankings.

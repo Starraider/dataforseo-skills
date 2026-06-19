@@ -1,0 +1,36 @@
+slug: seo-rankings
+display_name: Live SEO Rankings
+summary:
+  en: >
+    Checks a domain's live Google organic positions and search volumes with DataForSEO MCP, groups every keyword by ranking tier, prioritizes one action per keyword, and writes a detailed Markdown report.
+category: marketing
+tags:
+  - dataforseo
+  - rank-tracking
+  - google-rankings
+  - seo-report
+use_cases:
+  - Check live Google organic positions for a supplied domain and keyword list.
+  - Combine rank positions with search volume and classify winning, page-one, close, long-haul, and not-ranking keywords.
+  - Prioritize one next action per keyword and the single highest-leverage action overall.
+expected_outputs:
+  - Position, volume, ranking URL, tier, and one next action for every keyword.
+  - A single highest-leverage recommendation across the tracked keyword set.
+  - A detailed dated Markdown report saved under the requested report root or SEO/<domain>/ by default.
+context_requirements:
+  - A target domain or HTTP(S) URL and a non-empty keyword list.
+  - The official DataForSEO MCP server with the SERP and KEYWORDS_DATA modules enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - seo-keyword-research
+  - seo-competitor-gap-analysis
+example_prompts:
+  - Check example.com rankings for seo audit tool, keyword research, and ai seo, then save the detailed report.
+  - Find our live Google positions and search volumes for this keyword list on mobile in Germany.
+  - Group these tracked keywords by ranking tier and tell me the single highest-leverage action.
+primary_keywords:
+  - rank-checker
+  - google-rank-tracking
+  - keyword-rankings

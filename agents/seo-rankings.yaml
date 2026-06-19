@@ -1,0 +1,4 @@
+interface:
+  display_name: Live SEO Rankings
+  short_description: Check live Google positions and prioritize keyword actions.
+  default_prompt: Check this domain's live Google organic rankings and search volumes for the supplied keywords with DataForSEO MCP, then save the report under SEO/<domain>/.

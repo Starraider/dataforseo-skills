@@ -1,0 +1,39 @@
+{
+  "skill_name": "seo-rankings",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Check example.com rankings for seo audit tool, keyword research, and ai seo. Save the detailed report in the default location.",
+      "expected_output": "Runs one live Google organic SERP check per unique keyword plus one bulk search-volume request, classifies every result, recommends one action per keyword, and saves a dated report under SEO/example.com/.",
+      "files": [],
+      "assertions": [
+        "The workflow calls serp_organic_live_advanced once per unique keyword and kw_data_google_ads_search_volume once for the complete keyword set.",
+        "Organic position uses the best matching organic item's rank_group rather than rank_absolute.",
+        "Every keyword is assigned exactly one requested tier and one corresponding action.",
+        "The path follows SEO/example.com/YYYY-MM-DD_Rankings_example.com.md and the first line is the local ISO date."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Can you check our current Google rankings and tell me what to work on?",
+      "expected_output": "Asks for both the missing domain and keyword list and waits without making a billable call.",
+      "files": [],
+      "assertions": [
+        "The workflow asks for the missing domain and keyword list together and waits.",
+        "No DataForSEO call or report is produced before both required inputs are supplied."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Track https://www.example.org/store for 'fahrrad kaufen' and 'e bike test' in Germany, language de, on mobile to depth 50. Put the report in ./client-reports.",
+      "expected_output": "Normalizes the domain, respects all scope overrides, distinguishes absence within depth 50 from global non-ranking, and saves the detailed report below the requested report root.",
+      "files": [],
+      "assertions": [
+        "The normalized target is example.org and every SERP call uses Google, Germany, de, mobile, and depth 50.",
+        "A missing match is described as not found within depth 50 rather than absent from Google.",
+        "The report is saved under ./client-reports/example.org/ with the Rankings filename convention.",
+        "The final highest-leverage recommendation follows Close, Page 1, Long-haul, Not ranking, Winning priority and uses volume as the within-tier tiebreaker."
+      ]
+    }
+  ]
+}

@@ -25,6 +25,7 @@ action_level: writes_files
 risk_level: medium
 related_skills:
   - seo-competitor-gap-analysis
+  - seo-rankings
 example_prompts:
   - Research electric bikes for example.com, identify the top keyword opportunities, and save the report in the default location.
   - Analyze the organic keywords example.com already ranks for in Germany and score the opportunity set.

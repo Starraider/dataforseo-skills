@@ -1,6 +1,6 @@
 {
   "name": "Starraider/dataforseo-skills",
-  "description": "Agent skills for DataForSEO technical audits, competitor-gap reports, and keyword opportunity research.",
+  "description": "Agent skills for DataForSEO technical audits, competitor-gap reports, keyword research, and live rank checking.",
   "type": "ai-agent-skill",
   "license": "(MIT AND CC-BY-SA-4.0)",
   "authors": [
@@ -14,7 +14,8 @@
     "ai-agent-skill": [
       "skills/seo-technical-page-audit/SKILL.md",
       "skills/seo-competitor-gap-analysis/SKILL.md",
-      "skills/seo-keyword-research/SKILL.md"
+      "skills/seo-keyword-research/SKILL.md",
+      "skills/seo-rankings/SKILL.md"
     ]
   }
 }
