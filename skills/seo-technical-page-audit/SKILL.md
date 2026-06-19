@@ -1,36 +1,34 @@
 ---
 name: seo-technical-page-audit
-description: "Use when auditing one specific webpage for technical SEO, page health, indexability, redirects, broken links, metadata, structured data, or performance and producing a prioritized Markdown report with a 0-100 Technical Score."
+description: "Use when auditing one webpage for technical SEO, indexability, redirects, links, metadata, structured data, or performance and producing a prioritized report with a 0-100 Technical Score."
 license: "(MIT AND CC-BY-SA-4.0). See LICENSE-MIT and LICENSE-CC-BY-SA-4.0"
 compatibility: "Requires the official DataForSEO MCP server with the ONPAGE module enabled and filesystem write access."
 ---
 
 # SEO Technical Page Audit
 
-Audit one absolute HTTP(S) URL with current DataForSEO evidence and write a decision-ready report.
-
 Use the official [Instant Pages](https://docs.dataforseo.com/v3/on_page/instant_pages/), [Lighthouse](https://docs.dataforseo.com/v3/on_page-lighthouse-live-json/), and [OnPage score](https://dataforseo.com/help-center/how-on-page-seo-score-is-calculated) references.
 
 ## Workflow
 
-1. If no page URL was supplied, ask for it and wait. Reject malformed or credential-bearing URLs; keep query strings out of filenames.
-2. Use the official DataForSEO MCP server. Call `on_page_instant_pages` with the URL and `enable_javascript: true`. Then call `on_page_lighthouse` with the same URL, `enable_javascript: true`, and `full_data: true`. These live calls are billable; the audit request authorizes these two calls, but ask before retries or additional URL checks.
-3. Verify provider and task statuses before interpreting results. Never invent missing fields. State crawl/render failures and evidence limitations explicitly.
+1. Require a project domain. Derive it from a supplied absolute page URL; otherwise ask and wait. Also ask when the URL is absent. Reject malformed or credential-bearing URLs. Normalize the domain to a lowercase hostname without port, URL suffix, trailing dot, or leading `www.`.
+2. Through DataForSEO MCP, call `on_page_instant_pages` with the URL and `enable_javascript: true`, then `on_page_lighthouse` with the same URL, JavaScript enabled, and `full_data: true`. The request authorizes these billable calls; ask before retries or additional URLs.
+3. Validate provider/task statuses. Never invent fields; state failures and limitations.
 4. Inspect HTTP status and redirects; indexability, robots directives, canonicalization, HTTPS, and mixed content; title, description, headings, content signals, and image alt checks; broken-link/resource flags; microdata presence/errors; loading checks, page timing, Lighthouse categories, Core Web Vitals, and render-blocking or oversized assets.
-5. Use Lighthouse redirect details to identify a chain only when the returned audit evidence shows multiple hops. A lone redirect is not a chain. If DataForSEO only flags broken links without returning destinations, report the flag and recommend a scoped crawl instead of naming unverified URLs.
-6. Set **Technical Score** to the rounded DataForSEO `onpage_score` (0-100). If the page cannot be fetched or scored, use `0 (audit incomplete)` and explain why; do not substitute a Lighthouse category score.
-7. Prioritize findings: P0 blocks crawling/indexing or page availability; P1 materially harms discovery, rendering, or users; P2 is an important optimization; P3 is an enhancement. Every finding needs evidence, impact, an implementable fix, effort, and a validation step. Treat missing schema as a gap only when markup is absent, invalid, or clearly appropriate to visible page content.
+5. Claim a redirect chain only when Lighthouse shows multiple hops. If only a broken-link flag exists, recommend a scoped crawl without inventing URLs.
+6. Set **Technical Score** to rounded DataForSEO `onpage_score` (0-100). If unavailable, use `0 (audit incomplete)` and explain; never substitute Lighthouse.
+7. Prioritize P0 availability/indexing blockers, P1 material discovery/rendering/user harm, P2 important optimizations, and P3 enhancements. Each finding needs evidence, impact, fix, effort, and validation. Flag missing schema only when absent, invalid, or appropriate to visible content.
 
 ## Report file
 
-Use the requested directory or `<current-working-directory>/SEO`; create it. Sanitize the target to letters, numbers, dots, hyphens, and underscores; replace other runs with `_`, trim separators, cap at 140 characters. Derive `<URL>` by removing the scheme, fragment, query, and trailing slash, replacing unsafe character runs with `_`, and limiting it to 140 characters. Write:
+Use the requested report root or `<current-working-directory>/SEO`; create its normalized domain child. Allow letters, numbers, dots, hyphens, and underscores; replace other runs with `_`, trim separators, and cap components at 140 characters. Derive `<URL>` by removing scheme, fragment, query, and trailing slash, then sanitizing. Write:
 
-`<YYYY-MM-DD>_Techical-Report_<URL>.md`
+`<report-root>/<domain>/<YYYY-MM-DD>_Techical-Report_<URL>.md`
 
-Use the local ISO date; for example, `2026-06-19_Techical-Report_example.com_products_widget.md`. Preserve the requested `Techical-Report` spelling. Make the first line the ISO date.
+Use the local ISO date; for example, `SEO/example.com/2026-06-19_Techical-Report_example.com_products_widget.md`. Preserve the requested `Techical-Report` spelling. Make the first line the ISO date.
 
 ## Report structure
 
-Include: title and audited URL; executive summary; Technical Score and interpretation; crawl/render facts; prioritized findings table; detailed findings grouped P0-P3; indexability and canonicalization; redirects and links; metadata/content; schema; performance and Core Web Vitals; prioritized implementation plan; verification checklist; methodology, DataForSEO MCP calls, audit timestamp, limitations, and official DataForSEO documentation links. Cite exact returned values without embedding raw customer response data.
+Include title/URL; summary; score; crawl/render facts; prioritized table and P0-P3 details; indexability/canonicalization; redirects/links; metadata/content; schema; performance/Core Web Vitals; implementation plan; verification; methodology, MCP calls, timestamp, limitations, and official links. Cite exact values without raw customer responses.
 
 Return the saved absolute path and a concise summary.

@@ -1,9 +1,8 @@
 {
-  "name": "dataforseo-api",
+  "name": "dataforseo-skills",
   "version": "0.4.0",
-  "description": "Build DataForSEO integrations and run evidence-based technical SEO, competitor-gap, and keyword-opportunity analyses with safe reporting workflows.",
+  "description": "Run evidence-based technical SEO, competitor-gap, and keyword-opportunity analyses with DataForSEO MCP reporting workflows.",
   "skills": [
-    "./skills/dataforseo-api",
     "./skills/seo-technical-page-audit",
     "./skills/seo-competitor-gap-analysis",
     "./skills/seo-keyword-research"

@@ -16,7 +16,7 @@ use_cases:
 expected_outputs:
   - A 0-100 Competitive Score and strength tier.
   - Evidence-backed top-five competitor and keyword-gap analysis.
-  - A detailed dated Markdown report saved to the requested directory or /SEO.
+  - A detailed dated Markdown report saved under the project domain in the requested report root or SEO/<domain>/ by default.
 context_requirements:
   - A target domain or HTTP(S) URL.
   - The official DataForSEO MCP server with the DATAFORSEO_LABS module enabled.
@@ -24,13 +24,12 @@ context_requirements:
 action_level: writes_files
 risk_level: medium
 related_skills:
-  - dataforseo-api
   - seo-technical-page-audit
   - seo-keyword-research
 example_prompts:
   - Identify the true organic SEO competitors for example.com and save the detailed report in the default location.
   - Quantify our keyword and traffic gap against the domains that overlap most with our Google rankings.
-  - Find direct, adjacent, and aspirational competitors for shop.example.org in Germany and save the report under ./reports.
+  - Find direct, adjacent, and aspirational competitors for shop.example.org in Germany and use ./reports as the report root.
 primary_keywords:
   - seo-competitor-analysis
   - keyword-gap

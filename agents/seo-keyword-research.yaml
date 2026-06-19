@@ -1,4 +1,4 @@
 interface:
   display_name: Keyword Research and Opportunity Scoring
   short_description: Find and score keyword opportunities with DataForSEO MCP.
-  default_prompt: Research this seed keyword or domain with DataForSEO MCP, classify intent, calculate the Keyword Score and top opportunities, and save the detailed Markdown report.
+  default_prompt: Research this seed keyword or domain for the supplied website domain with DataForSEO MCP, calculate the Keyword Score, and save the report under SEO/<domain>/.

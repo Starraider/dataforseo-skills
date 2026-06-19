@@ -1,4 +1,4 @@
 interface:
   display_name: SEO Competitor Gap Analysis
   short_description: Find true SERP competitors and quantify keyword and traffic gaps.
-  default_prompt: Identify this domain's true organic-search competitors with DataForSEO MCP, calculate its Competitive Score, and save the detailed Markdown report.
+  default_prompt: Identify this domain's true organic-search competitors with DataForSEO MCP, calculate its Competitive Score, and save the report under SEO/<domain>/.

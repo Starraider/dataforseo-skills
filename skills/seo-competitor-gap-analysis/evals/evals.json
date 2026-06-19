@@ -4,13 +4,13 @@
     {
       "id": 1,
       "prompt": "Identify the true SEO competitors for example.com and create the competitor-gap report in the default location.",
-      "expected_output": "Uses DataForSEO MCP with a 20-competitor cap, analyzes the top five by organic SERP overlap, calculates the specified Competitive Score, and writes the dated Markdown report under /SEO.",
+      "expected_output": "Uses DataForSEO MCP with a 20-competitor cap, analyzes the top five by organic SERP overlap, calculates the specified Competitive Score, and writes the dated Markdown report under SEO/example.com/.",
       "files": [],
       "assertions": [
         "The discovery workflow calls dataforseo_labs_google_competitors_domain and never retains more than 20 competitors.",
         "Each top-five competitor receives shared, target-only, and competitor-only domain intersection calls.",
         "The Competitive Score uses target organic ETV divided by the sum of up to ten competitor organic ETV values and is capped at 100.",
-        "The filename follows YYYY-MM-DD_Competitor-Report_example.com.md in /SEO."
+        "The path follows SEO/example.com/YYYY-MM-DD_Competitor-Report_example.com.md."
       ]
     },
     {
@@ -26,11 +26,11 @@
     {
       "id": 3,
       "prompt": "Analyze https://www.example.org/store?ref=ad for Germany in German and save the competitor report to ./client-reports.",
-      "expected_output": "Normalizes the domain, respects the specified market and output directory, discloses sample coverage, and applies the requested gap and strategic-group formulas.",
+      "expected_output": "Normalizes the domain, respects the specified market and report root, stores the report in its example.org child directory, discloses sample coverage, and applies the requested gap and strategic-group formulas.",
       "files": [],
       "assertions": [
         "The target is normalized to example.org and the filename excludes the URL path and query.",
-        "Germany and German override the default United States and English scope.",
+        "Germany and German override the default United States and English scope, and the report is saved under ./client-reports/example.org/.",
         "A target rank of 15 and competitor rank of 4 produces a position gap of -11.",
         "Direct, Adjacent, Aspirational, and Low-overlap classifications follow the documented thresholds."
       ]

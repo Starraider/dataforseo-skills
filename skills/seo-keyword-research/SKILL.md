@@ -1,6 +1,6 @@
 ---
 name: seo-keyword-research
-description: "Use when researching keywords from a seed term or domain, finding related and long-tail terms, grouping search intent, scoring SEO opportunities, calculating a 0-100 Keyword Score, or producing a detailed keyword-analysis Markdown report."
+description: "Use when researching keywords for a website domain, finding related or long-tail terms, grouping intent, scoring opportunities, calculating a 0-100 Keyword Score, or producing a Markdown report."
 license: "(MIT AND CC-BY-SA-4.0). See LICENSE-MIT and LICENSE-CC-BY-SA-4.0"
 compatibility: "Requires the official DataForSEO MCP server with the DATAFORSEO_LABS module enabled and filesystem write access."
 ---
@@ -11,9 +11,9 @@ Follow the official [Related Keywords](https://docs.dataforseo.com/v3/dataforseo
 
 ## Input
 
-1. Require one seed keyword or domain. If absent, ask and wait; if both appear, ask which to use.
-2. Default to `location_name: "United States"`, `language_code: "en"`; honor `--location` and `--language` overrides and disclose scope.
-3. Normalize domains to lowercase hostnames without credentials, port, URL suffix, trailing dot, or `www.`. Reject malformed input.
+1. Require a project domain. If absent, ask and wait, even when a seed exists. Use a supplied seed for seed mode; without one, use the domain for domain mode. When both exist, default to seed mode unless domain mode is explicit.
+2. Default to `location_name: "United States"`, `language_code: "en"`; honor overrides and disclose scope.
+3. Normalize the domain to a lowercase hostname without credentials, port, URL suffix, trailing dot, or leading `www.`. Reject malformed input.
 
 ## DataForSEO MCP workflow
 
@@ -21,18 +21,18 @@ The request authorizes these billable calls only. Ask before retries, pagination
 
 - **Seed:** call `dataforseo_labs_google_related_keywords` with `limit: 200`, then `dataforseo_labs_google_keyword_suggestions` with `limit: 100`.
 - **Domain:** call `dataforseo_labs_google_ranked_keywords` with the normalized target, `limit: 100`, `item_types: ["organic"]`, and search-volume-descending order.
-- Deduplicate case-insensitively and preserve sources. Call `dataforseo_labs_bulk_keyword_difficulty` once for all unique keywords (maximum 1,000); merge KD by normalized keyword.
-- Validate provider/task statuses. Extract keyword, volume, CPC, Ads competition/level, KD, intent, and applicable rank/URL. Never invent metrics; disclose `total_count`, `items_count`, and coverage.
+- Deduplicate case-insensitively, preserve sources, and call `dataforseo_labs_bulk_keyword_difficulty` once for up to 1,000 unique keywords; merge KD by normalized keyword.
+- Validate statuses. Extract keyword, volume, CPC, Ads competition/level, KD, intent, and rank/URL. Never invent metrics; disclose counts and coverage.
 
 ## Analysis
 
-Classify one primary intent in this precedence: URL/domain or clear brand navigation -> **Navigational**; `buy`, `price`, `deal`, `near me`, or brand+product -> **Transactional**; `best`, `review`, `comparison`, or `vs` -> **Commercial**; `how to`, `what is`, `guide`, or `tutorial` -> **Informational**. Otherwise use DataForSEO `main_intent`; if absent, use **Informational (inferred)**. Explain ambiguity.
+Classify one intent in precedence: URL/domain or brand navigation -> **Navigational**; `buy`, `price`, `deal`, `near me`, or brand+product -> **Transactional**; `best`, `review`, `comparison`, or `vs` -> **Commercial**; `how to`, `what is`, `guide`, or `tutorial` -> **Informational**. Otherwise use `main_intent`, then **Informational (inferred)**. Explain ambiguity.
 
 With both metrics calculate:
 
 `opportunity = search_volume / (keyword_difficulty + 10)`
 
-Sort descending; surface 20. Never coerce missing values to zero.
+Sort descending and surface 20. Never coerce missing values to zero.
 
 For Keyword Score, let `K` be up to 50 top opportunity rows. Show each component:
 
@@ -40,12 +40,12 @@ For Keyword Score, let `K` be up to 50 top opportunity rows. Show each component
 - low difficulty = `25 * count(KD < 30) / count(valid KD in K)`;
 - intent diversity = `15 * distinct_intent_buckets(K) / 4`;
 - CPC = `15 * min(1, log10(1 + average_CPC_USD(K)) / log10(11))`;
-- long-tail = `15 * min(1, breadth / 100)`, where breadth is returned suggestions in seed mode and returned ranked keywords of at least four words in domain mode (label this proxy).
+- long-tail = `15 * min(1, breadth / 100)`, where breadth is suggestions in seed mode or ranked keywords of at least four words in domain mode (label as proxy).
 
-Sum without reweighting, clamp 0-100, and round to one decimal. Score unavailable components zero and disclose them. Justify the score in one sentence using its strongest and weakest signals.
+Sum without reweighting, clamp 0-100, and round to one decimal. Score unavailable components zero and disclose them. Justify using the strongest and weakest signals.
 
 ## Report
 
-Use the requested directory or `<current-working-directory>/SEO`; create it. Sanitize the target to letters, numbers, dots, hyphens, and underscores; replace other runs with `_`, trim separators, cap at 140 characters. Write `<YYYY-MM-DD>_Keyword-Analysis_<target>.md` with local date as the first line.
+Use the requested report root or `<current-working-directory>/SEO`; create its normalized domain child. Allow letters, numbers, dots, hyphens, and underscores; replace other runs with `_`, trim separators, and cap components at 140 characters. Write `<report-root>/<domain>/<YYYY-MM-DD>_Keyword-Analysis_<target>.md`, sanitizing the seed/domain target separately. Default: `SEO/<domain>/<filename>`. Start with the local ISO date.
 
-Include scope; summary; Keyword Score components; top-20 opportunities; intent distribution/groups; related keywords; suggestions/proxy; complete deduplicated metrics; prioritized content opportunities; formulas; MCP calls, cost scope, timestamp, coverage, limitations, and official links. Return the absolute path and concise summary.
+Include scope; summary; score components; top-20 opportunities; intent groups; related keywords; suggestions/proxy; deduplicated metrics; content priorities; formulas; MCP calls, cost scope, timestamp, coverage, limitations, and official links. Return the absolute path and summary.

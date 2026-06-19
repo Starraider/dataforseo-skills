@@ -16,20 +16,19 @@ use_cases:
 expected_outputs:
   - A provider-derived Technical Score from 0 to 100.
   - Evidence-backed findings prioritized from P0 to P3.
-  - A detailed dated Markdown report saved to the requested directory or /SEO.
+  - A detailed dated Markdown report saved under the project domain in the requested report root or SEO/<domain>/ by default.
 context_requirements:
-  - An absolute HTTP(S) page URL.
+  - An absolute HTTP(S) page URL, whose hostname supplies the website project domain, or a separately supplied project domain while requesting the URL.
   - The official DataForSEO MCP server with the ONPAGE module enabled.
   - Filesystem write access and DataForSEO credentials configured in the MCP server.
 action_level: writes_files
 risk_level: medium
 related_skills:
-  - dataforseo-api
   - seo-keyword-research
 example_prompts:
   - Audit https://example.com/products/widget for technical SEO and save the Markdown report in the default location.
   - Check this landing page for indexability, redirect, metadata, schema, link, and performance problems.
-  - Create a prioritized technical SEO report for https://shop.example.org/category/shoes and save it under ./reports.
+  - Create a prioritized technical SEO report for https://shop.example.org/category/shoes and use ./reports as the report root.
 primary_keywords:
   - technical-seo-audit
   - page-audit

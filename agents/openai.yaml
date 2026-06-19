@@ -1,5 +1,0 @@
-interface:
-  display_name: DataForSEO API
-  short_description: Build and troubleshoot cost-aware DataForSEO API integrations safely.
-  default_prompt: Plan or implement this DataForSEO integration using current official endpoint documentation and explicit billing safeguards.
-
