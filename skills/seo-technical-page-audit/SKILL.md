@@ -6,32 +6,33 @@ compatibility: "Requires the official DataForSEO MCP server with the ONPAGE modu
 
 # SEO Technical Page Audit
 
-Use the official [Instant Pages](https://docs.dataforseo.com/v3/on_page/instant_pages/), [Lighthouse](https://docs.dataforseo.com/v3/on_page-lighthouse-live-json/), and [OnPage score](https://dataforseo.com/help-center/how-on-page-seo-score-is-calculated) references.
+Before acting, read `references/audit-playbook.md` and use `templates/report-template.md` as the default scaffold.
+
+Use the official [Task POST](https://docs.dataforseo.com/v3/on_page/task_post/), [Links](https://docs.dataforseo.com/v3/on_page/links/), [Resources](https://docs.dataforseo.com/v3/on_page/resources/), [Lighthouse](https://docs.dataforseo.com/v3/on_page/lighthouse/live/json/), and [OnPage score](https://dataforseo.com/help-center/how-on-page-seo-score-is-calculated) references.
 
 ## Workflow
 
-1. Require a project domain. Derive it from a supplied absolute page URL; otherwise ask and wait. Also ask when the URL is absent. Reject malformed or credential-bearing URLs. Normalize the domain to a lowercase hostname without port, URL suffix, trailing dot, or leading `www.`.
-2. Through DataForSEO MCP, call `on_page_instant_pages` with the URL and `enable_javascript: true`, then `on_page_lighthouse` with the same URL, JavaScript enabled, and `full_data: true`. The request authorizes these billable calls; ask before retries or additional URLs.
-3. Validate provider/task statuses. Never invent fields; state failures and limitations.
-4. Inspect HTTP status and redirects; indexability, robots directives, canonicalization, HTTPS, and mixed content; title, description, headings, content signals, and image alt checks; broken-link/resource flags; microdata presence/errors; loading checks, page timing, Lighthouse categories, Core Web Vitals, and render-blocking or oversized assets.
-5. Claim a redirect chain only when Lighthouse shows multiple hops. If only a broken-link flag exists, recommend a scoped crawl without inventing URLs.
-6. Set **Technical Score** to rounded DataForSEO `onpage_score` (0-100). If unavailable, use `0 (audit incomplete)` and explain; never substitute Lighthouse.
-7. Prioritize P0 availability/indexing blockers, P1 material discovery/rendering/user harm, P2 important optimizations, and P3 enhancements. Each finding needs evidence, impact, fix, effort, and validation. Flag missing schema only when absent, invalid, or appropriate to visible content.
+1. Require an absolute HTTP(S) page URL. Derive the project domain from its hostname; otherwise ask and wait. Reject malformed or credential-bearing URLs. Normalize the domain to lowercase without port, trailing dot, or leading `www.`.
+2. Prefer a task-based crawl via `on_page_task_post` with `target` = domain, `start_url` = page URL, `max_crawl_pages: 1`, `force_sitewide_checks: true`, `load_resources: true`, `enable_javascript: true`, `validate_micromarkup: true`, and `browser_preset: desktop`.
+3. Validate statuses and keep the task ID plus audited page URL. Then collect available follow-up evidence from `on_page_pages`, `on_page_links`, `on_page_redirect_chains`, `on_page_non_indexable`, `on_page_resources`, `on_page_waterfall`, `on_page_microdata`, and `on_page_lighthouse` with `full_data: true`.
+4. Optional billable escalations only after asking: `on_page_content_parsing_live` and `on_page_page_screenshot`.
+5. If task-based endpoints are unavailable, fall back to `on_page_instant_pages` plus `on_page_lighthouse` and mark exact inventories that could not be produced.
+6. Analyze availability, indexability, robots, canonicals, redirects, hreflang, exact broken links, metadata, headings, content ratios, schema, resources, TTFB and waterfall, Lighthouse audits, Core Web Vitals, and sitewide checks.
+7. Only claim redirect chains from explicit evidence. Only list broken URLs or assets when returned exactly. Use rounded DataForSEO `onpage_score` as Technical Score; if unavailable use `0 (audit incomplete)`. Add Score Drivers without invented weights.
+8. Prioritize P0-P3. Every finding needs evidence, impact, fix, owner, effort, and validation.
 
 ## Cost accounting
 
-Log each call's endpoint and top-level `cost` USD. Sum unrounded values. Scope: `Total cost: x,xx USD` (decimal comma, two digits). Include zero; missing cost means incomplete subtotal; name affected calls.
+Log each endpoint and top-level `cost` USD. Sum unrounded values and report `Total cost: x,xx USD`. Missing cost means incomplete subtotal; name affected calls.
 
 ## Report file
 
-Use the requested report root or `<current-working-directory>/SEO`; create its normalized domain child. Allow letters, numbers, dots, hyphens, and underscores; replace other runs with `_`, trim separators, and cap components at 140 characters. Derive `<URL>` by removing scheme, fragment, query, and trailing slash, then sanitizing. Write:
+Use the requested report root or `<current-working-directory>/SEO`, then its normalized domain child. Derive `<URL>` by removing scheme, query, fragment, and trailing slash, then sanitizing. Write:
 
 `<report-root>/<domain>/<YYYY-MM-DD>_Techical-Report_<URL>.md`
 
-Use the local ISO date; for example, `SEO/example.com/2026-06-19_Techical-Report_example.com_products_widget.md`. Preserve the requested `Techical-Report` spelling. Make the first line the ISO date.
+Use the local ISO date; for example, `SEO/example.com/2026-06-20_Techical-Report_example.com_products_widget.md`. Preserve `Techical-Report`. Make the first line the ISO date.
 
 ## Report structure
 
-Include Scope with URL and total cost; summary; score; crawl/render facts; prioritized table and P0-P3 details; indexability/canonicalization; redirects/links; metadata/content; schema; performance/Core Web Vitals; implementation plan; verification; methodology, call log, timestamp, limitations, and official links. Cite exact values without raw customer responses.
-
-Return the saved absolute path and a concise summary.
+Follow the linked template. Include exact inventories when DataForSEO returns them, cite exact values instead of raw responses, and return the saved absolute path plus a concise summary.

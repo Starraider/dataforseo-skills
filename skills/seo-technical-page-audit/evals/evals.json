@@ -4,13 +4,14 @@
     {
       "id": 1,
       "prompt": "Run an SEO technical page audit for https://example.com/products/widget?campaign=spring and save the report in the default location.",
-      "expected_output": "Derives example.com as the project domain, uses both required DataForSEO MCP OnPage tools, records every call cost and reports their sum in Scope, reports a provider-derived 0-100 Technical Score, prioritizes evidence-backed fixes, and saves a detailed report under SEO/example.com/ with a safe dated filename that omits the query string.",
+      "expected_output": "Derives example.com as the project domain, starts a task-based DataForSEO MCP OnPage crawl for the supplied URL, collects follow-up endpoint evidence for the audited page, records every call cost and reports their sum in Scope, reports a provider-derived 0-100 Technical Score, prioritizes evidence-backed fixes, and saves a detailed report under SEO/example.com/ with a safe dated filename that omits the query string.",
       "files": [],
       "assertions": [
-        "The workflow calls on_page_instant_pages and on_page_lighthouse through DataForSEO MCP.",
+        "The workflow calls on_page_task_post and on_page_lighthouse through DataForSEO MCP.",
+        "The workflow uses available task follow-up endpoints such as on_page_pages, on_page_links, on_page_resources, on_page_waterfall, and on_page_microdata for exact evidence inventories.",
         "The report uses the DataForSEO onpage_score rather than a Lighthouse score as Technical Score.",
         "The report is saved under SEO/example.com/ and its filename starts with the local ISO date and Techical-Report and excludes the URL query string.",
-        "Findings include evidence, impact, fix, effort, and validation and are prioritized P0 through P3."
+        "Findings include evidence, impact, fix, owner, effort, and validation and are prioritized P0 through P3."
       ]
     },
     {
@@ -26,12 +27,12 @@
     {
       "id": 3,
       "prompt": "Audit https://shop.example.org/category/shoes for technical SEO. Put the Markdown report in ./client-reports.",
-      "expected_output": "Derives example.org as the project domain, audits only the supplied page with DataForSEO MCP, records every call cost and reports their sum in Scope, distinguishes redirects from redirect chains, handles broken-link evidence conservatively, and saves the detailed report under the requested report root's example.org child directory.",
+      "expected_output": "Derives example.org as the project domain, audits only the supplied page with DataForSEO MCP, records every call cost and reports their sum in Scope, distinguishes redirects from redirect chains, uses exact broken-link and resource evidence when DataForSEO returns it, falls back to conservative wording when it does not, and saves the detailed report under the requested report root's example.org child directory.",
       "files": [],
       "assertions": [
         "The requested ./client-reports directory overrides the SEO report root and the report is saved under ./client-reports/example.org/.",
-        "A redirect chain is claimed only when multiple hops are present in returned evidence.",
-        "Broken destination URLs are not invented when only a boolean broken-links signal is available.",
+        "A redirect chain is claimed only when multiple hops are present in returned endpoint evidence.",
+        "Broken destination URLs or assets are listed only when returned by DataForSEO and are not invented from aggregate flags.",
         "Schema recommendations are conditional on returned markup evidence and visible page content."
       ]
     }

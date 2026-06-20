@@ -45,7 +45,7 @@ Analyze example.com for topical authority and content gaps, then recommend the n
 
 ### `seo-technical-page-audit`
 
-Audits one specific page through the official DataForSEO MCP OnPage tools. It checks availability, indexability, redirects, broken-link and resource signals, metadata, headings, canonicalization, structured-data gaps, page speed, Core Web Vitals, and related technical SEO issues. It returns the DataForSEO-derived Technical Score from 0 to 100, prioritizes fixes from P0 to P3, and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
+Audits one specific page through a task-based DataForSEO MCP OnPage workflow. It runs a one-page crawl with sitewide checks enabled, then collects page, link, redirect, non-indexable, resource, schema, waterfall, and Lighthouse evidence to produce a fix-ready Markdown report. The report returns the DataForSEO-derived Technical Score from 0 to 100, lists exact affected URLs or assets where available, prioritizes fixes from P0 to P3, and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
 
 The page URL supplies the project domain. If the prompt does not contain a URL or separate domain, the skill asks for the domain; it always asks for the URL when that is absent, before making billable DataForSEO requests.
 
@@ -107,7 +107,7 @@ Every generated report records each DataForSEO call's response cost and shows th
 
 ## Related skills
 
-- `seo-technical-page-audit`: single-page technical SEO analysis and Markdown reporting.
+- `seo-technical-page-audit`: task-based single-page technical SEO analysis and fix-ready Markdown reporting.
 - `seo-competitor-gap-analysis`: organic competitor discovery, keyword-gap analysis, Competitive Score, and Markdown reporting.
 - `seo-keyword-research`: seed- and domain-based keyword discovery, intent grouping, opportunity scoring, and Markdown reporting.
 - `seo-rankings`: live Google organic rank checking, search-volume context, tiered actions, and Markdown reporting.
