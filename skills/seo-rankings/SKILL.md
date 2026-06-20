@@ -1,7 +1,6 @@
 ---
 name: seo-rankings
 description: "Use when checking a domain's live Google organic positions for a supplied keyword list, combining rankings with search volume, grouping keywords by ranking tier, prioritizing one action per keyword, or producing a detailed rankings Markdown report."
-license: "(MIT AND CC-BY-SA-4.0). See LICENSE-MIT and LICENSE-CC-BY-SA-4.0"
 compatibility: "Requires the official DataForSEO MCP server with the SERP and KEYWORDS_DATA modules enabled and filesystem write access."
 ---
 
@@ -11,9 +10,9 @@ Follow the official [Live Advanced SERP](https://docs.dataforseo.com/v3/serp-se-
 
 ## Input
 
-1. Require a domain and non-empty keyword list. Ask for all missing required inputs and wait.
+1. Require a domain and keywords. Ask for missing inputs and wait.
 2. Default to location `United States`, language `en`, device `desktop`, and depth `100`. Accept `desktop` or `mobile` and depth 10–100; disclose scope.
-3. Normalize the domain to a lowercase hostname without credentials, port, path, trailing dot, or leading `www.`. Reject malformed input. Trim and case-insensitively deduplicate keywords. Reject entries over 80 characters or 10 words.
+3. Normalize the domain to lowercase hostname without credentials, port, path, trailing dot, or leading `www.`. Reject malformed input. Trim and case-insensitively deduplicate keywords. Reject entries over 80 characters or 10 words.
 
 ## DataForSEO MCP workflow
 
@@ -24,9 +23,13 @@ The request authorizes one live rank call per unique keyword and one bulk volume
 3. Call `kw_data_google_ads_search_volume` once with all keywords and the same location/language. Merge `search_volume` case-insensitively. Ask to split lists over its 700-keyword limit.
 4. Validate statuses. Never invent metrics; use `—` when missing. “Not ranking” means not found within depth, not proven absence from Google.
 
+## Cost accounting
+
+Log each call's endpoint and top-level `cost` USD. Sum unrounded values. Scope: `Total cost: x,xx USD` (decimal comma, two digits). Include zero; missing cost means incomplete subtotal; name affected calls.
+
 ## Classification and actions
 
-Assign exactly one tier and next action:
+Assign one tier and next action:
 
 | Tier | Position | Action |
 |---|---:|---|
@@ -36,10 +39,10 @@ Assign exactly one tier and next action:
 | 🔴 **Long-haul** | 31–100 | Pivot or invest heavily |
 | ⚫ **Not ranking** | none within depth | Decide: pursue or drop |
 
-Order groups as above and rows by position, then descending volume. For the final highest-leverage action, choose the highest-volume keyword from the first populated tier in this order: Close, Page 1, Long-haul, Not ranking, Winning. Break ties by better position, then input order. State its keyword, position/tier, volume, URL, and action.
+Order groups as above and rows by position, then descending volume. Choose the highest-volume keyword from the first populated tier in this order: Close, Page 1, Long-haul, Not ranking, Winning. Break ties by better position, then input order. State keyword, position/tier, volume, URL, and action.
 
 ## Report
 
 Use the requested report root or `<current-working-directory>/SEO`; create its domain child. Write `<report-root>/<domain>/<YYYY-MM-DD>_Rankings_<domain>.md`; default: `SEO/<domain>/<filename>`. Use local ISO date (example: `2026-06-19_Rankings_example.com.md`) as the first line.
 
-Include scope/timestamp; summary; grouped `Keyword | Pos | Volume | URL | Action` table; tier counts; highest-leverage action; methodology; MCP calls/cost scope; coverage/limitations; and official links. Use thousands separators and target-relative URL paths. Return the absolute path and summary.
+Include Scope with timestamp/total cost; summary; grouped `Keyword | Pos | Volume | URL | Action` table; tier counts; highest-leverage action; methodology; call log; coverage/limitations; and official links. Use thousands separators and target-relative URL paths. Return absolute path and summary.

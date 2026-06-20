@@ -1,6 +1,6 @@
 # DataForSEO Skills
 
-## What this skill collection solves
+## What this skill solves
 
 This collection of AI skills provides practical SEO analysis and reporting tools as a cost-effective alternative to subscription services such as Semrush or Ahrefs. It is particularly useful for small businesses and independent professionals who need professional SEO data without committing to another recurring subscription. Instead, the skills use DataForSEO's pay-what-you-use model, so costs are tied to the analyses and API data actually requested.
 
@@ -25,6 +25,7 @@ Use these skills to audit one page for technical SEO, identify true Google organ
 - A keyword analysis with intent groups, top-20 opportunities, and a reproducible 0-100 Keyword Score.
 - A live rankings report with search volume, tier, and one prioritized action per keyword.
 - A topical-authority report with a 0-100 Content Score, cluster gaps, and five prioritized article briefs.
+- A per-call DataForSEO cost log and summed `Total cost: x,xx USD` value in every report's Scope section.
 
 ## Context requirements
 
@@ -101,6 +102,8 @@ Example prompt:
 ```text
 Analyze example.com for topical authority and content gaps, then recommend the five highest-leverage articles to write next.
 ```
+
+Every generated report records each DataForSEO call's response cost and shows the summed value in its Scope section as `Total cost: x,xx USD`.
 
 ## Related skills
 

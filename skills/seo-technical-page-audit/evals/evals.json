@@ -4,7 +4,7 @@
     {
       "id": 1,
       "prompt": "Run an SEO technical page audit for https://example.com/products/widget?campaign=spring and save the report in the default location.",
-      "expected_output": "Derives example.com as the project domain, uses both required DataForSEO MCP OnPage tools, reports a provider-derived 0-100 Technical Score, prioritizes evidence-backed fixes, and saves a detailed report under SEO/example.com/ with a safe dated filename that omits the query string.",
+      "expected_output": "Derives example.com as the project domain, uses both required DataForSEO MCP OnPage tools, records every call cost and reports their sum in Scope, reports a provider-derived 0-100 Technical Score, prioritizes evidence-backed fixes, and saves a detailed report under SEO/example.com/ with a safe dated filename that omits the query string.",
       "files": [],
       "assertions": [
         "The workflow calls on_page_instant_pages and on_page_lighthouse through DataForSEO MCP.",
@@ -26,7 +26,7 @@
     {
       "id": 3,
       "prompt": "Audit https://shop.example.org/category/shoes for technical SEO. Put the Markdown report in ./client-reports.",
-      "expected_output": "Derives example.org as the project domain, audits only the supplied page with DataForSEO MCP, distinguishes redirects from redirect chains, handles broken-link evidence conservatively, and saves the detailed report under the requested report root's example.org child directory.",
+      "expected_output": "Derives example.org as the project domain, audits only the supplied page with DataForSEO MCP, records every call cost and reports their sum in Scope, distinguishes redirects from redirect chains, handles broken-link evidence conservatively, and saves the detailed report under the requested report root's example.org child directory.",
       "files": [],
       "assertions": [
         "The requested ./client-reports directory overrides the SEO report root and the report is saved under ./client-reports/example.org/.",

@@ -1,7 +1,6 @@
 ---
 name: seo-technical-page-audit
 description: "Use when auditing one webpage for technical SEO, indexability, redirects, links, metadata, structured data, or performance and producing a prioritized report with a 0-100 Technical Score."
-license: "(MIT AND CC-BY-SA-4.0). See LICENSE-MIT and LICENSE-CC-BY-SA-4.0"
 compatibility: "Requires the official DataForSEO MCP server with the ONPAGE module enabled and filesystem write access."
 ---
 
@@ -19,6 +18,10 @@ Use the official [Instant Pages](https://docs.dataforseo.com/v3/on_page/instant_
 6. Set **Technical Score** to rounded DataForSEO `onpage_score` (0-100). If unavailable, use `0 (audit incomplete)` and explain; never substitute Lighthouse.
 7. Prioritize P0 availability/indexing blockers, P1 material discovery/rendering/user harm, P2 important optimizations, and P3 enhancements. Each finding needs evidence, impact, fix, effort, and validation. Flag missing schema only when absent, invalid, or appropriate to visible content.
 
+## Cost accounting
+
+Log each call's endpoint and top-level `cost` USD. Sum unrounded values. Scope: `Total cost: x,xx USD` (decimal comma, two digits). Include zero; missing cost means incomplete subtotal; name affected calls.
+
 ## Report file
 
 Use the requested report root or `<current-working-directory>/SEO`; create its normalized domain child. Allow letters, numbers, dots, hyphens, and underscores; replace other runs with `_`, trim separators, and cap components at 140 characters. Derive `<URL>` by removing scheme, fragment, query, and trailing slash, then sanitizing. Write:
@@ -29,6 +32,6 @@ Use the local ISO date; for example, `SEO/example.com/2026-06-19_Techical-Report
 
 ## Report structure
 
-Include title/URL; summary; score; crawl/render facts; prioritized table and P0-P3 details; indexability/canonicalization; redirects/links; metadata/content; schema; performance/Core Web Vitals; implementation plan; verification; methodology, MCP calls, timestamp, limitations, and official links. Cite exact values without raw customer responses.
+Include Scope with URL and total cost; summary; score; crawl/render facts; prioritized table and P0-P3 details; indexability/canonicalization; redirects/links; metadata/content; schema; performance/Core Web Vitals; implementation plan; verification; methodology, call log, timestamp, limitations, and official links. Cite exact values without raw customer responses.
 
 Return the saved absolute path and a concise summary.
