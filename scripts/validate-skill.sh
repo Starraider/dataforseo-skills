@@ -136,3 +136,5 @@ if errors:
 
 print(f"Skill repository is valid: {len(skill_paths)} registered skill(s)")
 PY
+
+python3 "$REPO_ROOT/skills/seo-technical-page-audit/tests/test_fetch_task_onpage_fixture.py"

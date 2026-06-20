@@ -2,7 +2,7 @@ slug: seo-technical-page-audit
 display_name: SEO Technical Page Audit
 summary:
   en: >
-    Audits one webpage with a task-based DataForSEO MCP OnPage workflow and writes a fix-ready Markdown report with exact URLs and assets where available plus a provider-derived 0-100 Technical Score.
+    Audits one webpage with DataForSEO MCP plus a direct REST bridge for missing task endpoints and writes a fix-ready Markdown report with exact URLs and assets where available plus a provider-derived 0-100 Technical Score.
 category: marketing
 tags:
   - dataforseo
@@ -21,6 +21,7 @@ expected_outputs:
 context_requirements:
   - An absolute HTTP(S) page URL, whose hostname supplies the website project domain, or a separately supplied project domain while requesting the URL.
   - The official DataForSEO MCP server with the ONPAGE module enabled.
+  - Python 3 and a .env file containing DATAFORSEO_USERNAME and DATAFORSEO_PASSWORD for direct task API access.
   - Filesystem write access and DataForSEO credentials configured in the MCP server.
 action_level: writes_files
 risk_level: medium

@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "status": "complete",
+  "task_id": "fixture-task-id",
+  "audited_url": "https://www.example.com/",
+  "crawled_page_url": "https://www.example.com/",
+  "costs_usd": {
+    "task_post": 0.00425,
+    "summary": 0,
+    "pages": 0,
+    "links": 0,
+    "redirect_chains": 0,
+    "non_indexable": 0,
+    "resources": 0,
+    "waterfall": 0,
+    "microdata": 0
+  },
+  "known_cost_total_usd": 0.00425,
+  "endpoints": {
+    "task_post": {
+      "status_code": 20000,
+      "cost": 0.00425,
+      "tasks": [
+        {
+          "status_code": 20100,
+          "id": "fixture-task-id",
+          "result": null
+        }
+      ]
+    },
+    "summary": {
+      "status_code": 20000,
+      "cost": 0,
+      "tasks": [
+        {
+          "status_code": 20000,
+          "result": [
+            {
+              "crawl_progress": "finished",
+              "page_metrics": {
+                "onpage_score": 91.59
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "pages": {
+      "status_code": 20000,
+      "cost": 0,
+      "tasks": [
+        {
+          "status_code": 20000,
+          "result": [
+            {
+              "items_count": 1,
+              "total_items_count": 1,
+              "items": [
+                {
+                  "status_code": 200,
+                  "url": "https://www.example.com/",
+                  "onpage_score": 91.59,
+                  "page_timing": {
+                    "dom_complete": 2607,
+                    "duration_time": 2609
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "links": {
+      "status_code": 20000,
+      "cost": 0,
+      "tasks": [
+        {
+          "status_code": 20000,
+          "result": [
+            {
+              "items_count": 2,
+              "total_items_count": 2,
+              "items": [
+                {
+                  "link_to": "https://www.example.com/",
+                  "is_broken": false,
+                  "is_valid_hreflang": true
+                },
+                {
+                  "link_to": "https://www.example.com/de/",
+                  "is_broken": false,
+                  "is_valid_hreflang": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "redirect_chains": {
+      "status_code": 20000,
+      "cost": 0,
+      "tasks": [
+        {
+          "status_code": 20000,
+          "result": [
+            {
+              "items_count": 0,
+              "total_items_count": 0,
+              "items": null
+            }
+          ]
+        }
+      ]
+    },
+    "non_indexable": {
+      "status_code": 20000,
+      "cost": 0,
+      "tasks": [
+        {
+          "status_code": 20000,
+          "result": [
+            {
+              "items_count": 0,
+              "total_items_count": 0,
+              "items": null
+            }
+          ]
+        }
+      ]
+    },
+    "resources": {
+      "status_code": 20000,
+      "cost": 0,
+      "tasks": [
+        {
+          "status_code": 20000,
+          "result": [
+            {
+              "items_count": 2,
+              "total_items_count": 3,
+              "items": [
+                {
+                  "url": "https://www.example.com/assets/main.js",
+                  "status_code": 200,
+                  "checks": {
+                    "is_broken": true
+                  },
+                  "resource_errors": {
+                    "errors": [
+                      {
+                        "message": "Unexpected token"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "url": "https://www.example.com/assets/logo.webp",
+                  "status_code": 200,
+                  "checks": {
+                    "is_broken": false
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "waterfall": {
+      "status_code": 20000,
+      "cost": 0,
+      "tasks": [
+        {
+          "status_code": 20000,
+          "result": [
+            {
+              "items_count": 1,
+              "items": [
+                {
+                  "page_url": "https://analytics.example/script.js",
+                  "resources": [
+                    {
+                      "url": "https://www.example.com/assets/main.js",
+                      "is_render_blocking": true
+                    },
+                    {
+                      "url": "https://www.example.com/assets/app.css",
+                      "is_render_blocking": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "microdata": {
+      "status_code": 20000,
+      "cost": 0,
+      "tasks": [
+        {
+          "status_code": 20000,
+          "result": [
+            {
+              "items_count": 0,
+              "total_items_count": 0,
+              "items": null,
+              "test_summary": {
+                "fatal": 0,
+                "error": 0,
+                "warning": 0,
+                "info": 0
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

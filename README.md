@@ -29,7 +29,7 @@ Use these skills to audit one page for technical SEO, identify true Google organ
 
 ## Context requirements
 
-Configure the official DataForSEO MCP server and credentials securely. Every analysis requires a website project domain; page URLs supply it implicitly through their hostname. Keyword research also requires a seed or uses the project domain as its analysis target. Rank checking requires a keyword list. Content suggestions optionally accept up to five competitor domains and discover them when omitted. Filesystem write access is required for Markdown reports.
+Configure the official DataForSEO MCP server and credentials securely. Technical page audits also require Python 3 and a `.env` credential file so the skill can call task endpoints missing from MCP. The helper looks in the project root first and asks for the file path when it is absent. Every analysis requires a website project domain; page URLs supply it implicitly through their hostname. Keyword research also requires a seed or uses the project domain as its analysis target. Rank checking requires a keyword list. Content suggestions optionally accept up to five competitor domains and discover them when omitted. Filesystem write access is required for Markdown reports.
 
 ## Example prompts
 
@@ -45,14 +45,14 @@ Analyze example.com for topical authority and content gaps, then recommend the n
 
 ### `seo-technical-page-audit`
 
-Audits one specific page through a task-based DataForSEO MCP OnPage workflow. It runs a one-page crawl with sitewide checks enabled, then collects page, link, redirect, non-indexable, resource, schema, waterfall, and Lighthouse evidence to produce a fix-ready Markdown report. The report returns the DataForSEO-derived Technical Score from 0 to 100, lists exact affected URLs or assets where available, prioritizes fixes from P0 to P3, and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
+Audits one specific page through DataForSEO MCP and a direct REST bridge for task endpoints that MCP does not expose. It runs a one-page crawl with sitewide checks enabled, then collects page, link, redirect, non-indexable, resource, schema, waterfall, and Lighthouse evidence to produce a fix-ready Markdown report. If direct task access fails, it falls back to MCP Instant Pages plus Lighthouse. The report returns the DataForSEO-derived Technical Score from 0 to 100, lists exact affected URLs or assets where available, prioritizes fixes from P0 to P3, and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
 
 The page URL supplies the project domain. If the prompt does not contain a URL or separate domain, the skill asks for the domain; it always asks for the URL when that is absent, before making billable DataForSEO requests.
 
 Example prompt:
 
 ```text
-Audit https://example.com/products/widget for technical SEO, prioritize the fixes, and save the detailed Markdown report in the default location.
+Audit https://example.com/products/widget for technical SEO.
 ```
 
 ### `seo-competitor-gap-analysis`
@@ -122,6 +122,7 @@ Before using the SEO analysis and reporting skills:
 - Register for a [DataForSEO account](https://app.dataforseo.com/?aff=292583).
 - Install and configure the [DataForSEO MCP server](https://dataforseo.com/model-context-protocol) in your Agent Skills-compatible client.
 - Provide credentials through the MCP server's secure configuration.
+- Provide a git-ignored `.env` containing `DATAFORSEO_USERNAME` and `DATAFORSEO_PASSWORD` for the technical audit's direct task API bridge; `DATAFORSEO_LOGIN` is accepted as a username alias.
 
 Then install the skills needed for your SEO workflow.
 
