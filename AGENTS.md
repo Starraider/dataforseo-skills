@@ -6,6 +6,7 @@
   - `skills/seo-competitor-gap-analysis/SKILL.md` identifies organic competitors with the DataForSEO MCP tools, quantifies keyword and traffic gaps, scores competitiveness, and writes a detailed Markdown report.
   - `skills/seo-keyword-research/SKILL.md` researches seed- or domain-based keywords with the DataForSEO MCP tools, scores opportunities, and writes a detailed Markdown report.
   - `skills/seo-rankings/SKILL.md` checks live Google organic positions and search volumes for a domain and keyword list, assigns ranking tiers and actions, and writes a detailed Markdown report.
+  - `skills/seo-content-suggestions/SKILL.md` clusters a domain's ranked keywords, compares topic coverage with competitors, calculates a Content Score, and recommends the five highest-leverage articles.
 - Every SEO analysis and reporting skill must use the DataForSEO MCP server.
 - Use the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/) and [DataForSEO White Papers and knowledge base](https://dataforseo.com/knowledgebase) when designing, implementing, or verifying skills.
 - Keep each skill under `skills/<skill-name>/SKILL.md` and register it in both plugin and distribution manifests.

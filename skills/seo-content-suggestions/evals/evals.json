@@ -1,0 +1,39 @@
+{
+  "skill_name": "seo-content-suggestions",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Analyze example.com for topical authority and content gaps, then recommend the next five articles and save the report in the default location.",
+      "expected_output": "Retrieves 200 target keywords, discovers five competitors, runs pairwise competitor-only gap analysis plus the top competitor keyword call, clusters the evidence, calculates the Content Score, and writes the dated report under SEO/example.com/.",
+      "files": [],
+      "assertions": [
+        "The target ranked-keywords call uses limit 200 and organic results.",
+        "Exactly five discovered competitors are retained and each receives a competitor-only domain-intersection call.",
+        "The Content Score uses the requested strong-cluster, missing-cluster, and normalized top-quartile position components.",
+        "The path follows SEO/example.com/YYYY-MM-DD_Content-Suggestions_example.com.md."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Find our strongest and missing content topics and tell me what to publish next.",
+      "expected_output": "Asks for the missing target domain and waits without making a billable call.",
+      "files": [],
+      "assertions": [
+        "The workflow asks for the target domain and waits.",
+        "No DataForSEO call or report is produced before a valid domain is supplied."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Run content suggestions for https://www.example.org/store against rival-one.test, rival-two.test, and rival-three.test in Germany, language de, and save it under ./client-reports.",
+      "expected_output": "Normalizes the domain, uses the supplied competitors and market, performs the supported pairwise content-gap workflow, creates no more than 15 clusters, and writes a detailed report below the requested root.",
+      "files": [],
+      "assertions": [
+        "The target is normalized to example.org and competitor discovery is skipped.",
+        "Germany, de, and the three supplied competitors are used consistently across MCP calls.",
+        "The analysis produces 8-15 clusters when the evidence supports that range and applies all four statuses deterministically.",
+        "Five article briefs include target and related keywords, intent evidence, prioritization metrics, and editorial word-count estimates."
+      ]
+    }
+  ]
+}

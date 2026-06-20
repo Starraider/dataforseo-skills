@@ -1,0 +1,4 @@
+interface:
+  display_name: SEO Content Suggestions
+  short_description: Score topical authority and prioritize content gaps.
+  default_prompt: Analyze this domain's topical authority and content gaps with DataForSEO MCP, calculate its Content Score, recommend five articles, and save the report under SEO/<domain>/.

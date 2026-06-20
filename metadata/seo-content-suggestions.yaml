@@ -1,0 +1,37 @@
+slug: seo-content-suggestions
+display_name: SEO Content Suggestions
+summary:
+  en: >
+    Clusters ranked keywords into topics, compares topical coverage with organic competitors through DataForSEO MCP, calculates a 0-100 Content Score, and recommends five high-leverage articles.
+category: marketing
+tags:
+  - dataforseo
+  - topical-authority
+  - content-gap
+  - seo-report
+use_cases:
+  - Classify topic clusters as strong, building, weak, or missing.
+  - Compare up to 200 ranked keywords with gaps across as many as five organic competitors.
+  - Prioritize five commercial or transactional articles using volume, difficulty, intent, and competitor authority.
+expected_outputs:
+  - A reproducible 0-100 Content Score and topic-cluster matrix.
+  - Five evidence-backed article briefs with related keywords and editorial word-count estimates.
+  - A detailed dated Markdown report saved under the requested report root or SEO/<domain>/ by default.
+context_requirements:
+  - A target domain or HTTP(S) URL; up to five competitor domains are optional.
+  - The official DataForSEO MCP server with the DATAFORSEO_LABS module enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - seo-competitor-gap-analysis
+  - seo-keyword-research
+  - seo-rankings
+example_prompts:
+  - Analyze example.com for topical authority and recommend the next five articles to publish.
+  - Find our strong, weak, and missing topic clusters against our five closest organic competitors.
+  - Run a content-gap analysis for example.org against rival.test in Germany and save the report under ./client-reports.
+primary_keywords:
+  - topical-authority
+  - content-gap-analysis
+  - content-score
