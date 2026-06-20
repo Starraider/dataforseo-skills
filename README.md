@@ -33,75 +33,57 @@ Configure the official DataForSEO MCP server and credentials securely. Technical
 
 ## Example prompts
 
-```text
-Audit https://example.com/products/widget for technical SEO and save the report in the default location.
-Identify the true organic SEO competitors for example.com and quantify the keyword and traffic gap.
-Research the seed keyword electric bikes for example.com, score the best opportunities, and save a detailed report.
-Check example.com rankings for seo audit tool, keyword research, and ai seo, then prioritize the next actions.
-Analyze example.com for topical authority and content gaps, then recommend the next five articles.
-```
+See the individual skill READMEs for invocation examples.
 
 ## Available skills
+
+Each skill below has a dedicated README with the full behavior, invocation examples, and report expectations:
+
+- [seo-technical-page-audit](skills/seo-technical-page-audit/README.md)
+- [seo-competitor-gap-analysis](skills/seo-competitor-gap-analysis/README.md)
+- [seo-keyword-research](skills/seo-keyword-research/README.md)
+- [seo-rankings](skills/seo-rankings/README.md)
+- [seo-content-suggestions](skills/seo-content-suggestions/README.md)
 
 ### `seo-technical-page-audit`
 
 Audits one specific page through DataForSEO MCP and a direct REST bridge for task endpoints that MCP does not expose. It runs a one-page crawl with sitewide checks enabled, then collects page, link, redirect, non-indexable, resource, schema, waterfall, and Lighthouse evidence to produce a fix-ready Markdown report. If direct task access fails, it falls back to MCP Instant Pages plus Lighthouse. The report returns the DataForSEO-derived Technical Score from 0 to 100, lists exact affected URLs or assets where available, prioritizes fixes from P0 to P3, and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
 
+Detailed reference: [skills/seo-technical-page-audit/README.md](skills/seo-technical-page-audit/README.md)
+
 The page URL supplies the project domain. If the prompt does not contain a URL or separate domain, the skill asks for the domain; it always asks for the URL when that is absent, before making billable DataForSEO requests.
-
-Example prompt:
-
-```text
-Audit https://example.com/products/widget for technical SEO.
-```
 
 ### `seo-competitor-gap-analysis`
 
 Finds up to 20 true organic-search competitors through DataForSEO Labs, ranks them by SERP keyword overlap, and analyzes the top five for shared and unique keywords, average position gaps, defensive wins, traffic estimates, and strategic grouping. It calculates the requested 0-100 Competitive Score and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
 
+Detailed reference: [skills/seo-competitor-gap-analysis/README.md](skills/seo-competitor-gap-analysis/README.md)
+
 If the prompt does not contain a domain, the skill asks for one before making billable DataForSEO requests.
-
-Example prompt:
-
-```text
-Identify the true SEO competitors for example.com, quantify the gap, and save the detailed report in the default location.
-```
 
 ### `seo-keyword-research`
 
 Researches a seed keyword through up to 200 related terms and 100 long-tail suggestions, or finds up to 100 organic keywords for which a domain already ranks. It reports search volume, CPC, Ads competition, keyword difficulty, and intent; surfaces the top 20 by volume-to-difficulty opportunity; calculates a transparent 0-100 Keyword Score; and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
 
+Detailed reference: [skills/seo-keyword-research/README.md](skills/seo-keyword-research/README.md)
+
 The skill always requires a project domain and asks for it before making billable DataForSEO requests when it is absent, including seed-based research.
-
-Example prompt:
-
-```text
-Research electric bikes for example.com, group the keywords by intent, score the top opportunities, and save the report in the default location.
-```
 
 ### `seo-rankings`
 
 Checks live Google organic positions for a supplied domain and keyword list through DataForSEO MCP, adds search volume, and groups each keyword as Winning, Page 1, Close, Long-haul, or Not ranking. It assigns one next action per keyword, selects the single highest-leverage action overall, and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
 
+Detailed reference: [skills/seo-rankings/README.md](skills/seo-rankings/README.md)
+
 If the prompt omits the domain or keyword list, the skill asks for all missing required inputs before making billable DataForSEO requests. Location, language, device, and depth default to United States, `en`, desktop, and 100.
-
-Example prompt:
-
-```text
-Check example.com rankings for seo audit tool, keyword research, and ai seo, then save the detailed report in the default location.
-```
 
 ### `seo-content-suggestions`
 
 Clusters up to 200 keywords for which a domain ranks into 8-15 topical groups, discovers or accepts up to five competitors, and uses DataForSEO Labs keyword gaps to classify each cluster as Strong, Building, Weak, or Missing. It calculates a reproducible 0-100 Content Score and recommends five specific commercial or transactional articles using search volume, keyword difficulty, intent, and competitor authority. The detailed dated Markdown report is saved under the normalized project domain, using `SEO/<domain>/` by default.
 
+Detailed reference: [skills/seo-content-suggestions/README.md](skills/seo-content-suggestions/README.md)
+
 If the prompt does not contain a domain, the skill asks for one before making billable DataForSEO requests.
-
-Example prompt:
-
-```text
-Analyze example.com for topical authority and content gaps, then recommend the five highest-leverage articles to write next.
-```
 
 Every generated report records each DataForSEO call's response cost and shows the summed value in its Scope section as `Total cost: x,xx USD`.
 
