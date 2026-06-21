@@ -1,0 +1,39 @@
+{
+  "skill_name": "seo-international-opportunities",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Compare international SEO opportunities for example.com. Its current language is English. Evaluate Germany/de, Austria/de, and France/fr, validate up to three native terms per market with live Google SERPs, and recommend a launch order.",
+      "expected_output": "Runs the bounded DataForSEO MCP workflow independently for all three markets, validates no more than three live terms per market, recommends localized clusters and URL paths, and writes the detailed dated report under SEO/example.com/.",
+      "files": [],
+      "assertions": [
+        "Germany/de, Austria/de, and France/fr retain separate keyword, volume, ranking, intent, competitor, terminology, Trends, and SERP datasets.",
+        "The workflow uses Keywords for Site, Ranked Keywords, Domain Rank Overview, Competitors Domain, Domain Intersection, Keyword Overview, Search Intent, Google Trends, and approved live SERPs.",
+        "The launch order uses independently calculated fixed-cap market summaries and the documented score formula.",
+        "The path follows SEO/example.com/YYYY-MM-DD_International-Opportunities_example.com.md and the file begins with the same ISO date."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Find the best countries for us to expand example.org into.",
+      "expected_output": "Asks together for the missing current language and at least two country/language target combinations, then waits without making a billable DataForSEO call or writing a report.",
+      "files": [],
+      "assertions": [
+        "The workflow requests the current language and at least two complete target country/language pairs.",
+        "No DataForSEO call is made before every required input is supplied."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Our domain is https://www.example.co.uk/products, current language en. Compare United States/en with Canada/en and save the international opportunity report under ./client-reports.",
+      "expected_output": "Normalizes the project domain, analyzes the two English-language countries independently, identifies country-specific terminology and intent, recommends distinct or shared URL paths from evidence, and writes the report under the requested root.",
+      "files": [],
+      "assertions": [
+        "The project domain is normalized to example.co.uk while United States|en and Canada|en remain separate markets.",
+        "Identical English keywords are retained as separate market observations rather than merged.",
+        "Google Trends indices are interpreted only within each market call and are not compared as absolute cross-market demand.",
+        "The output path follows client-reports/example.co.uk/YYYY-MM-DD_International-Opportunities_example.co.uk.md."
+      ]
+    }
+  ]
+}

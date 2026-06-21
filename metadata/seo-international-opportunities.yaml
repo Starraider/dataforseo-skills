@@ -1,0 +1,41 @@
+slug: seo-international-opportunities
+display_name: SEO International Opportunities
+summary:
+  en: >
+    Compares organic search demand, visibility, competitors, terminology, and content opportunities across isolated country/language datasets, then recommends a localized market launch order and URL strategy.
+category: marketing
+tags:
+  - dataforseo
+  - international-seo
+  - localization
+  - keyword-research
+  - seo-report
+use_cases:
+  - Compare organic demand and existing visibility across two or more country/language markets.
+  - Find native keyword clusters and terms that should be localized rather than translated literally.
+  - Sequence international market launches using demand, gaps, foothold, and competitor accessibility.
+  - Plan country/language pages, subdirectories, subdomains, or ccTLDs.
+expected_outputs:
+  - A market-by-market demand, visibility, competitor-strength, and opportunity comparison.
+  - Localized keyword clusters with intent, difficulty, trends, current rankings, and live SERP validation.
+  - A recommended market launch order and phased content plan.
+  - A dated Markdown report saved under the requested root or SEO/<domain>/ by default.
+context_requirements:
+  - A target domain, its current language, and at least two target country/language combinations.
+  - The official DataForSEO MCP server with DATAFORSEO_LABS, KEYWORDS_DATA, and SERP enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - seo-keyword-research
+  - seo-competitor-gap-analysis
+  - seo-content-suggestions
+  - seo-serp-optimization
+example_prompts:
+  - Compare Germany/de, Austria/de, and France/fr for example.com and recommend a launch order.
+  - Find native keyword and URL opportunities for United States/en and Canada/en without merging the datasets.
+  - Plan international expansion for example.org and validate the top three native terms in each market.
+primary_keywords:
+  - international-seo
+  - market-opportunity
+  - localized-keyword-research

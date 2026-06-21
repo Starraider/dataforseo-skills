@@ -13,6 +13,7 @@
   - `skills/seo-text-keyword-optimization/SKILL.md` researches up to 50 related keywords for each of one to three seeds, prioritizes low-difficulty search demand, and proposes three distinct optimizations for supplied prose.
   - `skills/seo-page-metadata/SKILL.md` analyzes one page's primary topic, ranks related keyword opportunities, recommends one of three coherent search and social metadata packages, and writes a detailed Markdown report.
   - `skills/seo-serp-optimization/SKILL.md` finds feature opportunities in top-20 rankings, verifies approved keywords with live SERPs, compares target and winning page formats, and writes a detailed Markdown report with exact structural changes.
+  - `skills/seo-international-opportunities/SKILL.md` compares isolated country/language datasets, identifies localized keyword and competitor opportunities, sequences market launches, and recommends international content and URL strategies.
 - Every SEO analysis and reporting skill must use the DataForSEO MCP server.
 - Use the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/) and [DataForSEO White Papers and knowledge base](https://dataforseo.com/knowledgebase) when designing, implementing, or verifying skills.
 - Keep each skill under `skills/<skill-name>/SKILL.md` and register it in both plugin and distribution manifests.

@@ -16,7 +16,7 @@ Simpler crawling tools such as Screaming Frog or On-Page-Crawler are useful for 
 
 ## Use when
 
-Use these skills to select and troubleshoot DataForSEO MCP tools, perform a custom evidence-based SEO analysis, audit one page for technical SEO, identify true Google organic competitors, research and score keyword opportunities, detect and refresh decaying content, resolve keyword cannibalization and sampled internal-link gaps, optimize supplied prose around low-difficulty keywords, generate evidence-based page and social metadata, optimize ranked pages for the live Google SERP composition, assess topical authority and content gaps, or check live Google rankings for a supplied keyword list.
+Use these skills to select and troubleshoot DataForSEO MCP tools, perform a custom evidence-based SEO analysis, audit one page for technical SEO, identify true Google organic competitors, research and score keyword opportunities, compare international country/language opportunities, detect and refresh decaying content, resolve keyword cannibalization and sampled internal-link gaps, optimize supplied prose around low-difficulty keywords, generate evidence-based page and social metadata, optimize ranked pages for the live Google SERP composition, assess topical authority and content gaps, or check live Google rankings for a supplied keyword list.
 
 ## Expected outputs
 
@@ -27,6 +27,7 @@ Use these skills to select and troubleshoot DataForSEO MCP tools, perform a cust
 - A supplied-text optimization report with up to 20 low-hanging-fruit keywords and three distinct revision approaches.
 - A page-metadata report with five primary-content-derived seeds, explicit market/language provenance, up to 20 ranked keyword opportunities, and three coherent search and social metadata packages with one recommendation.
 - A SERP-feature opportunity report with current owners, target positions, attainability, exact page-format changes, and priority based on ranking proximity, volume, intent fit, and live feature prominence.
+- An international opportunity report with isolated market datasets, localized keyword clusters, competitor strength, a market launch order, translation-risk terms, and country/language URL recommendations.
 - A live rankings report with search volume, tier, and one prioritized action per keyword.
 - A topical-authority report with a 0-100 Content Score, cluster gaps, and five prioritized article briefs.
 - A content-decay report that separates ranking loss from seasonality and provides page-level refresh, consolidation, redirect, or unchanged recommendations.
@@ -35,7 +36,7 @@ Use these skills to select and troubleshoot DataForSEO MCP tools, perform a cust
 
 ## Context requirements
 
-Configure the official DataForSEO MCP server and credentials securely. Technical page audits also require Python 3 and a `.env` credential file so the skill can call task endpoints missing from MCP. The helper looks in the project root first and asks for the file path when it is absent. Page-metadata analysis requires Python 3 for deterministic response normalization and report-path generation. Domain- and page-based analyses require a website project domain or URL. Keyword research also requires a seed or uses the project domain as its analysis target. Text keyword optimization requires complete supplied prose and one to three seeds, but no domain. Page-metadata analysis requires one absolute HTTP(S) page URL. SERP optimization requires a domain and uses DataForSEO Labs, SERP, and OnPage MCP modules; country, language, device, exact location, and report root are optional. Rank checking requires a keyword list. Content suggestions optionally accept up to five competitor domains and discover them when omitted. Content-decay analysis requires DataForSEO Labs, Keywords Data, and OnPage MCP modules. Cannibalization and internal-linking analysis requires domain, country, and language, uses DataForSEO Labs and OnPage, and accepts optional priority URLs. Filesystem write access is required for Markdown reports.
+Configure the official DataForSEO MCP server and credentials securely. Technical page audits also require Python 3 and a `.env` credential file so the skill can call task endpoints missing from MCP. The helper looks in the project root first and asks for the file path when it is absent. Page-metadata analysis requires Python 3 for deterministic response normalization and report-path generation. Domain- and page-based analyses require a website project domain or URL. Keyword research also requires a seed or uses the project domain as its analysis target. International opportunity analysis requires a domain, its current language, and at least two target country/language pairs, and uses DataForSEO Labs, Keywords Data, and SERP. Text keyword optimization requires complete supplied prose and one to three seeds, but no domain. Page-metadata analysis requires one absolute HTTP(S) page URL. SERP optimization requires a domain and uses DataForSEO Labs, SERP, and OnPage MCP modules; country, language, device, exact location, and report root are optional. Rank checking requires a keyword list. Content suggestions optionally accept up to five competitor domains and discover them when omitted. Content-decay analysis requires DataForSEO Labs, Keywords Data, and OnPage MCP modules. Cannibalization and internal-linking analysis requires domain, country, and language, uses DataForSEO Labs and OnPage, and accepts optional priority URLs. Filesystem write access is required for Markdown reports.
 
 ## Example prompts
 
@@ -55,6 +56,7 @@ Each skill below has a dedicated README with the full behavior, invocation examp
 - [seo-text-keyword-optimization](skills/seo-text-keyword-optimization/README.md)
 - [seo-page-metadata](skills/seo-page-metadata/README.md)
 - [seo-serp-optimization](skills/seo-serp-optimization/README.md)
+- [seo-international-opportunities](skills/seo-international-opportunities/README.md)
 - [dataforseo-skill](skills/dataforseo-skill/README.md)
 
 ### `dataforseo-skill`
@@ -145,6 +147,14 @@ Detailed reference: [skills/seo-serp-optimization/README.md](skills/seo-serp-opt
 
 If the prompt does not contain a domain, the skill asks for one before making billable DataForSEO requests. Live SERP calls require approval of a bounded shortlist unless the prompt already supplies it.
 
+### `seo-international-opportunities`
+
+Compares two or more country/language markets without merging their keyword, search-volume, ranking, intent, competitor, terminology, Trends, or live SERP datasets. It measures market-local demand, existing visibility, competitor strength, and competitor-only gaps; creates native keyword clusters; flags terms that require localization rather than literal translation; and recommends a reproducible market launch order plus country/language URL and page strategies. The default path is `SEO/<domain>/<YYYY-MM-DD>_International-Opportunities_<domain>.md`.
+
+Detailed reference: [skills/seo-international-opportunities/README.md](skills/seo-international-opportunities/README.md)
+
+The skill requires a domain, the site's current language, and at least two complete target country/language combinations. It asks for all missing required inputs before making billable DataForSEO requests. Live SERP calls require approval of up to three native-term candidates per market unless the prompt pre-authorizes that bounded validation.
+
 Every generated report records each DataForSEO call's response cost and shows the summed value in its Scope section as `Total cost: x,xx USD`.
 
 ## Related skills
@@ -160,6 +170,7 @@ Every generated report records each DataForSEO call's response cost and shows th
 - `seo-text-keyword-optimization`: supplied-text keyword discovery, low-difficulty prioritization, and three concrete revision approaches.
 - `seo-page-metadata`: primary-topic extraction, keyword-opportunity ranking, and coherent search/social metadata packages.
 - `seo-serp-optimization`: live SERP-feature ownership, attainability, page-format comparison, and exact structural recommendations.
+- `seo-international-opportunities`: isolated country/language opportunity comparison, localized keyword clusters, market sequencing, and international URL planning.
 
 ## Installation
 
@@ -187,6 +198,7 @@ npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-canni
 npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-text-keyword-optimization
 npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-page-metadata
 npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-serp-optimization
+npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-international-opportunities
 npx skills add https://github.com/Starraider/dataforseo-skills --skill dataforseo-skill
 ```
 
@@ -222,7 +234,7 @@ Code, scripts, workflows, and configuration are licensed under [MIT](LICENSE-MIT
 - `agents/*.yaml` provides OpenAI-facing discovery metadata for each reporting skill.
 - All skills keep their runtime instructions in `SKILL.md`; all reporting skills include non-live evaluation cases.
 - GitHub Pages should remain disabled because the README and marketplace entry are sufficient.
-- Proposed GitHub description: `Agent skills for DataForSEO MCP analysis, technical audits, competitor gaps, keyword research, content-decay refreshes, keyword cannibalization, internal linking, text optimization, page metadata, SERP features, topical authority, and live rank checking.`
-- Proposed GitHub topics: `agent-skill`, `dataforseo`, `mcp`, `seo`, `technical-seo`, `competitor-analysis`, `keyword-gap`, `keyword-research`, `content-decay`, `content-refresh`, `keyword-cannibalization`, `internal-linking`, `content-optimization`, `page-metadata`, `serp-features`, `featured-snippets`, `topical-authority`, `content-gap`, `rank-tracking`.
+- Proposed GitHub description: `Agent skills for DataForSEO MCP analysis, technical audits, competitor gaps, keyword research, international SEO opportunities, content-decay refreshes, keyword cannibalization, internal linking, text optimization, page metadata, SERP features, topical authority, and live rank checking.`
+- Proposed GitHub topics: `agent-skill`, `dataforseo`, `mcp`, `seo`, `technical-seo`, `competitor-analysis`, `keyword-gap`, `keyword-research`, `international-seo`, `seo-localization`, `content-decay`, `content-refresh`, `keyword-cannibalization`, `internal-linking`, `content-optimization`, `page-metadata`, `serp-features`, `featured-snippets`, `topical-authority`, `content-gap`, `rank-tracking`.
 
 Developed and maintained by [Sven Kalbhenn](https://www.skom.de/).

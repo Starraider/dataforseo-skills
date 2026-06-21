@@ -1,0 +1,4 @@
+interface:
+  display_name: SEO International Opportunities
+  short_description: Compare and sequence localized SEO markets.
+  default_prompt: Compare this domain's organic opportunities across the supplied country/language markets with DataForSEO MCP, keep market datasets separate, plan localized keywords and URLs, and save the report under SEO/<domain>/.
