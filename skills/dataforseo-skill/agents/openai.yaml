@@ -1,0 +1,4 @@
+interface:
+  display_name: "DataForSEO MCP SEO Analysis"
+  short_description: "Run evidence-based SEO analysis with DataForSEO MCP."
+  default_prompt: "Use $dataforseo-skill to perform the requested SEO analysis with DataForSEO MCP and explain the evidence, cost, and limitations."

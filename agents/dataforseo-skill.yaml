@@ -1,0 +1,4 @@
+interface:
+  display_name: DataForSEO MCP SEO Analysis
+  short_description: Select and run DataForSEO MCP tools for SEO analysis.
+  default_prompt: Use DataForSEO MCP to perform the requested SEO analysis with minimum billable scope, validate the evidence, and explain costs and limitations.

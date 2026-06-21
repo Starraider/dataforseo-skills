@@ -2,7 +2,7 @@
   "name": "@Starraider/dataforseo-skills",
   "version": "0.0.0-source",
   "private": true,
-  "description": "Agent skills for DataForSEO technical SEO audits, competitor-gap reports, keyword research, topical-authority analysis, and live rank checking.",
+  "description": "Agent skills for general DataForSEO MCP SEO analysis, technical audits, competitor-gap reports, keyword research, page metadata, topical-authority analysis, and live rank checking.",
   "license": "(MIT AND CC-BY-SA-4.0)",
   "author": "Sven Kalbhenn (https://www.skom.de/)",
   "homepage": "https://github.com/Starraider/dataforseo-skills",
@@ -16,6 +16,7 @@
   "keywords": [
     "ai-agent-skill",
     "dataforseo",
+    "mcp",
     "seo",
     "technical-seo",
     "seo-audit",
@@ -23,6 +24,8 @@
     "keyword-gap",
     "keyword-research",
     "keyword-opportunity",
+    "page-metadata",
+    "meta-description",
     "rank-tracking",
     "rank-checker",
     "topical-authority",
@@ -34,7 +37,9 @@
     "skills/seo-competitor-gap-analysis/SKILL.md",
     "skills/seo-keyword-research/SKILL.md",
     "skills/seo-rankings/SKILL.md",
-    "skills/seo-content-suggestions/SKILL.md"
+    "skills/seo-content-suggestions/SKILL.md",
+    "skills/seo-page-metadata/SKILL.md",
+    "skills/dataforseo-skill/SKILL.md"
   ],
   "files": [
     "skills/seo-technical-page-audit/",
@@ -42,6 +47,8 @@
     "skills/seo-keyword-research/",
     "skills/seo-rankings/",
     "skills/seo-content-suggestions/",
+    "skills/seo-page-metadata/",
+    "skills/dataforseo-skill/",
     ".claude-plugin/",
     "AGENTS.md",
     "LICENSE-MIT",

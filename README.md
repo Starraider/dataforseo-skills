@@ -2,7 +2,7 @@
 
 ## What this skill solves
 
-This collection of AI skills provides practical SEO analysis and reporting tools as a cost-effective alternative to subscription services such as Semrush or Ahrefs. It is particularly useful for small businesses and independent professionals who need professional SEO data without committing to another recurring subscription. Instead, the skills use DataForSEO's pay-what-you-use model, so costs are tied to the analyses and API data actually requested.
+This collection of AI skills provides general DataForSEO MCP guidance plus practical SEO analysis and reporting tools as a cost-effective alternative to subscription services such as Semrush or Ahrefs. It is particularly useful for small businesses and independent professionals who need professional SEO data without committing to another recurring subscription. Instead, the skills use DataForSEO's pay-what-you-use model, so costs are tied to the analyses and API data actually requested.
 
 Each analysis and reporting skill uses the DataForSEO MCP server and follows the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/) and [DataForSEO White Papers and knowledge base](https://dataforseo.com/knowledgebase).
 
@@ -16,20 +16,22 @@ Simpler crawling tools such as Screaming Frog or On-Page-Crawler are useful for 
 
 ## Use when
 
-Use these skills to audit one page for technical SEO, identify true Google organic competitors, research and score keyword opportunities, assess topical authority and content gaps, or check live Google rankings for a supplied keyword list.
+Use these skills to select and troubleshoot DataForSEO MCP tools, perform a custom evidence-based SEO analysis, audit one page for technical SEO, identify true Google organic competitors, research and score keyword opportunities, generate evidence-based page and social metadata, assess topical authority and content gaps, or check live Google rankings for a supplied keyword list.
 
 ## Expected outputs
 
+- A scoped, cost-aware DataForSEO MCP call plan or custom SEO analysis with validated evidence, coverage, and limitations.
 - A prioritized technical SEO report with a provider-derived Technical Score.
 - A competitor report with up to 20 discovered domains, detailed top-five comparisons, and a 0-100 Competitive Score.
 - A keyword analysis with intent groups, top-20 opportunities, and a reproducible 0-100 Keyword Score.
+- A page-metadata report with five primary-content-derived seeds, geographic targeting when explicitly supported, 20 low-hanging-fruit keywords, and three options for each search and social metadata field.
 - A live rankings report with search volume, tier, and one prioritized action per keyword.
 - A topical-authority report with a 0-100 Content Score, cluster gaps, and five prioritized article briefs.
 - A per-call DataForSEO cost log and summed `Total cost: x,xx USD` value in every report's Scope section.
 
 ## Context requirements
 
-Configure the official DataForSEO MCP server and credentials securely. Technical page audits also require Python 3 and a `.env` credential file so the skill can call task endpoints missing from MCP. The helper looks in the project root first and asks for the file path when it is absent. Every analysis requires a website project domain; page URLs supply it implicitly through their hostname. Keyword research also requires a seed or uses the project domain as its analysis target. Rank checking requires a keyword list. Content suggestions optionally accept up to five competitor domains and discover them when omitted. Filesystem write access is required for Markdown reports.
+Configure the official DataForSEO MCP server and credentials securely. Technical page audits also require Python 3 and a `.env` credential file so the skill can call task endpoints missing from MCP. The helper looks in the project root first and asks for the file path when it is absent. Every analysis requires a website project domain; page URLs supply it implicitly through their hostname. Keyword research also requires a seed or uses the project domain as its analysis target. Page-metadata analysis requires one absolute HTTP(S) page URL. Rank checking requires a keyword list. Content suggestions optionally accept up to five competitor domains and discover them when omitted. Filesystem write access is required for Markdown reports.
 
 ## Example prompts
 
@@ -44,6 +46,16 @@ Each skill below has a dedicated README with the full behavior, invocation examp
 - [seo-keyword-research](skills/seo-keyword-research/README.md)
 - [seo-rankings](skills/seo-rankings/README.md)
 - [seo-content-suggestions](skills/seo-content-suggestions/README.md)
+- [seo-page-metadata](skills/seo-page-metadata/README.md)
+- [dataforseo-skill](skills/dataforseo-skill/README.md)
+
+### `dataforseo-skill`
+
+Selects, sequences, calls, validates, and troubleshoots DataForSEO MCP tools for custom SEO analyses. It includes a captured catalog of 83 exposed tools with exact callable declarations and underlying REST mappings, plus protocol, authentication, response, error, rate-limit, pagination, batching, callback, SDK, and workflow references.
+
+Detailed reference: [skills/dataforseo-skill/README.md](skills/dataforseo-skill/README.md)
+
+The active MCP `tools/list` and input schema remain authoritative because enabled modules and deployed tool versions can differ from the captured catalog.
 
 ### `seo-technical-page-audit`
 
@@ -85,15 +97,25 @@ Detailed reference: [skills/seo-content-suggestions/README.md](skills/seo-conten
 
 If the prompt does not contain a domain, the skill asks for one before making billable DataForSEO requests.
 
+### `seo-page-metadata`
+
+Analyzes one exact page with DataForSEO OnPage, derives five evidence-backed seed keywords, and requests up to 25 related keywords for each seed. It deduplicates the results, ranks complete relevant rows by search volume and organic Keyword Difficulty, and surfaces the top 20 low-hanging-fruit opportunities. The report provides three Page Title, Meta Description, Meta Keywords, Open Graph Title, Open Graph Description, Twitter Card Title, and Twitter Card Description options with character counts. It is saved under the normalized project domain, using `SEO/<domain>/` by default.
+
+Detailed reference: [skills/seo-page-metadata/README.md](skills/seo-page-metadata/README.md)
+
+If the prompt does not contain an absolute HTTP(S) page URL, the skill asks for one before making billable DataForSEO requests.
+
 Every generated report records each DataForSEO call's response cost and shows the summed value in its Scope section as `Total cost: x,xx USD`.
 
 ## Related skills
 
+- `dataforseo-skill`: general DataForSEO MCP tool selection, sequencing, validation, protocol guidance, and troubleshooting.
 - `seo-technical-page-audit`: task-based single-page technical SEO analysis and fix-ready Markdown reporting.
 - `seo-competitor-gap-analysis`: organic competitor discovery, keyword-gap analysis, Competitive Score, and Markdown reporting.
 - `seo-keyword-research`: seed- and domain-based keyword discovery, intent grouping, opportunity scoring, and Markdown reporting.
 - `seo-rankings`: live Google organic rank checking, search-volume context, tiered actions, and Markdown reporting.
 - `seo-content-suggestions`: topical clustering, competitor content gaps, Content Score, and prioritized article briefs.
+- `seo-page-metadata`: page-topic extraction, low-hanging-fruit keyword research, and search/social metadata suggestions.
 
 ## Installation
 
@@ -116,6 +138,8 @@ npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-compe
 npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-keyword-research
 npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-rankings
 npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-content-suggestions
+npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-page-metadata
+npx skills add https://github.com/Starraider/dataforseo-skills --skill dataforseo-skill
 ```
 
 ### Composer
@@ -150,7 +174,7 @@ Code, scripts, workflows, and configuration are licensed under [MIT](LICENSE-MIT
 - `agents/*.yaml` provides OpenAI-facing discovery metadata for each reporting skill.
 - All skills keep their runtime instructions in `SKILL.md`; all reporting skills include non-live evaluation cases.
 - GitHub Pages should remain disabled because the README and marketplace entry are sufficient.
-- Proposed GitHub description: `Agent skills for DataForSEO technical audits, competitor gaps, keyword research, topical authority, and live rank checking.`
-- Proposed GitHub topics: `agent-skill`, `dataforseo`, `seo`, `technical-seo`, `competitor-analysis`, `keyword-gap`, `keyword-research`, `topical-authority`, `content-gap`, `rank-tracking`.
+- Proposed GitHub description: `Agent skills for DataForSEO MCP analysis, technical audits, competitor gaps, keyword research, page metadata, topical authority, and live rank checking.`
+- Proposed GitHub topics: `agent-skill`, `dataforseo`, `mcp`, `seo`, `technical-seo`, `competitor-analysis`, `keyword-gap`, `keyword-research`, `page-metadata`, `topical-authority`, `content-gap`, `rank-tracking`.
 
 Developed and maintained by [Sven Kalbhenn](https://www.skom.de/).

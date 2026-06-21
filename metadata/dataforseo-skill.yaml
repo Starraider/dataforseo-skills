@@ -1,0 +1,40 @@
+slug: dataforseo-skill
+display_name: DataForSEO MCP SEO Analysis
+summary:
+  en: >
+    Selects, sequences, calls, validates, and troubleshoots DataForSEO MCP tools for evidence-based SEO analysis using an exact captured tool catalog and official protocol guidance.
+category: marketing
+tags:
+  - dataforseo
+  - mcp
+  - seo-analysis
+  - api-reference
+use_cases:
+  - Select the minimum DataForSEO MCP tools for an SEO question.
+  - Build cost-aware keyword, SERP, backlink, local, ranking-history, competitor, and page-audit workflows.
+  - Troubleshoot authentication, input validation, errors, rate limits, pagination, batching, and responses.
+expected_outputs:
+  - A scoped DataForSEO MCP call plan or completed analysis with source provenance.
+  - Validated provider metrics, coverage, cost, limitations, and derived conclusions.
+  - Integration guidance grounded in the active tool schema and official documentation.
+context_requirements:
+  - The official DataForSEO MCP server with the relevant modules enabled.
+  - DataForSEO credentials configured securely in the MCP host.
+  - The targets and market parameters required by the requested analysis.
+action_level: runs_commands
+risk_level: medium
+related_skills:
+  - seo-technical-page-audit
+  - seo-competitor-gap-analysis
+  - seo-keyword-research
+  - seo-rankings
+  - seo-content-suggestions
+  - seo-page-metadata
+example_prompts:
+  - Plan and run the minimum DataForSEO MCP calls needed to analyze this domain's organic competitors.
+  - Get a live SERP snapshot for these keywords and explain all returned search features.
+  - Troubleshoot this DataForSEO MCP authentication or rate-limit error.
+primary_keywords:
+  - dataforseo-mcp
+  - seo-analysis
+  - dataforseo-api

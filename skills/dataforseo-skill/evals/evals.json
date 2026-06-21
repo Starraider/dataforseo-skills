@@ -1,0 +1,23 @@
+{
+  "skill_name": "dataforseo-skill",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I have 850 keywords for example.com and need US organic keyword difficulty plus search volume. Plan the minimum DataForSEO MCP calls, exact chunking, validation, and normalized output without making live calls.",
+      "expected_output": "Selects Bulk Keyword Difficulty for all 850 terms and Keyword Overview in two chunks because its maximum is 700; distinguishes KD from Ads competition; includes scope, cost, error, and missing-row handling.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Design a DataForSEO MCP workflow for a mobile local search audit of three plumbing keywords in Austin, Texas. Include tool names, arguments, call count, local-pack parsing, and listing evidence without claiming access to private Google Business Profile data.",
+      "expected_output": "Uses SERP location resolution, three Live Organic calls, and an optional coordinate-based Business Listings Search; keeps organic, local-pack, and listing evidence distinct and states billable scope.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "My raw remote DataForSEO MCP integration returns an expired bearer-token error and some REST calls show internal code 40209 despite HTTP 200. Explain the exact layers, refresh flow, retry policy, concurrency limit, and example request/response envelopes.",
+      "expected_output": "Separates MCP HTTP/JSON-RPC from DataForSEO REST/internal status, documents OAuth refresh_token form flow, recognizes 40209 as excessive concurrency, and recommends bounded backoff below 30 concurrent requests.",
+      "files": []
+    }
+  ]
+}

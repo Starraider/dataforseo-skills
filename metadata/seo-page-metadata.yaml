@@ -1,0 +1,37 @@
+slug: seo-page-metadata
+display_name: SEO Page Metadata
+summary:
+  en: >
+    Analyzes one page with DataForSEO MCP, derives five seed keywords solely from primary content with supported geographic targeting, finds and scores related low-difficulty opportunities, and generates search and social metadata suggestions.
+category: marketing
+tags:
+  - dataforseo
+  - page-metadata
+  - keyword-research
+  - seo-report
+use_cases:
+  - Identify five seed keywords solely from primary page content and incorporate explicit geographic targeting when relevant.
+  - Research up to 25 related keywords per seed and prioritize 20 high-volume, low-difficulty opportunities.
+  - Generate three options each for page, Open Graph, Twitter Card, and meta-keywords fields.
+expected_outputs:
+  - A top-20 keyword table with search volume, organic difficulty, Ads competition, opportunity, and seed provenance.
+  - Three options for each of seven metadata fields with character counts.
+  - A detailed dated Markdown report saved under the requested report root or SEO/<domain>/ by default.
+context_requirements:
+  - One absolute HTTP(S) page URL.
+  - The official DataForSEO MCP server with the ONPAGE and DATAFORSEO_LABS modules enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - seo-technical-page-audit
+  - seo-keyword-research
+  - seo-content-suggestions
+example_prompts:
+  - Analyze https://example.com/products/widget and create improved page and social metadata.
+  - Find 20 low-hanging-fruit keywords for this landing page and give me three options for every metadata field.
+  - Analyze https://example.de/leistungen/seo in Germany and save the metadata report under ./client-reports.
+primary_keywords:
+  - seo-metadata
+  - meta-title-description
+  - low-hanging-fruit-keywords

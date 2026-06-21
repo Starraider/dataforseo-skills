@@ -1,13 +1,15 @@
 {
   "name": "dataforseo-skills",
-  "version": "0.6.0",
-  "description": "Run evidence-based technical SEO, competitor-gap, keyword-opportunity, topical-authority, and live ranking analyses with DataForSEO MCP reporting workflows.",
+  "version": "0.7.0",
+  "description": "Select and use DataForSEO MCP tools, or run evidence-based technical SEO, competitor-gap, keyword-opportunity, page-metadata, topical-authority, and live ranking reporting workflows.",
   "skills": [
     "./skills/seo-technical-page-audit",
     "./skills/seo-competitor-gap-analysis",
     "./skills/seo-keyword-research",
     "./skills/seo-rankings",
-    "./skills/seo-content-suggestions"
+    "./skills/seo-content-suggestions",
+    "./skills/seo-page-metadata",
+    "./skills/dataforseo-skill"
   ],
   "license": "(MIT AND CC-BY-SA-4.0)",
   "author": {
