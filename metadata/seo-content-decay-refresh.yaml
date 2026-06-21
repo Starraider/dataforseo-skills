@@ -1,0 +1,38 @@
+slug: seo-content-decay-refresh
+display_name: SEO Content Decay Refresh
+summary:
+  en: >
+    Detects ranking and estimated-traffic decay among important existing pages, separates structural losses from seasonal demand, and creates evidence-backed content refresh briefs with DataForSEO MCP.
+category: marketing
+tags:
+  - dataforseo
+  - content-decay
+  - content-refresh
+  - seo-report
+use_cases:
+  - Find important pages and keywords with declining organic rankings and estimated traffic.
+  - Distinguish structural ranking losses from seasonal search-demand changes.
+  - Prioritize refresh, consolidation, redirect, or leave-unchanged actions.
+expected_outputs:
+  - Page- and keyword-level position loss and sampled DataForSEO ETV impact.
+  - Seasonal, structural, mixed, or inconclusive classifications with evidence.
+  - Detailed refresh briefs with updated outlines and internal-link recommendations.
+  - A dated Markdown report saved under the requested root or SEO/<domain>/ by default.
+context_requirements:
+  - A target domain or HTTP(S) URL.
+  - The official DataForSEO MCP server with DATAFORSEO_LABS, KEYWORDS_DATA, and ONPAGE modules enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - seo-content-suggestions
+  - seo-rankings
+  - seo-keyword-research
+example_prompts:
+  - Find the pages losing organic traffic on example.com and create refresh briefs.
+  - Separate seasonal demand from structural ranking decay for example.org.
+  - Prioritize existing content updates for example.co.uk and save the report under ./client-reports.
+primary_keywords:
+  - content-decay
+  - content-refresh
+  - ranking-decline

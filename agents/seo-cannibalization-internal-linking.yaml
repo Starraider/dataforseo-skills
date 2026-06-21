@@ -1,0 +1,4 @@
+interface:
+  display_name: SEO Cannibalization and Internal Linking
+  short_description: Resolve competing pages and improve internal links.
+  default_prompt: Analyze this domain for keyword cannibalization with DataForSEO MCP, select primary pages, recommend consolidation or differentiation and sampled internal links, and save the report under SEO/<domain>/.

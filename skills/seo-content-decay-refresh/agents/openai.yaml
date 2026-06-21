@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEO Content Decay Refresh"
+  short_description: "Find and prioritize decaying organic content."
+  default_prompt: "Use $seo-content-decay-refresh to detect declining pages, separate seasonality from ranking decay, and create refresh briefs."

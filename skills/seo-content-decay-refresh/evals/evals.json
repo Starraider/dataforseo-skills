@@ -1,0 +1,39 @@
+{
+  "skill_name": "seo-content-decay-refresh",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Find decaying content on example.com, separate ranking losses from seasonality, and save detailed refresh briefs in the default location.",
+      "expected_output": "Runs the bounded DataForSEO MCP workflow, calculates reproducible position and ETV changes, classifies sampled declines, parses no more than five priority pages, and writes the dated Markdown report under SEO/example.com/.",
+      "files": [],
+      "assertions": [
+        "Historical Rank Overview, Relevant Pages, Ranked Keywords, Historical SERPs, Historical Keyword Data, Google Trends, and OnPage Content Parsing are used in sequence.",
+        "Historical SERPs are limited to ten keywords with no more than two per page unless the user approves more.",
+        "Structural, Seasonal, Mixed, and Inconclusive/stable classifications follow the documented thresholds.",
+        "The path follows SEO/example.com/YYYY-MM-DD_Content-Decay-Refresh_example.com.md."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Tell me which old articles have lost organic traffic and what to update.",
+      "expected_output": "Asks for the missing domain and waits without making a billable DataForSEO call or writing a report.",
+      "files": [],
+      "assertions": [
+        "The workflow asks for a domain and waits.",
+        "No DataForSEO call is made before a valid domain is supplied."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Analyze https://www.example.org/blog for content decay in Germany using de and save the report under ./client-reports.",
+      "expected_output": "Normalizes the project domain, uses the supplied market and report root consistently, distinguishes demand decline from position decline, and produces page-level refresh decisions and briefs.",
+      "files": [],
+      "assertions": [
+        "The project domain is example.org while ranked page URLs remain exact normalized URLs.",
+        "Germany and de are used consistently across compatible MCP calls.",
+        "Traffic impact uses DataForSEO ETV deltas rather than an invented CTR curve.",
+        "Each actionable page receives an updated outline and internal-link recommendations."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+slug: seo-serp-optimization
+display_name: SEO SERP Optimization
+summary:
+  en: >
+    Finds feature opportunities in a domain's top-20 Google rankings, verifies approved keywords with live SERPs, compares target and winning page formats, and recommends exact structural changes.
+category: marketing
+tags:
+  - dataforseo
+  - serp-features
+  - featured-snippets
+  - seo-report
+use_cases:
+  - Find featured-snippet, People Also Ask, video, image, local-pack, shopping, and other live SERP opportunities.
+  - Identify current feature owners, target organic positions, and winning page formats.
+  - Prioritize exact page-format changes by ranking proximity, volume, intent fit, and feature prominence.
+expected_outputs:
+  - A SERP-feature opportunity matrix with current owners, target positions, attainability, and priority.
+  - Page-specific answer blocks, headings, lists, tables, media, structured-data eligibility, and supporting-question changes.
+  - A detailed dated Markdown report saved under the requested report root or SEO/<domain>/ by default.
+context_requirements:
+  - A target domain or HTTP(S) URL; country, language, device, exact location, and report root are optional.
+  - The official DataForSEO MCP server with DATAFORSEO_LABS, SERP, and ONPAGE enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - seo-page-metadata
+  - seo-text-keyword-optimization
+  - seo-rankings
+  - seo-technical-page-audit
+example_prompts:
+  - Analyze example.com for featured-snippet, PAA, image, and video opportunities.
+  - Find SERP-feature opportunities for example.de in Germany, de, on mobile and let me approve the live shortlist.
+  - Compare our ranking pages with current feature owners and specify the exact structural changes.
+primary_keywords:
+  - serp-feature-optimization
+  - featured-snippet-opportunities
+  - people-also-ask

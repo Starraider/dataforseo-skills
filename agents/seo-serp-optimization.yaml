@@ -1,0 +1,4 @@
+interface:
+  display_name: SEO SERP Optimization
+  short_description: Find and prioritize page-format opportunities in live Google SERPs.
+  default_prompt: Analyze this domain's top-20 rankings for Google SERP-feature opportunities with DataForSEO MCP, compare approved live winners with target pages, recommend exact structural changes, and save the report under SEO/<domain>/.

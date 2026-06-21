@@ -1,0 +1,39 @@
+{
+  "skill_name": "seo-cannibalization-internal-linking",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Find keyword cannibalization on example.com for United States/en, select the primary pages, recommend internal links, and save the report in the default location.",
+      "expected_output": "Runs the bounded DataForSEO MCP workflow, distinguishes same-intent competition from acceptable multi-URL rankings, assigns page decisions, creates a sampled internal-link map, and saves the detailed report under SEO/example.com/.",
+      "files": [],
+      "assertions": [
+        "Relevant Pages, Ranked Keywords, Page Intersection, Instant Pages, and Content Parsing are used in the documented sequence.",
+        "Page Intersection uses no more than 20 priority pages and a maximum 1000-keyword union sample.",
+        "Every priority cluster identifies a primary page, competing pages, evidence, uncertainty, and one supported action.",
+        "The path follows SEO/example.com/YYYY-MM-DD_Content-Decay-Refresh_example.com.md."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Check my site for pages competing with each other and fix the internal links.",
+      "expected_output": "Asks for the missing domain, country, and language and waits without making billable DataForSEO calls or writing a report.",
+      "files": [],
+      "assertions": [
+        "The workflow requests domain, country, and language together.",
+        "No DataForSEO call is made until all three required inputs are supplied."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Compare https://example.de/leistungen/seo/ and https://example.de/seo-agentur/ for Germany/de, discover other priority pages, and save the report under ./client-reports.",
+      "expected_output": "Prioritizes the supplied same-domain URLs, supplements them with discovered pages within the cap, verifies page content and link evidence, and writes an implementation-ready report under the requested root.",
+      "files": [],
+      "assertions": [
+        "Supplied URLs are selected before discovered URLs and Germany/de is used consistently.",
+        "Canonicalization is reserved for duplicate pages that must remain reachable; redirect and differentiation decisions preserve distinct valuable intent.",
+        "Each internal-link recommendation includes source, target, natural anchor, context, and verified or unverified link status.",
+        "The report states that priority-page sampling does not guarantee a complete site-wide link graph."
+      ]
+    }
+  ]
+}

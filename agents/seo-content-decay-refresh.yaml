@@ -1,0 +1,4 @@
+interface:
+  display_name: SEO Content Decay Refresh
+  short_description: Find and prioritize decaying organic content.
+  default_prompt: Analyze this domain for content decay with DataForSEO MCP, separate seasonality from ranking loss, create refresh briefs, and save the report under SEO/<domain>/.

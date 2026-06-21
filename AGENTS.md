@@ -8,8 +8,11 @@
   - `skills/seo-keyword-research/SKILL.md` researches seed- or domain-based keywords with the DataForSEO MCP tools, scores opportunities, and writes a detailed Markdown report.
   - `skills/seo-rankings/SKILL.md` checks live Google organic positions and search volumes for a domain and keyword list, assigns ranking tiers and actions, and writes a detailed Markdown report.
   - `skills/seo-content-suggestions/SKILL.md` clusters a domain's ranked keywords, compares topic coverage with competitors, calculates a Content Score, and recommends the five highest-leverage articles.
+  - `skills/seo-content-decay-refresh/SKILL.md` detects ranking and estimated-traffic decay, separates structural losses from seasonality, prioritizes existing pages, and writes evidence-based refresh briefs.
+  - `skills/seo-cannibalization-internal-linking/SKILL.md` detects same-intent keyword overlap among priority pages, selects primary targets, recommends consolidation or differentiation, and creates a sampled internal-link map.
   - `skills/seo-text-keyword-optimization/SKILL.md` researches up to 50 related keywords for each of one to three seeds, prioritizes low-difficulty search demand, and proposes three distinct optimizations for supplied prose.
   - `skills/seo-page-metadata/SKILL.md` analyzes one page's primary topic, ranks related keyword opportunities, recommends one of three coherent search and social metadata packages, and writes a detailed Markdown report.
+  - `skills/seo-serp-optimization/SKILL.md` finds feature opportunities in top-20 rankings, verifies approved keywords with live SERPs, compares target and winning page formats, and writes a detailed Markdown report with exact structural changes.
 - Every SEO analysis and reporting skill must use the DataForSEO MCP server.
 - Use the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/) and [DataForSEO White Papers and knowledge base](https://dataforseo.com/knowledgebase) when designing, implementing, or verifying skills.
 - Keep each skill under `skills/<skill-name>/SKILL.md` and register it in both plugin and distribution manifests.

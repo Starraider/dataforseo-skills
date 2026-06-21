@@ -1,0 +1,62 @@
+{
+  "skill_name": "seo-serp-optimization",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Analyze example.com for featured-snippet, People Also Ask, image, and video opportunities in the United States on desktop, then save the report in the default location.",
+      "expected_output": "Runs one bounded top-20 Ranked Keywords discovery call, proposes no more than ten candidates, waits for shortlist approval, then uses live SERPs and deduplicated page parsing to produce a detailed report under SEO/example.com/.",
+      "files": [],
+      "assertions": [
+        "The discovery request filters organic target rankings to rank_group 20 or better, uses limit 200, and retains serp_item_types.",
+        "The workflow presents at most ten candidate keywords and a call budget before live SERP fan-out.",
+        "Each approved keyword receives one Google Advanced Live SERP call with desktop, depth 100, and one crawl page.",
+        "The report path follows SEO/example.com/YYYY-MM-DD_Serp-Optimization_example.com.md."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Find the Google SERP features we should optimize our pages for.",
+      "expected_output": "Asks for the missing domain and waits without making a DataForSEO call or creating a report.",
+      "files": [],
+      "assertions": [
+        "The workflow asks for a target domain.",
+        "No billable call or report occurs before a valid domain is supplied."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Run seo-serp-optimization for https://www.example.de/shop in Germany, language de, mobile. I approve the five strongest shopping, image, and video candidates. Save it under ./client-reports.",
+      "expected_output": "Normalizes example.de, skips a second approval because five candidates are pre-approved, verifies them on mobile live SERPs, distinguishes page changes from merchant-feed requirements, and writes below client-reports/example.de/.",
+      "files": [],
+      "assertions": [
+        "Germany, de, and mobile are used consistently in discovery and live calls.",
+        "Exactly five or fewer supported candidates receive live calls without an additional approval pause.",
+        "Shopping recommendations label merchant feed, inventory, and eligibility dependencies separately from page edits.",
+        "The custom root resolves to client-reports/example.de/YYYY-MM-DD_Serp-Optimization_example.de.md."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Analyze example.org for local-pack opportunities in the United States. Ranked Keywords lists local_pack, but the approved live SERP no longer contains it.",
+      "expected_output": "Warns that a country-level location is weak for local analysis, marks the feature stale/absent after the successful live call, and does not assign it an opportunity score.",
+      "files": [],
+      "assertions": [
+        "The workflow discloses that country-level results may not represent a city SERP.",
+        "The successful live SERP overrides the stored feature inventory for current opportunity status.",
+        "The stale/absent feature receives no priority score or unsupported owner claim."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "For an approved keyword, our page ranks 7 with volume 1000 and the featured snippet is at absolute position 1. Compare our page with the winner and tell me exactly what to change.",
+      "expected_output": "Parses the target and representative winner, labels inferred formats, classifies attainability with rationale, calculates the documented four-component priority when all inputs exist, and specifies evidence-backed structural changes without guaranteeing acquisition.",
+      "files": [],
+      "assertions": [
+        "The comparison uses observed main-topic headings, answer form, lists, tables, and media rather than metadata alone.",
+        "The priority calculation exposes proximity, log-normalized volume, intent fit, prominence, and the weighted total.",
+        "Recommendations name the target URL, insertion point, proposed heading, answer format, and applicable supporting elements.",
+        "Structured data and content formatting are not described as guarantees."
+      ]
+    }
+  ]
+}

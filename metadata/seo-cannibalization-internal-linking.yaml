@@ -1,0 +1,40 @@
+slug: seo-cannibalization-internal-linking
+display_name: SEO Cannibalization and Internal Linking
+summary:
+  en: >
+    Detects priority pages competing for the same keywords, selects primary targets, recommends consolidation or differentiation, and creates a sampled internal-link map with DataForSEO MCP.
+category: marketing
+tags:
+  - dataforseo
+  - keyword-cannibalization
+  - internal-linking
+  - content-consolidation
+  - seo-report
+use_cases:
+  - Find keywords ranking through multiple URLs and determine whether the overlap is harmful.
+  - Select primary pages and decide whether to merge, redirect, canonicalize, differentiate, or retain competing pages.
+  - Recommend source pages, target pages, natural anchor text, and placement context for sampled internal links.
+expected_outputs:
+  - A multi-URL keyword matrix with ranking URLs, positions, demand, intent, and confidence.
+  - Primary and competing page selections with evidence-backed implementation decisions.
+  - A sampled internal-link map with source, target, anchor, context, and existing-link status.
+  - A detailed dated Markdown report saved under the requested root or SEO/<domain>/ by default.
+context_requirements:
+  - A target domain, country, and language; specific priority URLs and report root are optional.
+  - The official DataForSEO MCP server with DATAFORSEO_LABS and ONPAGE enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - seo-content-decay-refresh
+  - seo-content-suggestions
+  - seo-rankings
+  - seo-technical-page-audit
+example_prompts:
+  - Find keyword cannibalization on example.com for United States/en and recommend internal links.
+  - Compare two supplied example.de pages for Germany/de and select the primary target.
+  - Map competing URLs on example.co.uk and recommend merge, redirect, canonicalize, differentiate, or retain actions.
+primary_keywords:
+  - keyword-cannibalization
+  - internal-linking
+  - content-consolidation
