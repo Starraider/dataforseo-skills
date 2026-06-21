@@ -1,67 +1,61 @@
 # SEO Page Metadata
 
-`seo-page-metadata` analyzes one page through DataForSEO MCP, identifies five evidence-based seed keywords, retrieves up to 25 related keywords for each seed, and turns the best low-difficulty opportunities into implementation-ready metadata suggestions.
+`seo-page-metadata` analyzes one page through DataForSEO MCP, derives five evidence-backed seed keywords from structured primary content, ranks related keyword opportunities, and produces three coherent search and social metadata packages.
 
 ## What the skill does
 
-The skill requires an absolute HTTP(S) page URL. It uses DataForSEO OnPage Instant Pages to audit the page's existing title, description, canonical URL, meta keywords, and social tags. Existing metadata is never used to infer the page topic because it may be missing or inaccurate. OnPage Content Parsing separates the primary page text and headings from repeated navigation and footer content; that primary content is the sole evidence for topic, intent, geographic scope, seed keywords, and truthful suggestions.
+The skill validates one absolute HTTP(S) URL and announces a normal seven-call budget: OnPage Instant Pages, OnPage Content Parsing, and one bounded Related Keywords request for each of five seeds. It uses the active MCP schemas and asks before retries, pagination, extra calls, or more expensive JavaScript rendering.
 
-From the parsed primary content, it derives exactly five distinct seed keywords that represent the page's main topic and search intent. When the content explicitly targets a country, region, or city, the skill incorporates that scope naturally into applicable seeds. It ignores locations found only in boilerplate or a footer address. It then makes one Related Keywords request per seed with search depth 2 and a limit of 25 results. Results are deduplicated case-insensitively while retaining all seed sources.
+Instant Pages supplies the current title, description, canonical, meta keywords, and social tags for audit purposes. Those fields and the page URL are not positive topic evidence. Topic, intent, service geography, seeds, and suggested claims come only from qualifying headings and primary text in Content Parsing `main_topic` data. Header, footer, secondary content, navigation, cookie, legal, contact-only, and other boilerplate content are excluded.
 
-The skill defines organic competition through DataForSEO Keyword Difficulty. For each relevant keyword with complete metrics, it calculates:
+A successful keyword run requires five distinct, non-brand seeds supported by that evidence. If the page is broken, primary content is empty, or five seeds cannot be justified, the skill stops before Related Keywords calls. It returns the evidence shortfall and asks before a JavaScript-rendered retry instead of padding the seed list.
+
+## Keyword workflow
+
+Each Related Keywords request uses one approved seed, one selected country/language pair, depth 2, limit 25, and descending search volume. Country and language are resolved independently. User overrides win; otherwise explicit primary-content service geography and content language are used before disclosed United States/`en` defaults. Unsupported or uncertain pairs are resolved through an exposed MCP utility or confirmed with the user.
+
+Results are normalized with Unicode NFKC, collapsed whitespace, and casefolded deduplication. Seed provenance is merged. Zero remains distinct from missing data, metric conflicts are recorded, and every exclusion receives a reason. Complete relevant rows receive the derived score:
 
 ```text
-opportunity = search_volume / (keyword_difficulty + 10)
+opportunity_proxy = search_volume / (keyword_difficulty + 10)
 ```
 
-It selects the 20 highest-scoring keywords, using search volume and lower difficulty as tie-breakers. Google Ads competition is reported separately because it measures paid-search advertiser competition, not organic ranking difficulty.
+The proxy prioritizes the candidate set; it is not a DataForSEO metric or proof of low competition. Organic Keyword Difficulty remains separate from paid Ads competition.
 
 ## Requirements and inputs
 
-- The official DataForSEO MCP server with OnPage and DataForSEO Labs enabled.
-- Filesystem write access.
-- One absolute HTTP(S) page URL.
+- Python 3 and filesystem write access.
+- Official DataForSEO MCP with OnPage and DataForSEO Labs enabled.
+- One absolute HTTP(S) page URL without embedded credentials.
 
-Optional inputs are country, language, and report root. The report root defaults to `SEO/` below the current working directory. A user-specified country and language take precedence. Otherwise, the skill starts with United States and `en`, but uses a country explicitly and unambiguously targeted by the primary page content for keyword calls. The page hostname supplies only the project domain, not topic or location evidence. The skill asks for a missing URL before making billable requests. Retries, pagination, and extra DataForSEO calls require approval.
+Optional inputs are country, language, report root, and a request for legacy meta keywords. The default report root is `SEO/` below the current working directory.
 
 ## Invocation examples
 
 ```text
-Analyze https://example.com/products/widget and suggest improved page and social metadata.
+Analyze https://example.com/products/widget and recommend improved search and social metadata.
 ```
 
 ```text
-Find low-hanging-fruit keywords for https://example.org/services/consulting and write three metadata options for every field.
+Research keyword opportunities for https://example.org/services/consulting and create three coherent metadata packages.
 ```
 
 ```text
-Run seo-page-metadata for https://example.de/leistungen/seo using Germany and German, and save the report under ./client-reports.
+Run seo-page-metadata for https://example.de/leistungen/seo using Germany and de, and save it under ./client-reports.
 ```
 
-If the page URL is missing, the skill asks for it and waits without making DataForSEO calls.
+If the page URL is missing, the skill asks for it and makes no billable request.
 
-## What to expect in the report
+## Report contents
 
-The report begins with the local ISO date and is saved by default as:
+The report includes scope and timestamp, current metadata, primary-content evidence, market/language provenance, five justified seeds, coverage and exclusion counts, up to 20 ranked keyword opportunities, three coherent metadata packages with Unicode code-point counts, one recommended package, limitations, method, call log, and cost total.
+
+Length ranges are editorial targets rather than display guarantees. Meta keywords are omitted unless explicitly requested; when included, they are labeled legacy-only because Google and Bing do not use them for rankings.
+
+The default path is:
 
 ```text
 SEO/<domain>/<YYYY-MM-DD>_Page-Metadata_<safe-URL>.md
 ```
 
-For example:
-
-```text
-SEO/example.com/2026-06-19_Page-Metadata_https_example.com_products_widget.md
-```
-
-It contains:
-
-- Scope, selected market and its source, timestamp, and total DataForSEO cost.
-- Existing title, description, canonical, meta keywords, Open Graph, and Twitter Card data.
-- Primary-content evidence, detected geographic scope, and rationales for the five seed keywords.
-- Requested, returned, unique, complete-metric, and excluded keyword counts.
-- A top-20 keyword table with search volume, organic difficulty, Ads competition, opportunity score, and seed provenance.
-- Three Page Title, Meta Description, Meta Keywords, Open Graph Title, Open Graph Description, Twitter Card Title, and Twitter Card Description options.
-- Character counts, implementation notes, limitations, formula, call log, and official documentation links.
-
-The report states that existing metadata was audited but excluded from topic, intent, location, and seed derivation. The 21 suggestions stay faithful to the parsed primary content and its search intent. The meta-keywords options are included because the workflow requests them, while the report notes that Google does not use the meta keywords tag for ranking.
+Query and fragment text is excluded from filenames and redacted in the report scope. Every filename ends with a short deterministic hash to prevent collisions without exposing query values. The filename is capped at 140 characters.

@@ -3,16 +3,15 @@
   "evals": [
     {
       "id": 1,
-      "prompt": "Analyze https://example.com/products/widget, find low-hanging-fruit keywords, and create three suggestions for every page and social metadata field in the default report location.",
-      "expected_output": "Inspects the exact page with both DataForSEO OnPage calls, derives five seeds, makes five bounded Related Keywords calls, deduplicates and scores complete relevant rows, and writes the dated report under SEO/example.com/.",
+      "prompt": "Analyze https://example.com/products/widget, rank keyword opportunities, and recommend improved search and social metadata in the default report location.",
+      "expected_output": "Announces the seven-call budget, audits current metadata, derives five seeds from qualifying primary content, makes five bounded Related Keywords calls, and writes three coherent packages under SEO/example.com/.",
       "files": [],
       "assertions": [
-        "The workflow calls Instant Pages and Content Parsing for the exact supplied URL, but derives exactly five seeds solely from parsed primary content and headings.",
-        "Existing metadata, URL components, domain, and TLD are excluded from topic, intent, geographic-scope, and seed derivation.",
-        "It makes one Related Keywords call per seed with depth 2, limit 25, and the selected market, for five calls total.",
-        "The top 20 are deduplicated and sorted by search_volume / (keyword_difficulty + 10), with organic KD distinguished from Ads competition.",
-        "The report contains three suggestions for each of seven metadata fields, character counts, and a top-20 metrics table.",
-        "The path follows SEO/example.com/YYYY-MM-DD_Page-Metadata_https_example.com_products_widget.md."
+        "The workflow states a normal budget of two OnPage calls and five Related Keywords calls before execution.",
+        "Exactly five seeds are justified solely by qualifying Content Parsing main-topic headings and primary text.",
+        "Each Related Keywords call uses the same selected market, depth 2, limit 25, and descending search-volume order.",
+        "The report ranks at most 20 rows with the documented opportunity_proxy and labels it analyst-derived rather than a DataForSEO metric.",
+        "The report contains three coherent search/social metadata packages and marks one recommended."
       ]
     },
     {
@@ -27,49 +26,120 @@
     },
     {
       "id": 3,
-      "prompt": "Run seo-page-metadata for https://www.example.de/leistungen/seo?source=nav using Germany and de, and save it under ./client-reports.",
-      "expected_output": "Preserves the exact page URL for analysis, normalizes example.de for the directory, respects the market and output overrides, and produces the complete evidence-based metadata report.",
+      "prompt": "Run seo-page-metadata for https://www.example.de/leistungen/seo?customer=acme using Germany and de, and save it under ./client-reports.",
+      "expected_output": "Preserves the query for the page request, redacts it in the report, normalizes example.de for the directory, respects Germany/de, and creates a safe filename that does not expose the query value.",
       "files": [],
       "assertions": [
-        "Both OnPage calls use the supplied URL while the report directory uses the normalized hostname example.de.",
-        "All five Related Keywords calls use Germany and de with depth 2 and limit 25.",
-        "Missing keyword metrics are not coerced to zero and a shortfall is disclosed if fewer than 20 relevant complete rows exist.",
-        "The report is saved under ./client-reports/example.de/ with a sanitized full-URL filename."
+        "Both OnPage calls use the validated URL including its query and without a fragment.",
+        "The report Scope redacts query and fragment contents.",
+        "All five Related Keywords calls use Germany and de.",
+        "The report path is under the cwd-resolved client-reports/example.de directory.",
+        "The filename omits customer and acme, includes a deterministic hash, and is no longer than 140 characters."
       ]
     },
     {
       "id": 4,
-      "prompt": "Analyze https://example.org/lahore/mobile-vet and improve its metadata. The current title and description incorrectly describe an online pet store, while the parsed main content offers mobile veterinary visits throughout Lahore.",
-      "expected_output": "Audits the incorrect metadata without using it as topic evidence, derives five veterinary seeds from primary content, adds Lahore naturally to applicable local-service seeds, resolves Lahore to Pakistan for keyword calls when no market override is supplied, and documents those decisions.",
+      "prompt": "Analyze https://example.org/lahore/mobile-vet. The current title says online pet store, while the parsed main content offers mobile veterinary visits throughout Lahore.",
+      "expected_output": "Audits the incorrect metadata without using it as evidence, derives veterinary seeds from main-topic content, resolves Lahore to Pakistan, and documents the market source.",
       "files": [],
       "assertions": [
-        "The incorrect pet-store metadata is reported but excluded from topic, intent, geographic-scope, seed, and suggestion evidence.",
-        "Exactly five seeds are based solely on parsed mobile-veterinary content and use Lahore naturally where applicable.",
-        "With no user market override, all five Related Keywords calls use Pakistan because Lahore is an explicit and unambiguous service area.",
-        "The report names the detected geographic scope and explains that the keyword market came from primary content."
+        "The pet-store metadata is reported but excluded from topic, intent, geography, seed, and claim derivation.",
+        "Exactly five seeds are grounded in mobile-veterinary main-topic evidence and use Lahore only where natural.",
+        "Pakistan is used only because Lahore is an explicit and unambiguous primary-content service area.",
+        "The report identifies primary content as the country source."
       ]
     },
     {
       "id": 5,
-      "prompt": "Create page and social metadata for https://example.com/consulting. The page has no title or description. Its main content says the consultancy serves manufacturers across Ontario, Canada; the Toronto office address appears only in the footer.",
-      "expected_output": "Uses the parsed consulting content rather than missing metadata, treats Ontario and Canada as the supported service scope, does not infer Toronto targeting from the footer address, and uses Canada for all keyword calls.",
+      "prompt": "Create metadata for https://example.com/consulting. Main content says the consultancy serves manufacturers across Ontario, Canada; Toronto appears only in the footer office address.",
+      "expected_output": "Uses Ontario/Canada as service geography, rejects footer-only Toronto as market evidence, and uses the content language independently.",
       "files": [],
       "assertions": [
-        "Missing metadata does not prevent content-only topic and seed derivation.",
-        "Ontario or Canada is incorporated naturally into applicable consulting seeds.",
-        "Toronto is not treated as a target geography because it appears only in the footer address.",
-        "All five Related Keywords calls use Canada when no market override is supplied."
+        "Ontario or Canada is incorporated naturally into applicable seeds.",
+        "Toronto is explicitly rejected as target geography because it appears only in the footer.",
+        "All Related Keywords calls use Canada when there is no user country override.",
+        "Country and language sources are reported separately."
       ]
     },
     {
       "id": 6,
-      "prompt": "Analyze https://example.net/services/mobile-vet for Germany and de. The main content says the service operates only in Lahore, Pakistan.",
-      "expected_output": "Uses Lahore veterinary content for the five geographically relevant seeds, respects the explicit Germany/de keyword-market override, and clearly discloses the mismatch instead of silently replacing the requested market.",
+      "prompt": "Analyze https://example.net/services/mobile-vet for Germany and de. Main content says the service operates only in Lahore, Pakistan.",
+      "expected_output": "Respects Germany/de for keyword calls, keeps suggestions grounded in Lahore service content, and discloses the market/geography conflict.",
       "files": [],
       "assertions": [
-        "The five seeds remain grounded in primary content and incorporate Lahore where applicable.",
         "All five Related Keywords calls use the explicit Germany and de override.",
-        "The report discloses the conflict between the requested keyword market and the content-derived service geography."
+        "Seeds and suggested claims remain grounded in Lahore primary content.",
+        "The report discloses the conflict between requested keyword market and content-defined service geography."
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "Analyze https://example.com/thin-page. Content Parsing returns only a cookie banner, navigation links, and two generic words in main_topic.",
+      "expected_output": "Stops after the OnPage evidence gate because five distinct seeds cannot be justified, reports completed costs, and does not call Related Keywords.",
+      "files": [],
+      "assertions": [
+        "Cookie and navigation content are excluded from positive evidence.",
+        "The workflow does not invent or pad five seeds.",
+        "No Related Keywords call is made.",
+        "The diagnostic names completed calls, costs, and the evidence shortfall."
+      ]
+    },
+    {
+      "id": 8,
+      "prompt": "Analyze https://example.com/app. The non-JavaScript Content Parsing response is successful but has no main_topic content; the page is known to render client-side.",
+      "expected_output": "Stops before keyword calls and asks permission for one potentially more expensive JavaScript-rendered retry.",
+      "files": [],
+      "assertions": [
+        "JavaScript is not enabled on the initial OnPage calls.",
+        "No Related Keywords call occurs without qualifying content.",
+        "The workflow asks before retrying with enable_javascript true and explains the cost implication."
+      ]
+    },
+    {
+      "id": 9,
+      "prompt": "Run the metadata workflow for https://example.com/service. MCP transport succeeds, but the Content Parsing provider task returns status 40501 and no result.",
+      "expected_output": "Treats the task failure as a failure rather than empty content, does not make keyword calls, and asks before any eligible retry.",
+      "files": [],
+      "assertions": [
+        "The nested task status and message are validated and reported.",
+        "The missing result is not treated as an empty successful page.",
+        "No Related Keywords call or complete report is produced from the failed evidence call."
+      ]
+    },
+    {
+      "id": 10,
+      "prompt": "Related Keywords returns Emergency Vet Lahore twice with Unicode whitespace from two seeds, volume 0 and CPC 0, plus one conflicting non-null volume; another keyword has null KD.",
+      "expected_output": "Normalizes and merges the duplicate, preserves zero, records provenance and the conflicting volume, and excludes the null-KD row from opportunity ranking without converting null to zero.",
+      "files": [],
+      "assertions": [
+        "Unicode NFKC, whitespace collapse, and casefolding produce one Emergency Vet Lahore row.",
+        "Both source seeds are preserved.",
+        "Volume 0 and CPC 0 remain zero.",
+        "The first non-null conflicting metric is retained and the alternate value is logged.",
+        "Null KD remains null and the row is counted as metric-incomplete."
+      ]
+    },
+    {
+      "id": 11,
+      "prompt": "Analyze a Spanish-language page with no explicit service country and no user market. The active MCP exposes no DataForSEO Labs locations-and-languages utility, and support for United States/es is uncertain.",
+      "expected_output": "Keeps Spanish as content/report language but asks for a supported keyword country/language choice before the five Related Keywords calls.",
+      "files": [],
+      "assertions": [
+        "Country and language are resolved independently.",
+        "The workflow does not silently replace Spanish with English.",
+        "The workflow does not bypass MCP or guess an uncertain location/language pair.",
+        "No Related Keywords call is made before clarification."
+      ]
+    },
+    {
+      "id": 12,
+      "prompt": "Analyze https://example.com/service and include legacy meta keywords in the report.",
+      "expected_output": "Adds one legacy meta-keywords list to each coherent package because it was explicitly requested, while clearly stating that Google and Bing do not use the tag for rankings.",
+      "files": [],
+      "assertions": [
+        "Legacy meta keywords appear only because the user explicitly requested them.",
+        "They are labeled legacy-only and are not presented as an SEO ranking recommendation.",
+        "The normal search and social package recommendation remains complete without relying on meta keywords."
       ]
     }
   ]

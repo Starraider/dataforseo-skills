@@ -24,14 +24,14 @@ Use these skills to select and troubleshoot DataForSEO MCP tools, perform a cust
 - A prioritized technical SEO report with a provider-derived Technical Score.
 - A competitor report with up to 20 discovered domains, detailed top-five comparisons, and a 0-100 Competitive Score.
 - A keyword analysis with intent groups, top-20 opportunities, and a reproducible 0-100 Keyword Score.
-- A page-metadata report with five primary-content-derived seeds, geographic targeting when explicitly supported, 20 low-hanging-fruit keywords, and three options for each search and social metadata field.
+- A page-metadata report with five primary-content-derived seeds, explicit market/language provenance, up to 20 ranked keyword opportunities, and three coherent search and social metadata packages with one recommendation.
 - A live rankings report with search volume, tier, and one prioritized action per keyword.
 - A topical-authority report with a 0-100 Content Score, cluster gaps, and five prioritized article briefs.
 - A per-call DataForSEO cost log and summed `Total cost: x,xx USD` value in every report's Scope section.
 
 ## Context requirements
 
-Configure the official DataForSEO MCP server and credentials securely. Technical page audits also require Python 3 and a `.env` credential file so the skill can call task endpoints missing from MCP. The helper looks in the project root first and asks for the file path when it is absent. Every analysis requires a website project domain; page URLs supply it implicitly through their hostname. Keyword research also requires a seed or uses the project domain as its analysis target. Page-metadata analysis requires one absolute HTTP(S) page URL. Rank checking requires a keyword list. Content suggestions optionally accept up to five competitor domains and discover them when omitted. Filesystem write access is required for Markdown reports.
+Configure the official DataForSEO MCP server and credentials securely. Technical page audits also require Python 3 and a `.env` credential file so the skill can call task endpoints missing from MCP. The helper looks in the project root first and asks for the file path when it is absent. Page-metadata analysis requires Python 3 for deterministic response normalization and report-path generation. Every analysis requires a website project domain; page URLs supply it implicitly through their hostname. Keyword research also requires a seed or uses the project domain as its analysis target. Page-metadata analysis requires one absolute HTTP(S) page URL. Rank checking requires a keyword list. Content suggestions optionally accept up to five competitor domains and discover them when omitted. Filesystem write access is required for Markdown reports.
 
 ## Example prompts
 
@@ -99,7 +99,7 @@ If the prompt does not contain a domain, the skill asks for one before making bi
 
 ### `seo-page-metadata`
 
-Analyzes one exact page with DataForSEO OnPage, derives five evidence-backed seed keywords, and requests up to 25 related keywords for each seed. It deduplicates the results, ranks complete relevant rows by search volume and organic Keyword Difficulty, and surfaces the top 20 low-hanging-fruit opportunities. The report provides three Page Title, Meta Description, Meta Keywords, Open Graph Title, Open Graph Description, Twitter Card Title, and Twitter Card Description options with character counts. It is saved under the normalized project domain, using `SEO/<domain>/` by default.
+Analyzes one exact page with DataForSEO OnPage, derives five evidence-backed seed keywords from qualifying primary content, and requests up to 25 related keywords for each seed. It preserves nulls and provenance, records conflicts and exclusions, and ranks up to 20 complete relevant rows with a transparent volume-to-difficulty proxy. The report recommends one of three coherent Page Title, Meta Description, Open Graph, and Twitter Card packages with Unicode code-point counts. Legacy meta keywords are included only when explicitly requested. The report is saved under the normalized project domain, using `SEO/<domain>/` by default.
 
 Detailed reference: [skills/seo-page-metadata/README.md](skills/seo-page-metadata/README.md)
 
@@ -115,7 +115,7 @@ Every generated report records each DataForSEO call's response cost and shows th
 - `seo-keyword-research`: seed- and domain-based keyword discovery, intent grouping, opportunity scoring, and Markdown reporting.
 - `seo-rankings`: live Google organic rank checking, search-volume context, tiered actions, and Markdown reporting.
 - `seo-content-suggestions`: topical clustering, competitor content gaps, Content Score, and prioritized article briefs.
-- `seo-page-metadata`: page-topic extraction, low-hanging-fruit keyword research, and search/social metadata suggestions.
+- `seo-page-metadata`: primary-topic extraction, keyword-opportunity ranking, and coherent search/social metadata packages.
 
 ## Installation
 

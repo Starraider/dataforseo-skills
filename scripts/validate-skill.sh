@@ -53,6 +53,7 @@ if plugin.get("author", {}).get("url", "").rstrip("/") != "https://www.skom.de":
 allowed_frontmatter = {
     "name", "description", "license", "compatibility", "metadata", "allowed-tools"
 }
+registered_skills = []
 for relative in skill_paths:
     skill_file = root / relative / "SKILL.md"
     if not skill_file.is_file():
@@ -76,10 +77,72 @@ for relative in skill_paths:
     name = fields.get("name", "")
     if not re.fullmatch(r"[a-z0-9-]{1,64}", name):
         errors.append(f"invalid skill name in {relative}: {name!r}")
+    elif name != Path(relative).name:
+        errors.append(f"skill name does not match directory in {relative}: {name!r}")
+    else:
+        registered_skills.append(name)
     if not fields.get("description", "").startswith("Use when"):
         errors.append(f"description must start with 'Use when' in {relative}")
     if len(re.findall(r"\S+", text)) > 500:
         errors.append(f"SKILL.md exceeds 500 words: {relative}")
+
+for name in registered_skills:
+    readme_path = require(f"skills/{name}/README.md")
+    eval_path = require(f"skills/{name}/evals/evals.json")
+    agent_path = require(f"agents/{name}.yaml")
+    metadata_path = require(f"metadata/{name}.yaml")
+
+    if readme_path.is_file() and not readme_path.read_text().startswith("# "):
+        errors.append(f"skill README must begin with an H1: skills/{name}/README.md")
+    if metadata_path.is_file() and f"slug: {name}\n" not in metadata_path.read_text():
+        errors.append(f"distribution metadata slug mismatch: metadata/{name}.yaml")
+    if agent_path.is_file() and "interface:\n" not in agent_path.read_text():
+        errors.append(f"agent metadata is missing interface: agents/{name}.yaml")
+
+    if eval_path.is_file():
+        try:
+            eval_data = json.loads(eval_path.read_text())
+        except Exception as exc:
+            errors.append(f"invalid eval JSON for {name}: {exc}")
+            continue
+        if eval_data.get("skill_name") != name:
+            errors.append(f"eval skill_name mismatch for {name}")
+        evals = eval_data.get("evals")
+        if not isinstance(evals, list) or not evals:
+            errors.append(f"evals must be a non-empty array for {name}")
+            continue
+        seen_ids = set()
+        for index, item in enumerate(evals):
+            label = f"{name} eval {index}"
+            if not isinstance(item, dict):
+                errors.append(f"{label} must be an object")
+                continue
+            eval_id = item.get("id")
+            if eval_id in seen_ids:
+                errors.append(f"duplicate eval id for {name}: {eval_id!r}")
+            seen_ids.add(eval_id)
+            for field in ("prompt", "expected_output"):
+                if not isinstance(item.get(field), str) or not item[field].strip():
+                    errors.append(f"{label} has invalid {field}")
+            if not isinstance(item.get("files"), list):
+                errors.append(f"{label} files must be an array")
+            assertions = item.get("assertions")
+            if assertions is not None and (
+                not isinstance(assertions, list)
+                or not assertions
+                or not all(isinstance(value, str) and value.strip() for value in assertions)
+            ):
+                errors.append(f"{label} assertions must be a non-empty string array when present")
+
+for path in (
+    "skills/seo-page-metadata/references/data-contract.md",
+    "skills/seo-page-metadata/templates/report-template.md",
+    "skills/seo-page-metadata/scripts/metadata_support.py",
+    "skills/seo-page-metadata/tests/fixtures/onpage_success.json",
+    "skills/seo-page-metadata/tests/fixtures/related_keywords_success.json",
+    "skills/seo-page-metadata/tests/test_metadata_support.py",
+):
+    require(path)
 
 try:
     composer = json.loads((root / "composer.json").read_text())
@@ -138,3 +201,4 @@ print(f"Skill repository is valid: {len(skill_paths)} registered skill(s)")
 PY
 
 python3 "$REPO_ROOT/skills/seo-technical-page-audit/tests/test_fetch_task_onpage_fixture.py"
+python3 "$REPO_ROOT/skills/seo-page-metadata/tests/test_metadata_support.py"

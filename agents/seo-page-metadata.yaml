@@ -1,4 +1,4 @@
 interface:
   display_name: SEO Page Metadata
-  short_description: Find page keywords and generate search and social metadata.
-  default_prompt: Analyze this page with DataForSEO MCP, find 20 low-hanging-fruit keywords, generate three options for every requested metadata field, and save the report under SEO/<domain>/.
+  short_description: Rank page keyword opportunities and generate metadata packages.
+  default_prompt: Analyze this page with DataForSEO MCP, rank up to 20 evidence-backed keyword opportunities, recommend one of three coherent search and social metadata packages, and save the report under SEO/<domain>/.

@@ -1,0 +1,96 @@
+{
+  "instant_pages": {
+    "status_code": 20000,
+    "status_message": "Ok.",
+    "tasks_error": 0,
+    "tasks": [
+      {
+        "status_code": 20000,
+        "status_message": "Ok.",
+        "cost": 0.000125,
+        "result": [
+          {
+            "crawl_progress": "finished",
+            "items": [
+              {
+                "resource_type": "html",
+                "status_code": 200,
+                "url": "https://example.org/lahore/mobile-vet",
+                "location": null,
+                "meta": {
+                  "title": "Online Pet Store",
+                  "description": "Buy pet food online.",
+                  "meta_keywords": null,
+                  "canonical": "https://example.org/lahore/mobile-vet",
+                  "title_length": 16,
+                  "description_length": 20,
+                  "social_media_tags": {
+                    "og:title": "Online Pet Store",
+                    "twitter:title": "Online Pet Store"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "content_parsing": {
+    "status_code": 20000,
+    "status_message": "Ok.",
+    "tasks_error": 0,
+    "tasks": [
+      {
+        "status_code": 20000,
+        "status_message": "Ok.",
+        "cost": 0.000125,
+        "result": [
+          {
+            "crawl_progress": "finished",
+            "items": [
+              {
+                "type": "content_parsing_element",
+                "status_code": 200,
+                "page_content": {
+                  "header": {
+                    "primary_content": [
+                      {"text": "Shop Pet Food"}
+                    ]
+                  },
+                  "main_topic": [
+                    {
+                      "main_title": "Mobile Veterinary Visits in Lahore",
+                      "h_title": "Veterinary care at your home",
+                      "language": "en",
+                      "primary_content": [
+                        {"text": "Our veterinarians provide mobile checkups and urgent home visits throughout Lahore."}
+                      ],
+                      "secondary_content": [
+                        {"text": "Privacy policy and navigation"}
+                      ]
+                    }
+                  ],
+                  "secondary_topic": [
+                    {
+                      "h_title": "Recent posts",
+                      "primary_content": [
+                        {"text": "Unrelated blog links"}
+                      ]
+                    }
+                  ],
+                  "footer": {
+                    "primary_content": [
+                      {"text": "Karachi office address"}
+                    ]
+                  }
+                },
+                "page_as_markdown": "Shop Pet Food Recent posts Karachi office address"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
