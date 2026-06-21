@@ -19,6 +19,7 @@
 | Country source | `[user / primary content / default]` |
 | Language | `[language code]` |
 | Language source | `[user / primary content / default]` |
+| Evidence mode | `[structured_main_topic / projection_degraded_text]` |
 | Content service geography | `[value or not established]` |
 | Captured at | `[ISO-8601 timestamp with timezone]` |
 | Planned calls | `7 (2 OnPage + 5 Related Keywords)` |
@@ -50,7 +51,7 @@ State any conflict between user market settings and primary-content geography. S
 
 ### Geography and language
 
-[Evidence, rejected boilerplate geography, market choice, language choice, and conflicts.]
+[Evidence, evidence mode, rejected boilerplate geography, market choice, language choice, and conflicts.]
 
 ## Seed keywords
 

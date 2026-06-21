@@ -48,7 +48,8 @@ For each MCP result:
 4. Require a non-empty `tasks` array and `tasks_error == 0` when present.
 5. Require every task `status_code == 20000` and retain its `status_message`, `cost`, and returned counts.
 6. Require result objects and expected item types. For OnPage, require `crawl_progress == "finished"` and a page HTTP status in the 200-299 range.
-7. Treat redirect, `broken`, 4xx/5xx, unfinished crawl, missing result, and missing primary content as failures or evidence shortfalls, not empty successful data.
+7. Classify Content Parsing evidence mode. Prefer `structured_main_topic` when `page_content.main_topic[]` contains qualifying headings or text. Classify `projection_degraded_text` when the MCP exposes only projected text or when `main_topic` is empty but usable `page_as_markdown` or equivalent projected text exists.
+8. Treat redirect, `broken`, 4xx/5xx, unfinished crawl, missing result, and missing primary content as failures or evidence shortfalls, not empty successful data.
 
 Retry only a transient timeout, throttling, or `5xxxx` provider failure, and only after approval. Never retry validation, authorization, access, balance, malformed-input, or cost-limit failures unchanged.
 
@@ -66,13 +67,15 @@ Use these fields only to describe current implementation. They are not positive 
 
 ## 5. Primary-content evidence
 
-Use Content Parsing `page_content.main_topic[]` as the positive evidence set:
+Preferred mode: use Content Parsing `page_content.main_topic[]` as the positive evidence set:
 
 - Headings: non-empty `main_title` and `h_title`.
 - Text: non-empty `primary_content[].text`.
 - Language: an explicit `language` value associated with qualifying main-topic content.
 
 Exclude `page_content.header`, `page_content.footer`, `secondary_topic`, all `secondary_content`, navigation lists, contact-only blocks, repeated calls to action, cookie text, legal text, and other boilerplate. Do not treat `page_as_markdown` as primary evidence when structured `main_topic` data is available; it can mix boilerplate with content.
+
+Fallback mode: when the MCP projects only plain text or when `main_topic` is empty but `page_as_markdown` or equivalent projected text is present, classify the evidence mode as `projection_degraded_text`. Use `scripts/metadata_support.py extract-content` to apply conservative fallback extraction to that text. Treat the fallback output as lower confidence, keep the limitation explicit in the report, and never use it to infer unsupported claims or precise service geography.
 
 Record short excerpts or concise paraphrases sufficient to justify the topic, intent, geography, and each seed. Do not copy large passages into the report.
 
@@ -81,6 +84,8 @@ Use `scripts/metadata_support.py extract-instant` and `extract-content` with pro
 ## 6. Evidence gate and recovery
 
 A successful keyword workflow requires enough primary content to justify five distinct, non-brand seeds. Seeds should normally contain two to four words; longer geography-qualified phrases are allowed. Each seed needs an evidence note and must represent the page's actual offering or intent.
+
+`projection_degraded_text` is not an automatic stop condition, but it raises the evidence bar. Continue only when the fallback text still supports five distinct seeds without relying on metadata, URL terms, or weak paraphrases. Otherwise stop before keyword calls and explain that the MCP projection degraded the content evidence.
 
 If the page is broken, primary content is empty, or five distinct seeds cannot be justified:
 
@@ -104,9 +109,10 @@ Language precedence:
 
 1. Explicit user language override.
 2. Language explicitly returned for qualifying main-topic content.
-3. `en`, disclosed as the default.
+3. Strong low-risk textual signal from `projection_degraded_text`, disclosed as inferred.
+4. `en`, disclosed as the default.
 
-A footer address alone does not establish a market. User overrides win, but report any conflict with the content-defined service geography. Use the content language for suggestions even when the keyword-market override differs; disclose that distinction. Confirm uncertain location/language support through an exposed MCP resolver or ask the user.
+A footer address alone does not establish a market. User overrides win, but report any conflict with the content-defined service geography. Use the content language for suggestions even when the keyword-market override differs; disclose that distinction. In `projection_degraded_text` mode, do not promote weak geographic hints such as contact blocks or legacy office references into market facts. Confirm uncertain location/language support through an exposed MCP resolver or ask the user.
 
 ## 8. Related Keywords extraction
 
@@ -162,7 +168,7 @@ Prefer `tasks[].cost` and sum each task once. Use the envelope cost only when no
 
 Use `scripts/metadata_support.py cost` with either one provider response or `{"responses": [response1, response2]}` on stdin to calculate the total deterministically.
 
-Name calls with missing cost and mark the subtotal incomplete. Coverage must include calls planned/completed, rows requested, returned, exact-seed exclusions, unique rows, metric-complete rows, relevance exclusions by reason, conflicts, and selected rows.
+Name calls with missing cost and mark the subtotal incomplete. Coverage must include the evidence mode, calls planned/completed, rows requested, returned, exact-seed exclusions, unique rows, metric-complete rows, relevance exclusions by reason, conflicts, and selected rows.
 
 ## 12. Report path and timestamp
 

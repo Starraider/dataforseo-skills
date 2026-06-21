@@ -17,6 +17,7 @@ import json
 from pathlib import Path
 import re
 import sys
+from typing import Any
 import unicodedata
 from urllib.parse import SplitResult, urlsplit, urlunsplit
 
@@ -220,7 +221,101 @@ def _unique(values: list[str]) -> list[str]:
     return output
 
 
-def extract_primary_evidence(payload: dict) -> dict:
+PROJECTED_TEXT_WARNING = (
+    "Content Parsing structure was unavailable; using conservative fallback extraction "
+    "from projected text."
+)
+
+MARKDOWN_LINK_RE = re.compile(r"\[([^\]]+)\]\([^)]+\)")
+BOILERPLATE_LINE_PATTERNS = (
+    re.compile(r"(?i)^start the conversation$"),
+    re.compile(r"(?i)^kontakt$"),
+    re.compile(r"(?i)^folge mir:?$"),
+    re.compile(r"(?i)^zum blog$"),
+    re.compile(r"(?i)^privacy policy$"),
+    re.compile(r"(?i)^datenschutzerklärung$"),
+    re.compile(r"(?i)^impressum$"),
+    re.compile(r"(?i)^cookie(?: policy| settings| banner)?$"),
+    re.compile(r"(?i)^tel\.?:"),
+    re.compile(r"(?i)^e-?mail:"),
+    re.compile(r"(?i)^©"),
+)
+CONTACT_VALUE_PATTERNS = (
+    re.compile(r"(?i)^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$"),
+    re.compile(r"^\+?\d[\d\s()/.-]+$"),
+)
+
+
+def _normalize_projected_text(raw_text: str) -> str:
+    text = MARKDOWN_LINK_RE.sub(r"\1", raw_text)
+    text = re.sub(r"[`*_]+", "", text)
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    return text
+
+
+def _is_boilerplate_line(line: str) -> bool:
+    normalized = normalize_text(line)
+    if not normalized:
+        return True
+    if any(pattern.match(normalized) for pattern in BOILERPLATE_LINE_PATTERNS):
+        return True
+    if any(pattern.match(normalized) for pattern in CONTACT_VALUE_PATTERNS):
+        return True
+    if len(normalized) <= 2:
+        return True
+    return False
+
+
+def _extract_from_projected_text(raw_text: str, status: int = 200) -> dict:
+    text = _normalize_projected_text(raw_text)
+    lines = [line.strip() for line in text.splitlines()]
+    headings: list[str] = []
+    primary_text: list[str] = []
+    paragraph_lines: list[str] = []
+
+    def flush_paragraph() -> None:
+        if not paragraph_lines:
+            return
+        paragraph = normalize_text(" ".join(paragraph_lines))
+        paragraph_lines.clear()
+        if _is_boilerplate_line(paragraph):
+            return
+        primary_text.append(paragraph)
+
+    for raw_line in lines:
+        line = raw_line.strip()
+        if not line:
+            flush_paragraph()
+            continue
+        if line.startswith("#"):
+            flush_paragraph()
+            heading = normalize_text(line.lstrip("#").strip())
+            if heading and not _is_boilerplate_line(heading):
+                headings.append(heading)
+            continue
+        candidate = normalize_text(line)
+        if _is_boilerplate_line(candidate):
+            flush_paragraph()
+            continue
+        paragraph_lines.append(candidate)
+    flush_paragraph()
+
+    return {
+        "http_status": status,
+        "headings": _unique(headings),
+        "primary_text": _unique(primary_text),
+        "languages": [],
+        "evidence_mode": "projection_degraded_text",
+        "degraded": True,
+        "warnings": [PROJECTED_TEXT_WARNING],
+    }
+
+
+def extract_primary_evidence(payload: Any) -> dict:
+    if isinstance(payload, str):
+        return _extract_from_projected_text(payload)
+    if isinstance(payload, dict) and isinstance(payload.get("text"), str) and "tasks" not in payload:
+        return _extract_from_projected_text(payload["text"])
     items = _crawl_items(_require_success(payload))
     content_items = [item for item in items if item.get("type") == "content_parsing_element"]
     if not content_items:
@@ -256,11 +351,18 @@ def extract_primary_evidence(payload: dict) -> dict:
             text = block.get("text") if isinstance(block, dict) else None
             if isinstance(text, str) and normalize_text(text):
                 texts.append(normalize_text(text))
+    if not headings and not texts:
+        projected_text = item.get("page_as_markdown")
+        if isinstance(projected_text, str) and normalize_text(projected_text):
+            return _extract_from_projected_text(projected_text, status=status)
     return {
         "http_status": status,
         "headings": _unique(headings),
         "primary_text": _unique(texts),
         "languages": _unique(languages),
+        "evidence_mode": "structured_main_topic",
+        "degraded": False,
+        "warnings": [],
     }
 
 
@@ -421,7 +523,7 @@ def format_cost(value: Decimal) -> str:
     return f"{rounded:.2f}".replace(".", ",") + " USD"
 
 
-def _read_stdin_json() -> dict:
+def _read_stdin_json() -> Any:
     try:
         return json.load(sys.stdin)
     except json.JSONDecodeError as exc:

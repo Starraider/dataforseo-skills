@@ -30,6 +30,7 @@ related_skills:
   - seo-rankings
   - seo-content-suggestions
   - seo-page-metadata
+  - seo-text-keyword-optimization
 example_prompts:
   - Plan and run the minimum DataForSEO MCP calls needed to analyze this domain's organic competitors.
   - Get a live SERP snapshot for these keywords and explain all returned search features.

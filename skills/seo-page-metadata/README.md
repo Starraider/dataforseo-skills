@@ -1,18 +1,18 @@
 # SEO Page Metadata
 
-`seo-page-metadata` analyzes one page through DataForSEO MCP, derives five evidence-backed seed keywords from structured primary content, ranks related keyword opportunities, and produces three coherent search and social metadata packages.
+`seo-page-metadata` analyzes one page through DataForSEO MCP, derives five evidence-backed seed keywords from structured primary content when available, falls back conservatively when the MCP projects only unstructured text, ranks related keyword opportunities, and produces three coherent search and social metadata packages.
 
 ## What the skill does
 
 The skill validates one absolute HTTP(S) URL and announces a normal seven-call budget: OnPage Instant Pages, OnPage Content Parsing, and one bounded Related Keywords request for each of five seeds. It uses the active MCP schemas and asks before retries, pagination, extra calls, or more expensive JavaScript rendering.
 
-Instant Pages supplies the current title, description, canonical, meta keywords, and social tags for audit purposes. Those fields and the page URL are not positive topic evidence. Topic, intent, service geography, seeds, and suggested claims come only from qualifying headings and primary text in Content Parsing `main_topic` data. Header, footer, secondary content, navigation, cookie, legal, contact-only, and other boilerplate content are excluded.
+Instant Pages supplies the current title, description, canonical, meta keywords, and social tags for audit purposes. Those fields and the page URL are not positive topic evidence. Topic, intent, service geography, seeds, and suggested claims come from qualifying headings and primary text in Content Parsing `main_topic` data when the MCP exposes that structure. If the MCP projects only unstructured text, the skill switches to a lower-confidence fallback extractor, filters obvious boilerplate, and discloses the degraded evidence mode in the report.
 
-A successful keyword run requires five distinct, non-brand seeds supported by that evidence. If the page is broken, primary content is empty, or five seeds cannot be justified, the skill stops before Related Keywords calls. It returns the evidence shortfall and asks before a JavaScript-rendered retry instead of padding the seed list.
+A successful keyword run requires five distinct, non-brand seeds supported by that evidence. If the page is broken, primary content is empty, the projected text is too noisy, or five seeds cannot be justified, the skill stops before Related Keywords calls. It returns the evidence shortfall and asks before a JavaScript-rendered retry instead of padding the seed list.
 
 ## Keyword workflow
 
-Each Related Keywords request uses one approved seed, one selected country/language pair, depth 2, limit 25, and descending search volume. Country and language are resolved independently. User overrides win; otherwise explicit primary-content service geography and content language are used before disclosed United States/`en` defaults. Unsupported or uncertain pairs are resolved through an exposed MCP utility or confirmed with the user.
+Each Related Keywords request uses one approved seed, one selected country/language pair, depth 2, limit 25, and descending search volume. Country and language are resolved independently. User overrides win; otherwise explicit primary-content service geography and content language are used before disclosed United States/`en` defaults. In degraded evidence mode, only strong textual signals may substitute for structured language evidence, and weak geographic hints stay excluded. Unsupported or uncertain pairs are resolved through an exposed MCP utility or confirmed with the user.
 
 Results are normalized with Unicode NFKC, collapsed whitespace, and casefolded deduplication. Seed provenance is merged. Zero remains distinct from missing data, metric conflicts are recorded, and every exclusion receives a reason. Complete relevant rows receive the derived score:
 

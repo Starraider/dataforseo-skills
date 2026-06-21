@@ -1,6 +1,6 @@
 {
   "name": "Starraider/dataforseo-skills",
-  "description": "Agent skills for general DataForSEO MCP SEO analysis, technical audits, competitor-gap reports, keyword research, page metadata, topical-authority analysis, and live rank checking.",
+  "description": "Agent skills for general DataForSEO MCP SEO analysis, technical audits, competitor-gap reports, keyword research, supplied-text optimization, page metadata, topical-authority analysis, and live rank checking.",
   "type": "ai-agent-skill",
   "license": "(MIT AND CC-BY-SA-4.0)",
   "authors": [
@@ -17,6 +17,7 @@
       "skills/seo-keyword-research/SKILL.md",
       "skills/seo-rankings/SKILL.md",
       "skills/seo-content-suggestions/SKILL.md",
+      "skills/seo-text-keyword-optimization/SKILL.md",
       "skills/seo-page-metadata/SKILL.md",
       "skills/dataforseo-skill/SKILL.md"
     ]

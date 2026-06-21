@@ -1,0 +1,37 @@
+slug: seo-text-keyword-optimization
+display_name: SEO Text Keyword Optimization
+summary:
+  en: >
+    Finds and deduplicates up to 50 DataForSEO related keywords per seed, ranks low-difficulty search demand, and proposes three concrete optimization approaches for supplied prose.
+category: marketing
+tags:
+  - dataforseo
+  - content-optimization
+  - keyword-research
+  - seo-report
+use_cases:
+  - Optimize a blog post, article, or other supplied prose around one to three seed keywords.
+  - Deduplicate and prioritize related keywords by search volume and organic difficulty.
+  - Compare three distinct, evidence-based approaches to improving the supplied text.
+expected_outputs:
+  - Up to 20 relevant low-hanging-fruit keywords with volume, difficulty, intent, provenance, and opportunity.
+  - Three concrete optimization approaches with keyword-to-text mappings and one recommendation.
+  - A detailed dated Markdown report under SEO/text-keyword-optimization/ by default.
+context_requirements:
+  - Complete source text and one to three seed keywords.
+  - The official DataForSEO MCP server with the DATAFORSEO_LABS module enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - seo-keyword-research
+  - seo-content-suggestions
+  - seo-page-metadata
+example_prompts:
+  - Optimize this blog post for heat pump maintenance and heat pump service.
+  - Find low-hanging-fruit keywords for the article in draft.md using these three seeds.
+  - Compare three ways to revise this news analysis around the supplied seed keyword.
+primary_keywords:
+  - seo-text-optimization
+  - low-hanging-fruit-keywords
+  - content-keyword-optimization

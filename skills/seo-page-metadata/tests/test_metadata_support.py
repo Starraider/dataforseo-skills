@@ -168,10 +168,48 @@ class OnPageTests(unittest.TestCase):
     def test_primary_evidence_excludes_header_footer_and_secondary_content(self):
         evidence = extract_primary_evidence(self.payload["content_parsing"])
         self.assertEqual(evidence["languages"], ["en"])
+        self.assertEqual(evidence["evidence_mode"], "structured_main_topic")
+        self.assertFalse(evidence["degraded"])
         self.assertIn("Mobile Veterinary Visits in Lahore", evidence["headings"])
         combined = " ".join(evidence["headings"] + evidence["primary_text"])
         for excluded in ("Shop Pet Food", "Privacy policy", "Recent posts", "Karachi"):
             self.assertNotIn(excluded, combined)
+
+    def test_primary_evidence_falls_back_to_projected_text(self):
+        payload = (
+            "# Herzlich Willkommen!\n\n"
+            "Mein Name ist Sven Kalbhenn.\n\n"
+            "Seit mehr als 20 Jahren erstelle ich Websites für meine Kunden.\n\n"
+            "Kontakt\n\n"
+            "Tel.: +49 156 78581807\n\n"
+            "E-Mail: sven@skom.de\n\n"
+            "© 2022 SKom\n"
+        )
+        evidence = extract_primary_evidence(payload)
+        self.assertEqual(evidence["evidence_mode"], "projection_degraded_text")
+        self.assertTrue(evidence["degraded"])
+        self.assertEqual(evidence["languages"], [])
+        self.assertIn("Herzlich Willkommen!", evidence["headings"])
+        combined = " ".join(evidence["headings"] + evidence["primary_text"])
+        self.assertIn("Seit mehr als 20 Jahren erstelle ich Websites für meine Kunden.", combined)
+        for excluded in ("Kontakt", "+49 156 78581807", "sven@skom.de", "© 2022 SKom"):
+            self.assertNotIn(excluded, combined)
+
+    def test_primary_evidence_falls_back_to_page_as_markdown_when_main_topic_missing(self):
+        payload = json.loads(json.dumps(self.payload["content_parsing"]))
+        item = payload["tasks"][0]["result"][0]["items"][0]
+        item["page_content"]["main_topic"] = []
+        item["page_as_markdown"] = (
+            "# Mobile Veterinary Visits in Lahore\n\n"
+            "Our veterinarians provide mobile checkups and urgent home visits throughout Lahore.\n\n"
+            "Privacy policy\n"
+        )
+        evidence = extract_primary_evidence(payload)
+        self.assertEqual(evidence["evidence_mode"], "projection_degraded_text")
+        self.assertTrue(evidence["degraded"])
+        combined = " ".join(evidence["headings"] + evidence["primary_text"])
+        self.assertIn("Mobile Veterinary Visits in Lahore", combined)
+        self.assertNotIn("Privacy policy", combined)
 
     def test_onpage_http_failure_is_rejected(self):
         payload = json.loads(json.dumps(self.payload["content_parsing"]))

@@ -1,0 +1,47 @@
+{
+  "skill_name": "seo-text-keyword-optimization",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Optimize the supplied blog post using the seeds 'heat pump maintenance', 'heat pump service', and 'heat pump tune up'. Find the 20 best low-hanging-fruit keywords and give me three distinct optimization approaches.\n\n[Complete blog post text follows.]",
+      "expected_output": "Makes exactly one Related Keywords call per seed with depth 2 and limit 50, combines and deduplicates the rows, filters against the supplied text, ranks supported low-difficulty opportunities, produces three concrete approaches, and writes the dated report.",
+      "files": [],
+      "assertions": [
+        "All three calls use the same disclosed market and request no more than 50 related keywords per seed.",
+        "The final table preserves seed provenance and uses organic keyword difficulty rather than Ads competition as the ranking-competition signal.",
+        "The opportunity formula and difficulty-band ordering are disclosed and the list contains no keyword with difficulty 50 or higher.",
+        "The three approaches are materially different and map selected keywords to exact parts of the supplied text."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Find low-hanging-fruit keywords for this article.",
+      "expected_output": "Asks for both the complete text and one to three seed keywords, then waits without making a DataForSEO call.",
+      "files": [],
+      "assertions": [
+        "The response asks for all missing required inputs together.",
+        "No billable call or report is produced before the inputs are supplied."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Optimize the German article in artikel.md for 'wärmepumpe wartung' and 'wärmepumpe service'.",
+      "expected_output": "Detects that the text and seeds conflict with the English default and asks for the intended DataForSEO location and language before making billable calls.",
+      "files": ["artikel.md"],
+      "assertions": [
+        "The workflow does not silently run German keywords against the United States/en default.",
+        "No DataForSEO call is made until the market is resolved."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Optimize this short niche article for 'heritage lime kiln' in the United States and English. Return 20 low-hanging-fruit terms.\n\n[Complete niche article text follows.]",
+      "expected_output": "Uses one Related Keywords call and reports fewer than 20 candidates when the validated response does not contain 20 relevant rows with positive volume and keyword difficulty below 50.",
+      "files": [],
+      "assertions": [
+        "Missing metrics are not converted to zero and irrelevant terms are excluded with reasons.",
+        "The workflow does not fabricate or mislabel higher-difficulty terms merely to reach 20 rows."
+      ]
+    }
+  ]
+}

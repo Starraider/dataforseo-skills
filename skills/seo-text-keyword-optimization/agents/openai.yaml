@@ -1,0 +1,4 @@
+interface:
+  display_name: "SEO Text Keyword Optimization"
+  short_description: "Find low-competition keywords for supplied text"
+  default_prompt: "Use $seo-text-keyword-optimization to find 20 low-hanging-fruit keywords and propose three distinct optimization strategies for my text."
