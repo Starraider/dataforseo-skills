@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "status": "complete",
+  "device": "desktop",
   "task_id": "fixture-task-id",
   "audited_url": "https://www.example.com/",
   "crawled_page_url": "https://www.example.com/",

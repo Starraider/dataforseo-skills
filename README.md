@@ -71,7 +71,7 @@ The active MCP `tools/list` and input schema remain authoritative because enable
 
 ### `seo-technical-page-audit`
 
-Audits one specific page through DataForSEO MCP and a direct REST bridge for task endpoints that MCP does not expose. It runs a one-page crawl with sitewide checks enabled, then collects page, link, redirect, non-indexable, resource, schema, waterfall, and Lighthouse evidence to produce a fix-ready Markdown report. If direct task access fails, it falls back to MCP Instant Pages plus Lighthouse. The report returns the DataForSEO-derived Technical Score from 0 to 100, lists exact affected URLs or assets where available, prioritizes fixes from P0 to P3, and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
+Audits one specific page through DataForSEO MCP and a direct REST bridge for task endpoints that MCP does not expose. It analyzes desktop and mobile by default, or only an explicitly requested device, with matching OnPage browser presets and Lighthouse contexts. Dual-device reports keep invariant SEO checks once and compare only meaningful rendering, resource, runtime, usability, performance, caching, and mobile-first-indexing differences. The report returns device-specific DataForSEO Technical Scores, lists exact affected URLs or assets where available, prioritizes fixes from P0 to P3, and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
 
 Detailed reference: [skills/seo-technical-page-audit/README.md](skills/seo-technical-page-audit/README.md)
 

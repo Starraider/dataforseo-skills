@@ -1,4 +1,4 @@
 interface:
   display_name: SEO Technical Page Audit
-  short_description: Audit one URL with DataForSEO and write a fix-ready Markdown report.
-  default_prompt: Audit this page with the DataForSEO MCP OnPage endpoints, calculate the provider-derived Technical Score, list exact affected URLs or assets where available, prioritize fixes, and save the report under SEO/<domain>/.
+  short_description: Audit one URL across desktop and mobile with DataForSEO.
+  default_prompt: Audit this page for desktop and mobile by default with matching DataForSEO OnPage and Lighthouse contexts. Keep shared SEO checks once, compare only meaningful device differences, report each provider-derived Technical Score, prioritize fixes, and save the report under SEO/<domain>/.

@@ -1,6 +1,6 @@
 # SEO Technical Page Audit
 
-`seo-technical-page-audit` audits one specific, publicly reachable HTTP(S) page for technical SEO problems. It gathers page, crawl, link, resource, schema, rendering, and Lighthouse evidence through DataForSEO, converts the provider's OnPage score into a 0–100 Technical Score, and writes a prioritized, implementation-ready Markdown report.
+`seo-technical-page-audit` audits one specific, publicly reachable HTTP(S) page for technical SEO problems. It analyzes desktop and mobile by default, or only the explicitly requested device, using DataForSEO page, crawl, link, resource, schema, rendering, and Lighthouse evidence. It reports provider-derived Technical Scores and writes a prioritized, implementation-ready Markdown report.
 
 ## What the skill does
 
@@ -8,13 +8,13 @@ The skill:
 
 1. Validates the supplied absolute page URL and derives the project domain.
 2. Chooses one locale for all crawl calls, using a requested locale, a clear site signal, or `en-US`.
-3. Runs a task-based DataForSEO OnPage crawl when the required MCP methods are available. If they are not, it uses the included Python bridge and a git-ignored DataForSEO credential `.env` file.
-4. Collects available evidence about HTTP status, redirects, indexability, robots directives, canonicals, hreflang, links, metadata, headings, content ratios, structured data, resources, page timing, Lighthouse audits, and Core Web Vitals.
-5. Uses the rounded DataForSEO `onpage_score` as the Technical Score. It reports `0 (audit incomplete)` if that score is unavailable; it does not invent a substitute score.
+3. Selects desktop and mobile unless the request asks for only one of them, then runs one matching task-based DataForSEO OnPage crawl and Lighthouse audit per selected device. If task methods are unavailable, it uses the included Python bridge and a git-ignored DataForSEO credential `.env` file.
+4. Collects HTTP status, redirects, indexability, robots directives, canonicals, hreflang, links, metadata, headings, content ratios, structured data, resources, page timing, Lighthouse audits, and Core Web Vitals. Dual-device reports present invariant evidence once and compare only meaningful render or runtime differences.
+5. Uses the rounded DataForSEO `onpage_score` as the Technical Score for each selected device. It reports `0 (audit incomplete)` when a device score is unavailable and never blends device scores or substitutes Lighthouse scores.
 6. Prioritizes every supported finding from P0 to P3 and supplies evidence, impact, fix, owner, effort, and a validation step.
 7. Records DataForSEO endpoint costs and writes the final report to disk.
 
-The audit is for one supplied page, although task-based evidence may expose sitewide issues relevant to that page. It only reports exact broken URLs, assets, or redirect chains when DataForSEO returned the necessary evidence.
+The audit is for one supplied page, although task-based evidence may expose sitewide issues relevant to that page. It only reports exact broken URLs, assets, or redirect chains when DataForSEO returned the necessary evidence. In a desktop-and-mobile audit, shared checks such as titles, headings, canonicals, and broken links appear once unless returned evidence proves a material device-specific difference.
 
 ## Why this analysis matters
 
@@ -30,6 +30,8 @@ Fixing the reported issues can make it easier for search engines to discover the
 - One absolute `http://` or `https://` page URL. A bare domain or relative path is insufficient.
 
 Optional inputs include a locale and a report root. The default report root is `SEO/` below the current working directory. Optional content-parsing and screenshot calls require separate approval because they are billable escalations.
+
+Desktop and mobile are selected by default. A request for desktop only or mobile only restricts all OnPage and Lighthouse calls to that device.
 
 ## Invocation examples
 
@@ -51,6 +53,12 @@ With a custom report location:
 Run a technical page audit for https://example.com/pricing and save the report under ./client-reports.
 ```
 
+For one device only:
+
+```text
+Audit https://example.com/pricing for mobile only.
+```
+
 With a credential-file location supplied in advance:
 
 ```text
@@ -69,12 +77,13 @@ SEO/<domain>/<YYYY-MM-DD>_Techical-Report_<safe-URL>.md
 
 `Techical-Report` is intentionally preserved in the filename for compatibility. The report contains:
 
-- Scope, crawl/render context, and total DataForSEO cost.
-- An executive summary and the provider-derived Technical Score with its main drivers.
+- Scope, selected devices, crawl/render contexts, and total DataForSEO cost.
+- An executive summary and the provider-derived Technical Score for each selected device with its main drivers.
 - A prioritized findings table followed by detailed P0–P3 findings.
 - Indexability, canonical, robots, redirect, hreflang, and link analysis.
 - Exact broken-link, redirect-chain, schema-field, and resource inventories when returned.
-- Metadata, headings, content, structured-data, performance, Lighthouse, and Core Web Vitals findings.
+- Shared metadata, headings, content, and structured-data findings without device duplication.
+- For dual-device audits, only material differences in viewport/mobile usability, responsive resources, JavaScript/rendering, critical paths, timing and Core Web Vitals, caching/service workers, and mobile-first-indexing parity.
 - An ordered implementation plan and verification checklist.
 - Methodology, endpoint call log, limitations, and official DataForSEO references.
 

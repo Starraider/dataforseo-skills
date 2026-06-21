@@ -12,8 +12,9 @@ When exact inventories are unavailable, say so explicitly instead of faking prec
 
 - URL: `[absolute page URL]`
 - Domain: `[normalized domain]`
+- Devices: `[desktop and mobile / desktop only / mobile only]`
 - Crawl context: `[task-based OnPage crawl or fallback live audit]`
-- Render context: `[desktop preset, JS enabled, Lighthouse context]`
+- Render context: `[selected browser preset(s), JS enabled, matching Lighthouse contexts]`
 - Total cost: `[x,xx USD]`
 
 ## Executive Summary
@@ -22,14 +23,18 @@ When exact inventories are unavailable, say so explicitly instead of faking prec
 
 ## Technical Score
 
-- Technical Score: `[0-100 or 0 (audit incomplete)]`
-- Score Drivers: `[main issues likely depressing the score]`
+| Device | Technical Score | Score Drivers |
+| --- | ---: | --- |
+| Desktop | `[0-100 or 0 (audit incomplete)]` | `[drivers]` |
+| Mobile | `[0-100 or 0 (audit incomplete)]` | `[drivers]` |
+
+<!-- Keep only selected devices. Never average or blend device scores. -->
 
 ## Prioritized Findings
 
-| Priority | Issue | Evidence | Fix | Owner | Effort | Validation |
-| --- | --- | --- | --- | --- | --- | --- |
-| P0/P1/P2/P3 | [issue] | [short evidence] | [short fix] | [team] | [S/M/L] | [check] |
+| Priority | Context | Issue | Evidence | Fix | Owner | Effort | Validation |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| P0/P1/P2/P3 | [shared/desktop/mobile/device delta] | [issue] | [short evidence] | [short fix] | [team] | [S/M/L] | [check] |
 
 ## P0 Findings
 
@@ -37,6 +42,7 @@ When exact inventories are unavailable, say so explicitly instead of faking prec
 
 ### [P0] [Issue Name]
 
+- Context: [shared / desktop / mobile / device delta]
 - Evidence: [exact values, URLs, assets, or a clear statement that only aggregate evidence was returned]
 - Impact: [why this blocks crawling, indexing, rendering, or conversion]
 - Fix: [concrete action]
@@ -48,6 +54,7 @@ When exact inventories are unavailable, say so explicitly instead of faking prec
 
 ### [P1] [Issue Name]
 
+- Context: [details]
 - Evidence: [details]
 - Impact: [details]
 - Fix: [details]
@@ -59,6 +66,7 @@ When exact inventories are unavailable, say so explicitly instead of faking prec
 
 ### [P2] [Issue Name]
 
+- Context: [details]
 - Evidence: [details]
 - Impact: [details]
 - Fix: [details]
@@ -70,6 +78,7 @@ When exact inventories are unavailable, say so explicitly instead of faking prec
 
 ### [P3] [Issue Name]
 
+- Context: [details]
 - Evidence: [details]
 - Impact: [details]
 - Fix: [details]
@@ -128,15 +137,35 @@ When exact inventories are unavailable, say so explicitly instead of faking prec
 
 ## Resources and Performance
 
-- TTFB and waterfall summary: [summary]
-- Lighthouse summary: [performance, SEO, accessibility, best practices]
-- Core Web Vitals summary: [LCP, CLS, FCP, INP/FID-related evidence]
+- Shared resource summary: [facts that do not vary by device]
 
 ### Top Resource Offenders
 
-| Asset | Type | Problem | Evidence | Recommended Fix |
-| --- | --- | --- | --- | --- |
-| [URL] | [script/image/css] | [large/uncached/broken/render-blocking] | [metric] | [fix] |
+| Context | Asset | Type | Problem | Evidence | Recommended Fix |
+| --- | --- | --- | --- | --- | --- |
+| [shared/desktop/mobile] | [URL] | [script/image/css] | [large/uncached/broken/render-blocking] | [metric] | [fix] |
+
+## Desktop–Mobile Differences
+
+<!-- Include only when both devices were requested. Omit rows without a meaningful difference. Do not duplicate shared SEO checks here. -->
+
+| Area | Desktop Evidence | Mobile Evidence | Material Difference / Action |
+| --- | --- | --- | --- |
+| Viewport, scaling, touch, fonts | [evidence] | [evidence] | [delta and fix] |
+| Resource selection and critical path | [evidence] | [evidence] | [delta and fix] |
+| Responsive images | [evidence] | [evidence] | [delta and fix] |
+| JavaScript/rendered-content parity | [evidence] | [evidence] | [delta and fix] |
+| LCP/CLS/FCP/TBT/Speed Index | [evidence] | [evidence] | [delta and fix] |
+| Network, caching, service worker | [evidence] | [evidence] | [delta and fix] |
+| Mobile-first indexing | [evidence] | [evidence] | [evidence-backed risk or no material delta] |
+
+## Selected-Device Performance
+
+<!-- For a single-device audit, use this section instead of Desktop–Mobile Differences. -->
+
+- TTFB and waterfall summary: [summary]
+- Lighthouse summary: [performance, SEO, accessibility, best practices]
+- Core Web Vitals summary: [LCP, CLS, FCP, TBT/interaction-related evidence]
 
 ## Implementation Plan
 
@@ -147,6 +176,7 @@ When exact inventories are unavailable, say so explicitly instead of faking prec
 ## Verification Checklist
 
 - [ ] Re-run the same DataForSEO audit after deployment.
+- [ ] Re-run only the originally selected device context(s).
 - [ ] Confirm status, indexability, and canonical behavior.
 - [ ] Confirm affected links or assets no longer fail.
 - [ ] Confirm performance regressions are removed or improved.

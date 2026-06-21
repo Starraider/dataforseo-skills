@@ -16,6 +16,7 @@ from urllib import error, parse, request
 
 API_BASE = "https://api.dataforseo.com/v3/on_page"
 PENDING_CODES = {40601, 40602}
+DEVICE_PRESETS = ("desktop", "mobile")
 
 
 class AuditError(RuntimeError):
@@ -175,6 +176,7 @@ def normalize_summary(
     effective_url: str,
     accept_language: str,
     endpoints: dict[str, dict[str, Any]],
+    device: str = "desktop",
 ) -> dict[str, Any]:
     pages_result = task_result(endpoints["pages"], "pages")
     page_items = result_items(pages_result)
@@ -212,6 +214,7 @@ def normalize_summary(
     return {
         "accept_language_used": accept_language,
         "audited_url": audited_url,
+        "device": device,
         "effective_url": effective_url,
         "page_timing_source": "pages.page_timing",
         "page_status_code": page.get("status_code"),
@@ -257,20 +260,14 @@ def normalize_summary(
     }
 
 
-def run(args: argparse.Namespace) -> dict[str, Any]:
-    env_file = Path(args.env_file).expanduser() if args.env_file else Path.cwd() / ".env"
-    username, password = credentials_from_env_file(env_file.resolve())
-
-    parsed = parse.urlsplit(args.url)
-    target = (parsed.hostname or "").lower().rstrip(".")
-    if target.startswith("www."):
-        target = target[4:]
-    accept_language = args.accept_language or "en-US"
-
-    client = DataForSEOClient(username, password, args.request_timeout)
-    task_payload: dict[str, Any] = {
+def build_task_payload(
+    target: str, url: str, accept_language: str, device: str
+) -> dict[str, Any]:
+    if device not in DEVICE_PRESETS:
+        raise AuditError(f"unsupported device preset: {device}")
+    return {
         "target": target,
-        "start_url": args.url,
+        "start_url": url,
         "max_crawl_pages": 1,
         "force_sitewide_checks": True,
         "load_resources": True,
@@ -283,8 +280,22 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
         "disable_cookie_popup": True,
         "accept_language": accept_language,
         "validate_micromarkup": True,
-        "browser_preset": "desktop",
+        "browser_preset": device,
     }
+
+
+def run(args: argparse.Namespace) -> dict[str, Any]:
+    env_file = Path(args.env_file).expanduser() if args.env_file else Path.cwd() / ".env"
+    username, password = credentials_from_env_file(env_file.resolve())
+
+    parsed = parse.urlsplit(args.url)
+    target = (parsed.hostname or "").lower().rstrip(".")
+    if target.startswith("www."):
+        target = target[4:]
+    accept_language = args.accept_language or "en-US"
+
+    client = DataForSEOClient(username, password, args.request_timeout)
+    task_payload = build_task_payload(target, args.url, accept_language, args.device)
 
     task_post = checked_call(
         client,
@@ -329,11 +340,14 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
     }
     costs = {name: response.get("cost") for name, response in endpoints.items()}
     known_costs = [cost for cost in costs.values() if isinstance(cost, (int, float))]
-    normalized = normalize_summary(args.url, effective_url, accept_language, endpoints)
+    normalized = normalize_summary(
+        args.url, effective_url, accept_language, endpoints, args.device
+    )
 
     return {
         "schema_version": 1,
         "status": "complete",
+        "device": args.device,
         "task_id": task_id,
         "audited_url": args.url,
         "crawled_page_url": effective_url,
@@ -356,6 +370,12 @@ def parser() -> argparse.ArgumentParser:
     cli.add_argument(
         "--accept-language",
         help="Accept-Language header for crawling; defaults to en-US",
+    )
+    cli.add_argument(
+        "--device",
+        choices=DEVICE_PRESETS,
+        default="desktop",
+        help="browser preset to audit; defaults to desktop",
     )
     cli.add_argument("--poll-timeout", type=float, default=180.0)
     cli.add_argument("--poll-interval", type=float, default=5.0)

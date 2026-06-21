@@ -32,9 +32,11 @@ def main() -> int:
         fixture["crawled_page_url"],
         "en-US",
         fixture["endpoints"],
+        fixture["device"],
     )
 
     assert normalized["accept_language_used"] == "en-US"
+    assert normalized["device"] == "desktop"
     assert normalized["page_timing_source"] == "pages.page_timing"
     assert normalized["page_status_code"] == 200
     assert normalized["onpage_score"] == 91.59
@@ -60,6 +62,17 @@ def main() -> int:
         "warning": 0,
         "info": 0,
     }
+
+    desktop_payload = module.build_task_payload(
+        "example.com", fixture["audited_url"], "en-US", "desktop"
+    )
+    mobile_payload = module.build_task_payload(
+        "example.com", fixture["audited_url"], "en-US", "mobile"
+    )
+    assert desktop_payload["browser_preset"] == "desktop"
+    assert mobile_payload["browser_preset"] == "mobile"
+    assert desktop_payload["enable_browser_rendering"] is True
+    assert mobile_payload["enable_browser_rendering"] is True
 
     print("fetch_task_onpage fixture regression passed")
     return 0

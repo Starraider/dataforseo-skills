@@ -1,40 +1,37 @@
 ---
 name: seo-technical-page-audit
-description: "Use when auditing one webpage for technical SEO, indexability, redirects, links, metadata, structured data, or performance and producing a prioritized report with a 0-100 Technical Score."
+description: "Use when auditing one webpage for technical SEO, indexability, links, metadata, structured data, or desktop/mobile rendering and performance, then producing a prioritized report with DataForSEO-derived Technical Scores."
 compatibility: "Requires the official DataForSEO MCP server with the ONPAGE module enabled, Python 3, a DataForSEO credential .env file for direct task API access, and filesystem write access."
 ---
 
 # SEO Technical Page Audit
 
-Before acting, read `references/audit-playbook.md` and use `templates/report-template.md` as the default scaffold.
-
-Use the official [Task POST](https://docs.dataforseo.com/v3/on_page/task_post/), [Links](https://docs.dataforseo.com/v3/on_page/links/), [Resources](https://docs.dataforseo.com/v3/on_page/resources/), [Lighthouse](https://docs.dataforseo.com/v3/on_page/lighthouse/live/json/), and [OnPage score](https://dataforseo.com/help-center/how-on-page-seo-score-is-calculated) references.
+Read `references/audit-playbook.md` before acting and use `templates/report-template.md` as the report scaffold. Follow its linked official DataForSEO documentation.
 
 ## Workflow
 
-1. Require one absolute HTTP(S) page URL. Derive the project domain from its hostname. Reject malformed or credential-bearing URLs. Normalize the domain to lowercase without port, trailing dot, or leading `www.`.
-2. Choose one locale for all crawl calls: user-supplied first, then clear site/URL signals, otherwise `en-US`.
-3. Prefer MCP task methods when `on_page_task_post` and its result methods are exposed. Use the parameters in the playbook and collect all listed task evidence.
-4. When those task methods are absent from MCP, look for `.env` in the project root. If absent, ask for the credential file path; never ask for values. Run `python3 <skill-directory>/scripts/fetch_task_onpage.py '<page-url>'`; add `--env-file '<path>'` when supplied and `--accept-language '<locale>'` when not using the default `en-US`. Accept only exit status `0` with `status: complete`. Continue with MCP `on_page_lighthouse` using `full_data: true`.
-5. Optional billable escalations only after asking: `on_page_content_parsing_live` and `on_page_page_screenshot`.
-6. Exit status `2` or `status: env_file_required` means ask for the `.env` path, not fallback. If the helper fails after credentials are located, fall back to MCP `on_page_instant_pages` plus `on_page_lighthouse` and mark unavailable inventories. Do not retry automatically because Task POST is billable.
-7. Analyze availability, indexability, robots, canonicals, redirects, hreflang, exact broken links, metadata, headings, content ratios, schema, resources, TTFB and waterfall, Lighthouse audits, Core Web Vitals, and sitewide checks.
-8. Only claim redirect chains from explicit evidence. Only list broken URLs or assets when returned exactly. Treat resource-level `checks.is_broken` or parser/runtime errors as valid broken-asset evidence even when the HTTP status is `200`. Use rounded DataForSEO `onpage_score` as Technical Score; if unavailable use `0 (audit incomplete)`. Add Score Drivers without invented weights.
-9. Prefer the helper's `normalized` summary block for timing source, truncated inventories, exact broken assets, and waterfall anomalies; use raw payloads for cited evidence.
-10. Prioritize P0-P3. Every finding needs evidence, impact, fix, owner, effort, and validation.
+1. Require one absolute HTTP(S) page URL. Derive and normalize its domain; reject malformed or credential-bearing URLs.
+2. Choose one locale: requested, clear site signal, then `en-US`. Select desktop and mobile by default. When the request names only one device, select only it and never call or report the other.
+3. Prefer MCP task methods. Create one OnPage task per selected device with matching `browser_preset`. Run Lighthouse per selected device with `full_data: true` and `for_mobile: false` for desktop or `true` for mobile.
+4. If task methods are absent, locate the project `.env` or ask only for its path. Per selected device run `python3 <skill-directory>/scripts/fetch_task_onpage.py '<page-url>' --device <device>` with optional `--env-file` and `--accept-language`. Accept only exit `0`, `status: complete`, and matching device. Treat exit `2` as a credential-path request. After other failures, use the playbook fallback without automatic billable retries.
+5. Ask before `on_page_content_parsing_live` or `on_page_page_screenshot`.
+6. For one device, analyze all evidence in that context. For both, report invariant evidence once: availability, indexability, robots, canonicals, redirects, hreflang, broken links, metadata, headings, content, and schema.
+7. When both are selected, compare only meaningful render/runtime differences: viewport, touch targets, fonts/scaling, responsive images, resource selection/order and critical path, JavaScript/rendered-content parity, layout shift and performance, throttling, caching/service workers, and mobile-first-indexing risks. Report shared fields by device only when direct evidence materially differs; label these parity issues.
+8. Claim chains and broken URLs/assets only from exact evidence. Treat resource `checks.is_broken` or parser/runtime errors as valid with HTTP `200`. Report rounded `onpage_score` per selected device, or `0 (audit incomplete)` when missing. Show dual scores side by side; never blend them or invent weights.
+9. Use normalized helper fields for device identity and stable summaries, raw payloads for evidence. Prioritize P0-P3; include evidence, impact, fix, owner, effort, and validation.
 
 ## Cost accounting
 
-Log each endpoint and top-level `cost` USD. Sum unrounded values and report `Total cost: x,xx USD`. Missing cost means an incomplete subtotal; name affected calls.
+Log each endpoint and top-level USD cost. Sum unrounded values. Mark missing-cost subtotals incomplete.
 
 ## Report file
 
-Use the requested report root or `<current-working-directory>/SEO`, then its normalized domain child. Derive `<URL>` by removing scheme, query, fragment, and trailing slash, then sanitizing. Write:
+Use the requested root or `<current-working-directory>/SEO`, then its domain child. Sanitize `<URL>` after removing scheme, query, fragment, and trailing slash. Write:
 
 `<report-root>/<domain>/<YYYY-MM-DD>_Techical-Report_<URL>.md`
 
-Use the local ISO date. Preserve `Techical-Report`. Make the first line the ISO date.
+Use the local ISO date as the first line. Preserve `Techical-Report`.
 
 ## Report structure
 
-Follow the linked template. Include exact inventories when returned, cite exact values instead of raw responses, and return the saved absolute path plus a concise summary.
+Follow the template, remove empty sections, and return the saved absolute path plus a concise summary.

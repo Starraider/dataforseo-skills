@@ -2,7 +2,7 @@ slug: seo-technical-page-audit
 display_name: SEO Technical Page Audit
 summary:
   en: >
-    Audits one webpage with DataForSEO MCP plus a direct REST bridge for missing task endpoints and writes a fix-ready Markdown report with exact URLs and assets where available plus a provider-derived 0-100 Technical Score.
+    Audits one webpage on desktop and mobile by default, or one explicitly requested device, with DataForSEO MCP plus a direct REST bridge and writes a deduplicated, fix-ready Markdown report with device-specific Technical Scores.
 category: marketing
 tags:
   - dataforseo
@@ -10,12 +10,14 @@ tags:
   - on-page-audit
   - seo-report
 use_cases:
-  - Audit one URL for crawlability, indexability, redirects, links, metadata, schema, resources, and performance.
-  - Turn DataForSEO OnPage and Lighthouse evidence into prioritized fixes with exact affected URLs or assets where available.
+  - Audit one URL for crawlability, indexability, redirects, links, metadata, schema, resources, and desktop/mobile performance.
+  - Compare only meaningful device differences while reporting invariant SEO checks once.
+  - Turn matching DataForSEO OnPage and Lighthouse evidence into prioritized fixes with exact affected URLs or assets where available.
   - Generate a dated technical SEO Markdown report.
 expected_outputs:
-  - A provider-derived Technical Score from 0 to 100.
+  - A provider-derived Technical Score from 0 to 100 for each selected device.
   - Evidence-backed findings prioritized from P0 to P3 with concrete fix and validation steps.
+  - A deduplicated shared audit plus material desktop-mobile deltas when both devices are selected.
   - Exact issue inventories for broken links, redirect chains, schema findings, and resource offenders when returned by DataForSEO.
   - A detailed dated Markdown report saved under the project domain in the requested report root or SEO/<domain>/ by default.
 context_requirements:
@@ -29,6 +31,8 @@ related_skills:
   - seo-keyword-research
 example_prompts:
   - Audit https://example.com/products/widget for technical SEO and save the Markdown report in the default location.
+  - Audit https://example.com/products/widget for mobile only and do not run desktop checks.
+  - Run a desktop-only technical audit for https://example.com/pricing.
   - Check this landing page for indexability, redirect, metadata, schema, link, and performance problems.
   - Create a prioritized technical SEO report for https://shop.example.org/category/shoes and use ./reports as the report root.
 primary_keywords:

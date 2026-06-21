@@ -4,13 +4,15 @@
     {
       "id": 1,
       "prompt": "Run an SEO technical page audit for https://example.com/products/widget?campaign=spring and save the report in the default location.",
-      "expected_output": "Derives example.com as the project domain, starts a task-based DataForSEO OnPage crawl through MCP or the direct API bridge, collects follow-up endpoint evidence for the audited page, records every call cost and reports their sum in Scope, reports a provider-derived 0-100 Technical Score, prioritizes evidence-backed fixes, and saves a detailed report under SEO/example.com/ with a safe dated filename that omits the query string.",
+      "expected_output": "Derives example.com as the project domain, selects desktop and mobile by default, runs matching DataForSEO OnPage and Lighthouse contexts through MCP or the direct API bridge, records every call cost, reports separate provider-derived Technical Scores, keeps invariant SEO evidence once, compares only material device differences, prioritizes fixes, and saves a detailed report under SEO/example.com/ with a safe dated filename that omits the query string.",
       "files": [],
       "assertions": [
-        "The workflow uses MCP task methods when exposed, otherwise it runs scripts/fetch_task_onpage.py and accepts only a successful complete JSON result.",
+        "The workflow uses MCP task methods when exposed, otherwise it runs scripts/fetch_task_onpage.py once with --device desktop and once with --device mobile and accepts only complete device-matching JSON results.",
         "The direct helper uses the project-root .env or asks for an explicit credential file path when that file is absent, without asking for credential values.",
-        "The workflow collects pages, links, resources, waterfall, and microdata task evidence and calls on_page_lighthouse through MCP.",
-        "The report uses the DataForSEO onpage_score rather than a Lighthouse score as Technical Score.",
+        "The workflow uses browser_preset desktop/mobile for matching OnPage tasks and for_mobile false/true for matching Lighthouse calls.",
+        "The report uses each DataForSEO onpage_score rather than a Lighthouse score and never blends device scores.",
+        "Invariant findings such as broken links, titles, headings, canonicals, and schema appear once unless direct evidence shows a material parity problem.",
+        "The device comparison is limited to evidence that can meaningfully vary, such as viewport usability, resource loading, responsive images, JavaScript rendering, layout shift, performance, caching, service workers, and mobile-first-indexing parity.",
         "The report is saved under SEO/example.com/ and its filename starts with the local ISO date and Techical-Report and excludes the URL query string.",
         "Findings include evidence, impact, fix, owner, effort, and validation and are prioritized P0 through P3."
       ]
@@ -28,13 +30,36 @@
     {
       "id": 3,
       "prompt": "Audit https://shop.example.org/category/shoes for technical SEO. Put the Markdown report in ./client-reports.",
-      "expected_output": "Derives example.org as the project domain, audits only the supplied page with DataForSEO MCP, records every call cost and reports their sum in Scope, distinguishes redirects from redirect chains, uses exact broken-link and resource evidence when DataForSEO returns it, falls back to conservative wording when it does not, and saves the detailed report under the requested report root's example.org child directory.",
+      "expected_output": "Derives example.org as the project domain, audits the supplied page in desktop and mobile contexts by default, records every call cost and reports their sum in Scope, distinguishes redirects from redirect chains, deduplicates shared evidence, uses exact broken-link and resource evidence when DataForSEO returns it, and saves the report under the requested report root's example.org child directory.",
       "files": [],
       "assertions": [
         "The requested ./client-reports directory overrides the SEO report root and the report is saved under ./client-reports/example.org/.",
         "A redirect chain is claimed only when multiple hops are present in returned endpoint evidence.",
         "Broken destination URLs or assets are listed only when returned by DataForSEO and are not invented from aggregate flags.",
-        "Schema recommendations are conditional on returned markup evidence and visible page content."
+        "Schema recommendations are conditional on returned markup evidence and visible page content.",
+        "Shared redirects, links, metadata, headings, and schema checks are not duplicated by device."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Run a mobile-only technical SEO audit for https://example.com/pricing and save the report in the default location.",
+      "expected_output": "Runs only a mobile OnPage task and mobile Lighthouse audit, produces one mobile Technical Score, performs the full audit in the mobile context, and does not call, analyze, score, or report a desktop context.",
+      "files": [],
+      "assertions": [
+        "The selected device list contains only mobile.",
+        "OnPage uses browser_preset mobile and Lighthouse uses for_mobile true.",
+        "No desktop OnPage task, Lighthouse call, score, comparison row, or finding is produced."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Audit https://example.com/pricing for desktop only. Do not perform a mobile analysis.",
+      "expected_output": "Runs only a desktop OnPage task and desktop Lighthouse audit, produces one desktop Technical Score, performs the full audit in the desktop context, and does not call, analyze, score, or report a mobile context.",
+      "files": [],
+      "assertions": [
+        "The selected device list contains only desktop.",
+        "OnPage uses browser_preset desktop and Lighthouse uses for_mobile false.",
+        "No mobile OnPage task, Lighthouse call, score, comparison row, mobile-first-indexing analysis, or finding is produced."
       ]
     }
   ]
