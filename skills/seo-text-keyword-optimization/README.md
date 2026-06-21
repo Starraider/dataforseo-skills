@@ -4,6 +4,12 @@ This skill analyzes supplied prose against one to three seed keywords, retrieves
 
 It then produces three distinct optimization approaches for the original text. Each approach maps selected keywords to concrete headings, passages, or additions while preserving the text's factual boundaries and voice.
 
+## Why this analysis matters
+
+Good writing does not automatically match the words people use when they search. A page or draft can be clear and useful, yet still miss important terms, related questions, or subtopics that help search engines understand its relevance. This analysis helps bridge that gap without turning the text into keyword stuffing. It looks for realistic search terms connected to the subject and shows how they can be added in a natural way.
+
+The report explains which related keywords look most promising, how much demand and difficulty they appear to have, which ones the current text already covers, and where useful gaps remain. It then provides three different optimization approaches so the writer can choose between a lighter edit, a more structural revision, or a broader expansion. For non-specialists, that makes the output practical as an editing brief: it shows what to add, where to add it, and how aggressively to revise the original text.
+
 ## Inputs
 
 - Complete pasted text or a readable local text/Markdown file.

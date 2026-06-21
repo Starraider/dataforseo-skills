@@ -1,0 +1,4 @@
+interface:
+  display_name: SEO Growth Forecasting
+  short_description: Forecast and prioritize achievable organic growth.
+  default_prompt: Forecast this domain's achievable incremental organic traffic with DataForSEO MCP, compare conservative, expected, and ambitious ranking scenarios, prioritize keywords and pages, and save the report under SEO/<domain>/.

@@ -2,7 +2,7 @@
   "name": "@Starraider/dataforseo-skills",
   "version": "0.0.0-source",
   "private": true,
-  "description": "Agent skills for general DataForSEO MCP SEO analysis, technical audits, competitor-gap reports, keyword research, international opportunity analysis, content-decay refreshes, cannibalization and internal-linking analysis, supplied-text optimization, page metadata, SERP-feature optimization, topical-authority analysis, and live rank checking.",
+  "description": "Agent skills for general DataForSEO MCP SEO analysis, technical audits, competitor-gap reports, keyword research, SEO growth forecasting, international opportunity analysis, content-decay refreshes, cannibalization and internal-linking analysis, supplied-text optimization, page metadata, SERP-feature optimization, topical-authority analysis, and live rank checking.",
   "license": "(MIT AND CC-BY-SA-4.0)",
   "author": "Sven Kalbhenn (https://www.skom.de/)",
   "homepage": "https://github.com/Starraider/dataforseo-skills",
@@ -41,6 +41,8 @@
     "content-consolidation",
     "international-seo",
     "seo-localization",
+    "seo-forecasting",
+    "organic-traffic-forecast",
     "claude-code"
   ],
   "aiAgentSkill": [
@@ -55,6 +57,7 @@
     "skills/seo-page-metadata/SKILL.md",
     "skills/seo-serp-optimization/SKILL.md",
     "skills/seo-international-opportunities/SKILL.md",
+    "skills/seo-growth-forecasting/SKILL.md",
     "skills/dataforseo-skill/SKILL.md"
   ],
   "files": [
@@ -69,6 +72,7 @@
     "skills/seo-page-metadata/",
     "skills/seo-serp-optimization/",
     "skills/seo-international-opportunities/",
+    "skills/seo-growth-forecasting/",
     "skills/dataforseo-skill/",
     ".claude-plugin/",
     "AGENTS.md",

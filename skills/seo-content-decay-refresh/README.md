@@ -17,6 +17,12 @@ The skill uses DataForSEO MCP to:
 
 This skill protects and restores traffic from existing content. Use `seo-content-suggestions` when the primary goal is finding new articles to publish.
 
+## Why this analysis matters
+
+Older pages often lose search visibility gradually, and the reason is not always obvious. A page may have slipped because competitors improved, because the content no longer matches what people expect, or because interest in the topic naturally rises and falls during the year. This analysis helps separate those situations so a team does not waste time rewriting content that is only experiencing normal seasonality or ignore pages that are genuinely losing ground.
+
+The report explains which pages and keywords are declining, how large the likely traffic impact is, and whether the evidence points to a structural problem, a seasonal pattern, or a mixed picture. It also contains a page-by-page action plan, including refresh recommendations, consolidation or redirect suggestions where appropriate, updated outlines, and internal-link ideas. For non-SEO readers, it turns a vague sense that "traffic is down" into a list of specific pages to fix and why they should be fixed.
+
 ## Requirements and inputs
 
 - The official DataForSEO MCP server with DataForSEO Labs, Keywords Data, and OnPage modules enabled.

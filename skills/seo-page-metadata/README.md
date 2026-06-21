@@ -10,6 +10,12 @@ Instant Pages supplies the current title, description, canonical, meta keywords,
 
 A successful keyword run requires five distinct, non-brand seeds supported by that evidence. If the page is broken, primary content is empty, the projected text is too noisy, or five seeds cannot be justified, the skill stops before Related Keywords calls. It returns the evidence shortfall and asks before a JavaScript-rendered retry instead of padding the seed list.
 
+## Why this analysis matters
+
+Page titles, meta descriptions, and social preview tags are often the first summary of a page that people see in search results, link previews, and shared posts. If they are vague, misleading, or focused on the wrong topic, the page can attract the wrong audience or be skipped entirely. This analysis helps connect a page's metadata to the language people actually search for, while still grounding recommendations in the real content of the page rather than inventing a new promise it does not fulfill.
+
+The report shows the page's current metadata, the evidence used to understand its main topic, the keyword opportunities most closely related to that topic, and three complete metadata packages that can be applied as alternatives. It also explains which package is recommended and why, along with counts and limits that matter when writing titles and descriptions. For non-specialists, that makes the report easy to use as a rewrite brief for a marketer, editor, or developer who needs better search and social snippets without changing the page's underlying meaning.
+
 ## Keyword workflow
 
 Each Related Keywords request uses one approved seed, one selected country/language pair, depth 2, limit 25, and descending search volume. Country and language are resolved independently. User overrides win; otherwise explicit primary-content service geography and content language are used before disclosed United States/`en` defaults. In degraded evidence mode, only strong textual signals may substitute for structured language evidence, and weak geographic hints stay excluded. Unsupported or uncertain pairs are resolved through an exposed MCP utility or confirmed with the user.

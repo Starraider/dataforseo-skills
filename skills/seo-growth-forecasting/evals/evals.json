@@ -1,0 +1,40 @@
+{
+  "skill_name": "seo-growth-forecasting",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Forecast 12 months of achievable SEO growth for example.com in United States/en. Treat https://example.com/pricing as high business value and https://example.com/blog as low, then prioritize keywords and pages by incremental organic traffic versus difficulty.",
+      "expected_output": "Runs the bounded DataForSEO MCP workflow, creates conservative, expected, and ambitious keyword and page scenarios, keeps provider metrics separate, documents CTR and demand assumptions, and writes the detailed dated report under SEO/example.com/.",
+      "files": [],
+      "assertions": [
+        "The workflow uses Domain Rank Overview, Relevant Pages, Ranked Keywords, Keyword Overview, Bulk Keyword Difficulty, Historical Keyword Data, Historical Rank Overview, and Google Trends through DataForSEO MCP.",
+        "DataForSEO ETV, ranks, volume, difficulty, counts, and position buckets remain separate from derived forecast fields.",
+        "All scenario traffic, target ranks, page aggregates, and opportunity scores are labeled Derived estimate — not a DataForSEO forecast.",
+        "Business tiers affect prioritization but do not multiply forecast traffic.",
+        "The output path follows SEO/example.com/YYYY-MM-DD_Growth-Forecasting_example.com.md and the file begins with the same date."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Can you forecast our SEO growth for example.org?",
+      "expected_output": "Asks together for country, language, and forecast period, then waits without making billable DataForSEO calls or writing a report.",
+      "files": [],
+      "assertions": [
+        "The workflow requests every missing required input in one clarification.",
+        "No DataForSEO request is made before domain, country, language, and forecast period are all available."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Model organic growth for https://www.example.co.uk/products in United Kingdom/en from July 2026 through December 2027. Use our supplied CTR curve, focus on /products/widgets and /products/gadgets, and save it under ./client-reports.",
+      "expected_output": "Normalizes the domain, validates and documents the custom CTR curve, forecasts the two priority pages across the explicit 18-month period with lower long-horizon confidence where applicable, and writes the report under the requested root.",
+      "files": [],
+      "assertions": [
+        "The project domain is normalized to example.co.uk and supplied priority URLs remain exact absolute URLs on that domain.",
+        "The supplied CTR curve is validated, reproduced in the report, and labeled as an assumption rather than a DataForSEO metric.",
+        "Google Trends is used as relative directional evidence and not as absolute search volume.",
+        "The output path follows client-reports/example.co.uk/YYYY-MM-DD_Growth-Forecasting_example.co.uk.md."
+      ]
+    }
+  ]
+}

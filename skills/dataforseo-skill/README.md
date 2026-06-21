@@ -11,6 +11,12 @@
 - Documents authentication, raw MCP syntax, REST envelopes, error handling, rate limits, callbacks, encoding, clients, and troubleshooting.
 - Provides exact call sequences for keyword difficulty, live SERP, backlink, local search, ranking history, competitor-gap, and single-page audit workflows.
 
+## Why this analysis matters
+
+SEO work often fails before the analysis even starts because the wrong tool is chosen, a parameter is missing, the result is misread, or unnecessary API calls increase cost without improving the answer. This skill reduces that risk by helping an operator choose the right DataForSEO MCP tools for the question at hand and by showing how to combine them into a sensible workflow. That matters when a team needs reliable SEO evidence instead of guesswork or trial and error.
+
+The output is not one fixed report template. Instead, it gives the user a clear analysis plan and working context: which tools to call, why they were selected, what inputs they require, how to validate the responses, what limitations or billing implications to watch for, and how to turn the returned data into a defensible SEO conclusion. In practice, that means the result contains the tool path, the expected evidence, troubleshooting guidance, and the logic needed to produce a trustworthy SEO analysis.
+
 ## Requirements
 
 - The official DataForSEO MCP server with relevant modules enabled.

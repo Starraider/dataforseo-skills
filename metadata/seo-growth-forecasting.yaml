@@ -1,0 +1,42 @@
+slug: seo-growth-forecasting
+display_name: SEO Growth Forecasting
+summary:
+  en: >
+    Builds explicit conservative, expected, and ambitious ranking scenarios from DataForSEO visibility, demand, difficulty, and trend evidence, then prioritizes keywords and pages by achievable incremental organic traffic.
+category: marketing
+tags:
+  - dataforseo
+  - seo-forecasting
+  - organic-traffic
+  - keyword-prioritization
+  - seo-report
+use_cases:
+  - Estimate potential incremental organic traffic over a supplied forecast period.
+  - Compare conservative, expected, and ambitious ranking scenarios.
+  - Prioritize ranked keywords and pages by opportunity versus difficulty.
+  - Identify pages with the largest evidence-backed growth potential.
+expected_outputs:
+  - A current organic visibility baseline with unmodified DataForSEO metrics.
+  - Keyword- and page-level derived traffic estimates for three ranking scenarios.
+  - Opportunity-versus-difficulty scores and a prioritized action plan.
+  - Explicit CTR, demand, timing, confidence, and limitation documentation.
+  - A dated Markdown report saved under the requested root or SEO/<domain>/ by default.
+context_requirements:
+  - A target domain, country, language, and forecast period.
+  - The official DataForSEO MCP server with DATAFORSEO_LABS and KEYWORDS_DATA enabled.
+  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - seo-keyword-research
+  - seo-rankings
+  - seo-content-decay-refresh
+  - seo-content-suggestions
+example_prompts:
+  - Forecast 12 months of achievable SEO growth for example.com in United States/en.
+  - Compare conservative, expected, and ambitious traffic scenarios for example.org in Germany/de.
+  - Prioritize the pages on example.co.uk with the largest potential organic gain over 18 months.
+primary_keywords:
+  - seo-forecasting
+  - organic-traffic-forecast
+  - seo-growth

@@ -8,6 +8,12 @@ The skill starts with one bounded Ranked Keywords call and uses each keyword's `
 
 The analysis covers featured snippets, answer boxes, People Also Ask, video, images, local packs, shopping, product features, recipes, discussions, news, and other result types exposed by DataForSEO. It records current owners, nested owners, feature prominence, target organic position, and inferred winning page format. Features missing from the successful live SERP are labeled stale rather than treated as opportunities.
 
+## Why this analysis matters
+
+Ranking on the first page is useful, but the search results page often contains much more than standard blue links. Features such as featured snippets, People Also Ask boxes, video panels, image results, or local packs can take a large share of attention before a user ever reaches the normal listings. This analysis helps identify which of those features are realistically available for a site's existing keywords and what changes might improve the page's chance of appearing in them.
+
+The report shows where the domain already ranks, which SERP features are present now, who currently owns those features, and how attainable each opportunity looks. It then translates that into exact page-format recommendations, such as adding clearer answer blocks, improving lists or tables, strengthening supporting questions, or enhancing media and structured data. For non-SEO readers, the document is useful because it turns a complex search-results layout into a practical page-improvement checklist tied to visible opportunities in Google.
+
 ## Recommendations and priority
 
 Recommendations focus on actual page composition: answer blocks, headings, ordered or unordered lists, table columns, original imagery, video placement and transcripts, structured-data eligibility, supporting questions, and external dependencies. They identify an exact target URL and insertion point. Structured data is never presented as a display guarantee.

@@ -8,6 +8,12 @@ The skill uses DataForSEO MCP to discover important pages and ranked keywords, c
 
 For each overlapping keyword cluster, it selects a primary page and assigns an evidence-based merge, redirect, canonicalize, differentiate, or retain decision. The internal-link plan supplies source pages, target pages, natural anchor text, placement context, and whether a parsed source already links to the target.
 
+## Why this analysis matters
+
+Sometimes a website accidentally places two or more pages in competition for the same search intent. When that happens, Google may split signals between them, rank the weaker page, or change which page appears from week to week. This analysis helps identify where that confusion exists so the site can present one clearer answer for each important topic instead of multiple pages pulling in different directions.
+
+The report shows which keywords trigger overlap, which pages are involved, which page should be treated as the main target, and what action makes the most sense for each case. It also includes concrete internal-link recommendations so stronger pages can support the chosen primary target. For a non-specialist, that makes the report useful as both a diagnosis of duplicate intent and a practical cleanup plan for content structure and linking.
+
 ## Requirements and inputs
 
 - Domain, country, and language are required.
