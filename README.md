@@ -178,3 +178,8 @@ Skills and documentation: [LICENSE-CC-BY-SA-4.0](LICENSE-CC-BY-SA-4.0)
 See [CONTRIBUTING.md](CONTRIBUTING.md). Changes to discovery fields must document why an override is intentional.
 
 Questions and feedback welcome via GitHub issues or e-mail: sven@skom.de
+
+## Acknowledgment
+
+This project was inspired by [zubair-trabzada/dataforseo-claude](https://github.com/zubair-trabzada/dataforseo-claude).
+Many thanks to Zubair Trabzada for his great work.
