@@ -1,12 +1,13 @@
 {
   "name": "dataforseo-skills",
-  "version": "0.11.0",
-  "description": "Select and use DataForSEO MCP tools, or run evidence-based technical SEO, competitor-gap, keyword-opportunity, growth-forecasting, international-market, content-decay, cannibalization, internal-linking, text-optimization, page-metadata, SERP-feature, topical-authority, and live ranking reporting workflows.",
+  "version": "0.12.0",
+  "description": "Select and use DataForSEO MCP tools, or run evidence-based technical SEO, competitor-gap, keyword-opportunity, growth-forecasting, international-market, content-decay, cannibalization, internal-linking, text-optimization, page-metadata, SERP-feature, topical-authority, live ranking, and ranking-watchlist workflows.",
   "skills": [
     "./skills/seo-technical-page-audit",
     "./skills/seo-competitor-gap-analysis",
     "./skills/seo-keyword-research",
     "./skills/seo-rankings",
+    "./skills/seo-ranking-watchlist",
     "./skills/seo-content-suggestions",
     "./skills/seo-content-decay-refresh",
     "./skills/seo-cannibalization-internal-linking",

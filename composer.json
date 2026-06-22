@@ -1,6 +1,6 @@
 {
   "name": "Starraider/dataforseo-skills",
-  "description": "Agent skills for general DataForSEO MCP SEO analysis, technical audits, competitor-gap reports, keyword research, SEO growth forecasting, international opportunity analysis, content-decay refreshes, cannibalization and internal-linking analysis, supplied-text optimization, page metadata, SERP-feature optimization, topical-authority analysis, and live rank checking.",
+  "description": "Agent skills for general DataForSEO MCP SEO analysis, technical audits, competitor-gap reports, keyword research, SEO growth forecasting, international opportunity analysis, content-decay refreshes, cannibalization and internal-linking analysis, supplied-text optimization, page metadata, SERP-feature optimization, topical-authority analysis, live rank checking, and persistent ranking watchlists.",
   "type": "ai-agent-skill",
   "license": "(MIT AND CC-BY-SA-4.0)",
   "authors": [
@@ -16,6 +16,7 @@
       "skills/seo-competitor-gap-analysis/SKILL.md",
       "skills/seo-keyword-research/SKILL.md",
       "skills/seo-rankings/SKILL.md",
+      "skills/seo-ranking-watchlist/SKILL.md",
       "skills/seo-content-suggestions/SKILL.md",
       "skills/seo-content-decay-refresh/SKILL.md",
       "skills/seo-cannibalization-internal-linking/SKILL.md",

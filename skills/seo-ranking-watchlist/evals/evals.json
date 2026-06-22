@@ -1,0 +1,52 @@
+{
+  "skill_name": "seo-ranking-watchlist",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Add example.com to the SEO ranking watchlist with label Main site and target keywords seo audit tool and keyword research. Use the defaults and save it in the default location.",
+      "expected_output": "Discovers up to 100 current organic keywords, unions them with the supplied targets, performs one successful live rank check per saved keyword, and atomically writes the first snapshot to SEO/example.com/watchlist.json.",
+      "files": [],
+      "assertions": [
+        "The workflow calls dataforseo_labs_google_ranked_keywords once with limit 100 and organic results, then calls serp_organic_live_advanced once per final keyword.",
+        "The domain entry stores label, exact comparison scope, all explicit targets plus up to 100 discovered keywords, and a dated history snapshot with integer or null positions.",
+        "Positions use the best matching organic rank_group for the domain or its subdomains, never rank_absolute or 101.",
+        "The watchlist is written atomically only after all live calls succeed at SEO/example.com/watchlist.json."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Check example.com from the saved watchlist and create a full ranking report. The previous positions were seo audit tool 8, ai content tool 12, stable term 3, and lost term 9; current successful live results are 5, 18, 3, and not found within depth 100.",
+      "expected_output": "Appends the successful snapshot, computes direction and deltas against the immediately previous history entry, highlights the large decline and lost term, surfaces current positions 11-20, recommends one action, and writes the dated Rankink report.",
+      "files": [],
+      "assertions": [
+        "Movement classifies 8 to 5 as Up (+3), 12 to 18 as Down (-6), 3 to 3 as Same, and 9 to null as Lost.",
+        "The short take treats the -6 decline and Lost term as concerning and position 18 as an opportunity just outside the top ten.",
+        "The report path follows SEO/example.com/YYYY-MM-DD_Rankink-Report_example.com.md and its first line is the local ISO date.",
+        "The report includes scope, watchlist path, movement and current tables, cost log, limitations, and one suggested action."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "List every ranking watchlist under ./SEO, then remove keyword research from example.org. Do not check rankings.",
+      "expected_output": "Reads the stored JSON files without DataForSEO calls, prints the required summary table, removes only the case-insensitively matched active keyword while retaining history, and ends with a non-evaluated short take.",
+      "files": [],
+      "assertions": [
+        "The list table contains Domain, Label, # keywords, Last checked, and Last avg position, with null positions excluded from the average.",
+        "No DataForSEO call is made for list or remove.",
+        "Removing one keyword preserves historical ranking snapshots and unrelated domains.",
+        "The output names the resolved store and states that drops and opportunities were not evaluated."
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Check our ranking watchlist again, but use mobile results in Germany this time.",
+      "expected_output": "Asks for the missing domain and explains that changing the stored comparison scope requires explicit confirmation and a fresh history before making billable calls.",
+      "files": [],
+      "assertions": [
+        "The workflow asks for the missing domain and waits without making a DataForSEO call.",
+        "It does not compare German mobile rankings with a differently scoped saved history.",
+        "It requires explicit confirmation before replacing scope and clearing history for a fresh baseline."
+      ]
+    }
+  ]
+}

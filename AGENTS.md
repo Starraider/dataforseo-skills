@@ -7,6 +7,7 @@
   - `skills/seo-competitor-gap-analysis/SKILL.md` identifies organic competitors with the DataForSEO MCP tools, quantifies keyword and traffic gaps, scores competitiveness, and writes a detailed Markdown report.
   - `skills/seo-keyword-research/SKILL.md` researches seed- or domain-based keywords with the DataForSEO MCP tools, scores opportunities, and writes a detailed Markdown report.
   - `skills/seo-rankings/SKILL.md` checks live Google organic positions and search volumes for a domain and keyword list, assigns ranking tiers and actions, and writes a detailed Markdown report.
+  - `skills/seo-ranking-watchlist/SKILL.md` discovers up to 100 domain keywords, combines them with target terms, re-checks live Google positions across runs, and maintains a local JSON watchlist with optional Markdown reports.
   - `skills/seo-content-suggestions/SKILL.md` clusters a domain's ranked keywords, compares topic coverage with competitors, calculates a Content Score, and recommends the five highest-leverage articles.
   - `skills/seo-content-decay-refresh/SKILL.md` detects ranking and estimated-traffic decay, separates structural losses from seasonality, prioritizes existing pages, and writes evidence-based refresh briefs.
   - `skills/seo-cannibalization-internal-linking/SKILL.md` detects same-intent keyword overlap among priority pages, selects primary targets, recommends consolidation or differentiation, and creates a sampled internal-link map.
@@ -18,6 +19,8 @@
 - Every SEO analysis and reporting skill must use the DataForSEO MCP server.
 - Use the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/) and [DataForSEO White Papers and knowledge base](https://dataforseo.com/knowledgebase) when designing, implementing, or verifying skills.
 - Keep each skill under `skills/<skill-name>/SKILL.md` and register it in both plugin and distribution manifests.
+- Every skill must have its own `skills/<skill-name>/README.md`.
+- Every skill README must include a `## Why this analysis matters` section with a paragraph that explains, in simple language non-SEO experts can understand, why that specific skill and analysis are important for SEO.
 - Keep `SKILL.md` frontmatter limited to Agent Skills specification fields and begin descriptions with `Use when`.
 - Never commit DataForSEO credentials, authorization headers, live response data containing customer information, or billable live-test defaults.
 - For `seo-technical-page-audit`, require an absolute HTTP(S) page URL, ask for it when absent, and use `SEO/<domain>/` as the default report directory unless the user specifies another location.
