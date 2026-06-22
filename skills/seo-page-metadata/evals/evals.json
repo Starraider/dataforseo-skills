@@ -141,6 +141,18 @@
         "They are labeled legacy-only and are not presented as an SEO ranking recommendation.",
         "The normal search and social package recommendation remains complete without relying on meta keywords."
       ]
+    },
+    {
+      "id": 13,
+      "prompt": "Analyze https://example.com/products/widget and create the metadata report, but Python 3 is unavailable in this environment.",
+      "expected_output": "Continues with DataForSEO MCP and applies the complete validation, extraction, normalization, ranking, counting, cost, and safe-path contract directly instead of stopping for Python.",
+      "files": [],
+      "assertions": [
+        "The workflow does not stop or ask the user to install Python solely because Python 3 is unavailable.",
+        "URL validation, query and fragment handling, report redaction, and safe deterministic filename rules remain enforced.",
+        "Response validation, null-versus-zero preservation, deduplication, conflict logging, opportunity ranking, Unicode code-point counts, and cost arithmetic follow the documented contract.",
+        "The report method and limitations identify that the prompt-native fallback was used."
+      ]
     }
   ]
 }

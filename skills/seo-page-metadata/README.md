@@ -30,9 +30,11 @@ The proxy prioritizes the candidate set; it is not a DataForSEO metric or proof 
 
 ## Requirements and inputs
 
-- Python 3 and filesystem write access.
+- Filesystem write access.
 - Official DataForSEO MCP with OnPage and DataForSEO Labs enabled.
 - One absolute HTTP(S) page URL without embedded credentials.
+
+Python 3 is recommended, not required. When available, the bundled helper performs deterministic URL validation, response extraction, keyword normalization and ranking, character counts, cost arithmetic, and report-path generation. When Python is unavailable, the skill follows the equivalent data contract directly and records that fallback in the report.
 
 Optional inputs are country, language, report root, and a request for legacy meta keywords. The default report root is `SEO/` below the current working directory.
 

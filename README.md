@@ -54,7 +54,9 @@ For the most detailed results, the `seo-technical-page-audit` skill uses Python 
 
 The `seo-ranking-watchlist` skill uses Python 3 for its preferred direct API helper, which reduces large DataForSEO responses locally and safely stages resumable ranking checks before updating the watchlist. If Python 3, the helper, or local API credentials are unavailable before a direct request starts, the skill falls back to the DataForSEO MCP server and limits new keyword discovery to the first 20 keywords instead of 100; explicit and previously saved keywords are still preserved.
 
-The `seo-page-metadata` skill also requires Python 3. It uses a local helper to validate the supplied page URL, normalize the returned content, safely extract fallback page text when needed, and generate a consistent report path. All reporting skills require permission to save Markdown files, while the ranking watchlist additionally needs permission to maintain its local history file.
+The `seo-page-metadata` skill recommends Python 3 for a local helper that deterministically validates the supplied page URL, normalizes returned content, safely extracts fallback page text, and generates a consistent report path. But there is a fallback: If Python is not  available, the skill applies the equivalent contract directly and records that fallback in the report.
+
+All reporting skills require permission to save Markdown files, while the ranking watchlist additionally needs permission to maintain its local history file.
 
 ## Example prompts
 

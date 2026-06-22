@@ -2,6 +2,10 @@
 
 Read this file before calling DataForSEO. Treat the active MCP input schema as authoritative when it differs from examples here.
 
+## Execution mode
+
+Prefer `scripts/metadata_support.py` when Python 3 is available because it applies the mechanical parts of this contract deterministically. When Python 3 is unavailable, continue by applying every equivalent validation, extraction, normalization, ranking, counting, cost, and path rule below directly. Do not relax a rule, invent a value, or stop solely because the helper cannot run. Identify the prompt-native fallback in the report method and limitations.
+
 ## 1. Inputs and URL safety
 
 - Require one absolute `http://` or `https://` page URL with a hostname.
@@ -9,7 +13,7 @@ Read this file before calling DataForSEO. Treat the active MCP input schema as a
 - Keep the supplied URL transiently. Remove only its fragment for DataForSEO calls because fragments are not sent in HTTP requests; preserve its query string for the page request. In the report Scope section, replace query and fragment contents with `[redacted]`.
 - Normalize the project directory hostname to lowercase IDNA, remove a leading `www.`, trailing dot, and port, and replace IPv6 colons with hyphens.
 - Resolve a relative report root against the current working directory. The default root is `<cwd>/SEO`.
-- Use `scripts/metadata_support.py filename` for validation and deterministic paths. The readable filename excludes query and fragment text and always ends with an eight-character SHA-256 suffix so sanitized, truncated, or query-bearing URLs do not collide or expose query values.
+- Prefer `scripts/metadata_support.py filename` for validation and deterministic paths. Without Python, apply the preceding validation directly, build the same safe path, and compute the eight-character SHA-256 suffix from the request URL with an available non-Python facility. The readable filename excludes query and fragment text, retains the `.md` extension, is capped at 140 characters, and includes the suffix so sanitized, truncated, or query-bearing URLs do not collide or expose query values.
 
 ## 2. Planned calls and request settings
 
@@ -75,11 +79,11 @@ Preferred mode: use Content Parsing `page_content.main_topic[]` as the positive 
 
 Exclude `page_content.header`, `page_content.footer`, `secondary_topic`, all `secondary_content`, navigation lists, contact-only blocks, repeated calls to action, cookie text, legal text, and other boilerplate. Do not treat `page_as_markdown` as primary evidence when structured `main_topic` data is available; it can mix boilerplate with content.
 
-Fallback mode: when the MCP projects only plain text or when `main_topic` is empty but `page_as_markdown` or equivalent projected text is present, classify the evidence mode as `projection_degraded_text`. Use `scripts/metadata_support.py extract-content` to apply conservative fallback extraction to that text. Treat the fallback output as lower confidence, keep the limitation explicit in the report, and never use it to infer unsupported claims or precise service geography.
+Fallback mode: when the MCP projects only plain text or when `main_topic` is empty but `page_as_markdown` or equivalent projected text is present, classify the evidence mode as `projection_degraded_text`. Prefer `scripts/metadata_support.py extract-content`; without Python, normalize Markdown links to their labels, remove Markdown emphasis markers, split headings and paragraphs, and directly exclude empty lines, contact values, navigation, calls to action, cookie/legal text, and other boilerplate. Treat the fallback output as lower confidence, keep the limitation explicit in the report, and never use it to infer unsupported claims or precise service geography.
 
 Record short excerpts or concise paraphrases sufficient to justify the topic, intent, geography, and each seed. Do not copy large passages into the report.
 
-Use `scripts/metadata_support.py extract-instant` and `extract-content` with provider JSON on stdin to apply these paths deterministically. Keep raw responses transient and outside the repository.
+When Python is available, use `scripts/metadata_support.py extract-instant` and `extract-content` with provider JSON on stdin to apply these paths deterministically. Otherwise read the exact response paths and apply the same inclusions, exclusions, status checks, and evidence classification directly. Keep raw responses transient and outside the repository.
 
 ## 6. Evidence gate and recovery
 
@@ -132,7 +136,7 @@ Preserve nulls. Zero is a real value and must not become null. Keep organic KD s
 
 Normalize keyword display text with Unicode NFKC, collapsed whitespace, and trimming. Deduplicate using Unicode casefolded normalized text. Merge all seed provenance in sorted order.
 
-Use `scripts/metadata_support.py normalize-batch` with a transient `{"calls": [{"seed": "...", "response": {...}}]}` object on stdin. After semantic relevance exclusions, pass the remaining `rows` to `scripts/metadata_support.py rank`. Do not commit the input or raw response.
+When Python is available, use `scripts/metadata_support.py normalize-batch` with a transient `{"calls": [{"seed": "...", "response": {...}}]}` object on stdin. After semantic relevance exclusions, pass the remaining `rows` to `scripts/metadata_support.py rank`. Without Python, perform the same normalization, ordered first-non-null merge, conflict logging, range validation, formula, and sort directly. Do not commit the input or raw response.
 
 When duplicate rows disagree, keep the first non-null metric from the approved seed-call order and record every conflicting metric/value. Do not average incompatible observations.
 
@@ -158,7 +162,7 @@ Generate three internally coherent packages. Mark one as recommended. Each packa
 - Twitter title: target 55-65.
 - Twitter description: target 125-160.
 
-Count Unicode code points with `scripts/metadata_support.py count`. Length ranges are editorial targets, not search-engine or social-platform display guarantees. Keep every statement truthful to primary content. Do not claim prices, awards, availability, guarantees, locations, features, or outcomes absent from the evidence.
+Count Unicode code points with `scripts/metadata_support.py count` when available; otherwise count Unicode code points directly rather than bytes or UTF-16 code units. Length ranges are editorial targets, not search-engine or social-platform display guarantees. Keep every statement truthful to primary content. Do not claim prices, awards, availability, guarantees, locations, features, or outcomes absent from the evidence.
 
 Add one clearly labeled legacy meta keywords list per package. State that Google and Bing do not use the tag for rankings. Do not describe meta-keywords options as an SEO recommendation.
 
@@ -166,7 +170,7 @@ Add one clearly labeled legacy meta keywords list per package. State that Google
 
 Prefer `tasks[].cost` and sum each task once. Use the envelope cost only when no task-level cost exists; never add both. Sum unrounded decimal values, then round once to two decimals and format with a decimal comma as `Total cost: x,xx USD`.
 
-Use `scripts/metadata_support.py cost` with either one provider response or `{"responses": [response1, response2]}` on stdin to calculate the total deterministically.
+When Python is available, use `scripts/metadata_support.py cost` with either one provider response or `{"responses": [response1, response2]}` on stdin. Otherwise apply the preceding task-versus-envelope selection directly, sum unrounded decimal values once, and round the final total once.
 
 Name calls with missing cost and mark the subtotal incomplete. Coverage must include the evidence mode, calls planned/completed, rows requested, returned, exact-seed exclusions, unique rows, metric-complete rows, relevance exclusions by reason, conflicts, and selected rows.
 
@@ -178,7 +182,7 @@ Use local date `YYYY-MM-DD` and an ISO-8601 timestamp with timezone. Save:
 <root>/<domain>/<YYYY-MM-DD>_Page-Metadata_<safe-URL>.md
 ```
 
-The helper caps the full filename at 140 characters, keeps the extension, always adds a deterministic collision hash, and returns a redacted URL for the report. Do not place raw customer responses, credentials, authorization data, or sensitive query values in the report or repository.
+In either execution mode, cap the full filename at 140 characters, keep the extension, add the deterministic collision hash, and redact the report URL. Do not place raw customer responses, credentials, authorization data, or sensitive query values in the report or repository.
 
 ## Official references
 
