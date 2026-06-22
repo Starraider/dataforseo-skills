@@ -1,6 +1,6 @@
 # DataForSEO Skills
 
-## What this skill solves
+## What this skill collection solves
 
 This skill collection turns professional search data into clear, practical SEO recommendations. It helps businesses, consultants, and agencies understand how a website performs, find opportunities for growth, and decide what to improve next—from technical issues and keyword gaps to rankings, content, competitors, and international markets. Each skill follows a focused workflow and produces an actionable report, making reliable SEO analysis easier to run, repeat, and share.
 
