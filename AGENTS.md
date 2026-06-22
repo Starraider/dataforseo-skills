@@ -7,7 +7,7 @@
   - `skills/seo-competitor-gap-analysis/SKILL.md` identifies organic competitors with the DataForSEO MCP tools, quantifies keyword and traffic gaps, scores competitiveness, and writes a detailed Markdown report.
   - `skills/seo-keyword-research/SKILL.md` researches seed- or domain-based keywords with the DataForSEO MCP tools, scores opportunities, and writes a detailed Markdown report.
   - `skills/seo-rankings/SKILL.md` checks live Google organic positions and search volumes for a domain and keyword list, assigns ranking tiers and actions, and writes a detailed Markdown report.
-  - `skills/seo-ranking-watchlist/SKILL.md` discovers up to 100 domain keywords, combines them with target terms, re-checks live Google positions across runs, and maintains a local JSON watchlist with optional Markdown reports.
+  - `skills/seo-ranking-watchlist/SKILL.md` uses a compact direct DataForSEO API helper to discover up to 100 domain keywords and re-check live positions, with a 20-keyword MCP discovery fallback, then maintains a local JSON watchlist with optional Markdown reports.
   - `skills/seo-content-suggestions/SKILL.md` clusters a domain's ranked keywords, compares topic coverage with competitors, calculates a Content Score, and recommends the five highest-leverage articles.
   - `skills/seo-content-decay-refresh/SKILL.md` detects ranking and estimated-traffic decay, separates structural losses from seasonality, prioritizes existing pages, and writes evidence-based refresh briefs.
   - `skills/seo-cannibalization-internal-linking/SKILL.md` detects same-intent keyword overlap among priority pages, selects primary targets, recommends consolidation or differentiation, and creates a sampled internal-link map.
@@ -17,7 +17,7 @@
   - `skills/seo-international-opportunities/SKILL.md` compares isolated country/language datasets, identifies localized keyword and competitor opportunities, sequences market launches, and recommends international content and URL strategies.
   - `skills/seo-growth-forecasting/SKILL.md` models conservative, expected, and ambitious ranking scenarios, estimates derived incremental traffic, and prioritizes keywords and pages by opportunity versus difficulty.
   - `skills/seo-full-report/SKILL.md` consolidates date-selected reports for one domain, reconciles overlapping evidence, validates current visibility and ranking opportunities, and writes an action-first full SEO report.
-- Every SEO analysis and reporting skill must use the DataForSEO MCP server.
+- Every SEO analysis and reporting skill must use DataForSEO. Use the MCP server by default; `seo-ranking-watchlist` may use its documented direct API helper with an MCP fallback to prevent verbose SERP response truncation.
 - Use the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/) and [DataForSEO White Papers and knowledge base](https://dataforseo.com/knowledgebase) when designing, implementing, or verifying skills.
 - Keep each skill under `skills/<skill-name>/SKILL.md` and register it in both plugin and distribution manifests.
 - Every skill must have its own `skills/<skill-name>/README.md`.

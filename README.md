@@ -6,7 +6,7 @@ This skill collection turns professional search data into clear, practical SEO r
 
 The goal is to provide the insight of established SEO platforms without requiring another expensive monthly subscription. The skills use DataForSEO's pay-as-you-go data, so you pay only for the API requests needed for each analysis. An individual SEO analysis typically costs just a few cents, and many cost less than one cent, depending on the data and endpoints used.
 
-To use this collection, you need an active DataForSEO account and must install and configure the DataForSEO MCP server. Every analysis and reporting skill uses that server and follows the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/)
+To use this collection, you need an active DataForSEO account and should install and configure the DataForSEO MCP server. Analysis and reporting skills use DataForSEO through that server or a documented direct API helper and follow the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/).
 
 ## Why DataForSEO
 
@@ -51,6 +51,8 @@ Before using these skills, you need a [DataForSEO account](https://dataforseo.co
 Most skills need only a few details from you. Website analyses require a domain or page URL, while ranking checks also need a keyword list. Keyword research needs either a topic to explore or a domain whose existing keywords should be analyzed. International analysis requires the website's current language and at least two country-and-language markets to compare. Growth forecasts also need a target country, language, and forecast period. Full SEO reports require a domain plus one date or an inclusive date range and use the matching date-prefixed files already stored under the domain's report folder. Text optimization is the main exception: it needs the complete text and one to three starting keywords, but no website domain. The skills ask for any essential information that is missing before making chargeable requests.
 
 For the most detailed results, the `seo-technical-page-audit` skill uses Python 3 to run a helper that accesses DataForSEO OnPage task endpoints not currently available through the MCP server. This provides richer crawl evidence and device-specific technical data. The audit can still run without Python 3 by using the available MCP tools, but the resulting report will contain less detailed data. Full-detail mode also needs DataForSEO credentials stored securely in a `.env` file; the skill asks only for the file's location when it cannot find one in the project folder.
+
+The `seo-ranking-watchlist` skill uses Python 3 for its preferred direct API helper, which reduces large DataForSEO responses locally and safely stages resumable ranking checks before updating the watchlist. If Python 3, the helper, or local API credentials are unavailable before a direct request starts, the skill falls back to the DataForSEO MCP server and limits new keyword discovery to the first 20 keywords instead of 100; explicit and previously saved keywords are still preserved.
 
 The `seo-page-metadata` skill also requires Python 3. It uses a local helper to validate the supplied page URL, normalize the returned content, safely extract fallback page text when needed, and generate a consistent report path. All reporting skills require permission to save Markdown files, while the ranking watchlist additionally needs permission to maintain its local history file.
 
@@ -99,7 +101,7 @@ Choose the skill that matches the SEO question you want to answer. Each skill sa
 - `seo-competitor-gap-analysis`: organic competitor discovery, keyword-gap analysis, Competitive Score, and Markdown reporting.
 - `seo-keyword-research`: seed- and domain-based keyword discovery, intent grouping, opportunity scoring, and Markdown reporting.
 - `seo-rankings`: live Google organic rank checking, search-volume context, tiered actions, and Markdown reporting.
-- `seo-ranking-watchlist`: persistent file-based keyword monitoring, live position diffs across runs, and optional ranking-change reports.
+- `seo-ranking-watchlist`: persistent file-based keyword monitoring through a compact direct API helper with a 20-keyword MCP discovery fallback, live position diffs across runs, and optional ranking-change reports.
 - `seo-content-suggestions`: topical clustering, competitor content gaps, Content Score, and prioritized article briefs.
 - `seo-content-decay-refresh`: ranking-decay detection, seasonality classification, traffic-impact estimates, and refresh briefs for existing pages.
 - `seo-cannibalization-internal-linking`: same-intent keyword overlap, primary-page selection, consolidation or differentiation decisions, and sampled internal-link mapping.

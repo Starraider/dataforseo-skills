@@ -4,13 +4,14 @@
     {
       "id": 1,
       "prompt": "Add example.com to the SEO ranking watchlist with label Main site and target keywords seo audit tool and keyword research. Use the defaults and save it in the default location.",
-      "expected_output": "Discovers up to 100 current organic keywords, unions them with the supplied targets, performs one successful live rank check per saved keyword, and atomically writes the first snapshot to SEO/example.com/watchlist.json.",
+      "expected_output": "Preflights and uses the direct Python API helper to discover up to 100 current organic keywords, unions them with supplied targets, performs one successful live rank check per saved keyword, and atomically writes the first snapshot to SEO/example.com/watchlist.json.",
       "files": [],
       "assertions": [
-        "The workflow calls dataforseo_labs_google_ranked_keywords once with limit 100 and organic results, then calls serp_organic_live_advanced once per final keyword.",
+        "The workflow preflights and invokes scripts/rank_watchlist_api.py add with limit 100, the exact scope, supplied keywords, the resolved watchlist path, and --commit.",
+        "The helper uses Ranked Keywords discovery once and one target-filtered Live Advanced SERP request per final keyword, returning compact normalized JSON.",
         "The domain entry stores label, exact comparison scope, all explicit targets plus up to 100 discovered keywords, and a dated history snapshot with integer or null positions.",
         "Positions use the best matching organic rank_group for the domain or its subdomains, never rank_absolute or 101.",
-        "The watchlist is written atomically only after all live calls succeed at SEO/example.com/watchlist.json."
+        "The helper stages each completed check, prints only a bounded summary, and atomically commits SEO/example.com/watchlist.json only after all live calls succeed."
       ]
     },
     {
@@ -46,6 +47,30 @@
         "The workflow asks for the missing domain and waits without making a DataForSEO call.",
         "It does not compare German mobile rankings with a differently scoped saved history.",
         "It requires explicit confirmation before replacing scope and clearing history for a fresh baseline."
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Add example.net to the ranking watchlist, but Python 3 is unavailable in this environment. Use the configured DataForSEO MCP fallback.",
+      "expected_output": "Uses the DataForSEO MCP fallback, limits ranked-keyword discovery to the first 20 organic keywords ordered by search volume, preserves all explicit and existing terms, runs live checks, and discloses reduced discovery coverage.",
+      "files": [],
+      "assertions": [
+        "The fallback Ranked Keywords MCP request uses limit 20 rather than 100 and requests organic results ordered by descending search volume.",
+        "Explicit and previously saved keywords are retained even when they increase the final list beyond 20 terms.",
+        "The workflow makes one live MCP SERP request per final keyword and writes no snapshot if any response is failed, truncated, or incomplete.",
+        "Output and reports identify MCP fallback as the source and disclose the 20-keyword discovery limit."
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "The direct ranking-watchlist command finished but its stdout was empty. Determine whether example.com was saved without repeating paid calls.",
+      "expected_output": "Inspects the canonical watchlist and newest durable run manifest, treats a committed matching snapshot as success, or resumes only missing checks after approval instead of restarting the run.",
+      "files": [],
+      "assertions": [
+        "The workflow checks SEO/example.com/watchlist.json and .watchlist-runs before making any external call.",
+        "A committed run with a matching canonical snapshot is treated as successful despite empty stdout.",
+        "A partial run preserves completed results and identifies only missing keywords for resume.",
+        "No discovery or completed keyword check is repeated automatically."
       ]
     }
   ]

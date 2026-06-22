@@ -1,4 +1,4 @@
 interface:
   display_name: SEO Ranking Watchlist
   short_description: Track saved Google keyword positions across live checks.
-  default_prompt: Add or check this domain's local ranking watchlist with DataForSEO MCP, show changes since the previous successful run, and save state under SEO/<domain>/.
+  default_prompt: Add or check this domain's local ranking watchlist with the compact DataForSEO API helper and MCP fallback, show changes since the previous successful run, and save state under SEO/<domain>/.

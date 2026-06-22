@@ -47,13 +47,36 @@ Use UTF-8, two-space indentation, and a trailing newline. Write a sibling tempor
 
 For a domain removal, delete only that entry. If a domain-specific file then contains no domains, remove `watchlist.json` but leave its directory and reports intact. Removing a keyword changes `keywords` only; historical snapshots remain immutable evidence.
 
+## Retrieval paths
+
+Prefer the bundled Python 3 helper because it reduces verbose SERP responses locally before they reach the agent:
+
+```text
+python3 <skill-directory>/scripts/rank_watchlist_api.py preflight [--env-file <path>]
+python3 <skill-directory>/scripts/rank_watchlist_api.py add <domain> [scope options] [--keyword <term> ...] --watchlist <path> --limit 100 --commit
+python3 <skill-directory>/scripts/rank_watchlist_api.py check <domain> [scope options] --watchlist <path> --commit
+python3 <skill-directory>/scripts/rank_watchlist_api.py resume <run-file> [--commit]
+```
+
+The helper uses only Python's standard library. It reads `DATAFORSEO_USERNAME` or `DATAFORSEO_LOGIN` plus `DATAFORSEO_PASSWORD` from process environment variables, then from `./.env` or the supplied `--env-file`. Never pass credentials as command arguments, write them to reports, or retain raw responses.
+
+For discovery it calls `POST /v3/dataforseo_labs/google/ranked_keywords/live`. For each live check it calls `POST /v3/serp/google/organic/live/advanced` with `target`, `stop_crawl_on_match`, and `find_targets_in: ["organic"]`.
+
+Before billable calls, the helper creates a durable manifest under `<watchlist-directory>/.watchlist-runs/` unless `--run-file` is supplied. It atomically updates that manifest after every completed live check. With `--commit`, it validates all results, detects concurrent watchlist changes, appends the snapshot through a flushed sibling temporary file and `os.replace`, and marks the manifest `committed`. It preserves unknown watchlist and domain fields. Repeating commit for the same manifest must not duplicate history. For target-filtered live SERP checks, treat DataForSEO task code `40102 No Search Results` as a completed check with `position: null`, not as a retryable failure.
+
+Standard output is a bounded summary containing status, paths, counts, date, and known total cost; full keyword data stays in the run manifest and canonical watchlist. If stdout is absent, inspect those files. Treat a `committed` manifest and matching canonical snapshot as success. Exit `3` / `partial` retains successful paid checks; `resume` requests only keywords missing from `results`. A run stopped before discovery completed is not safely resumable without another approved discovery request.
+
+Use MCP fallback only when Python or the helper cannot start, or preflight reports `status: unavailable` / `fallback_safe: true` before any direct API task. The fallback discovery call must use `limit: 20`, `item_types: ["organic"]`, and descending search volume. Union those first 20 candidates after every explicit and existing keyword, then use one MCP live SERP call per final keyword. Record `source: MCP fallback` and `discovery_limit: 20` in reports. A truncated or otherwise incomplete MCP response is a failed check, not a null position.
+
+If a direct API operation returns `fallback_safe: false`, it may already have incurred cost. Inspect its run manifest first. Do not restart through MCP; ask before resuming missing checks or making another discovery request.
+
 ## Command details
 
 ### `add`
 
 Preserve an existing `label` when no replacement is supplied; use the domain as the label only for a new unlabeled entry. Order explicit keywords first, then existing keywords, then up to 100 discovery results ordered by descending search volume and better organic `rank_group`. Deduplicate without dropping supplied or existing terms. State the resulting live-call count before checking rankings.
 
-The Ranked Keywords dataset is a discovery source and may be updated weekly; it is not the saved live baseline. Run one live SERP request for every final keyword and store only those live positions.
+The Ranked Keywords dataset is a discovery source and may be updated weekly; it is not the saved live baseline. Direct API discovery may contribute up to 100 candidates; MCP fallback discovery may contribute up to 20. Run one live SERP request for every final keyword and store only those live positions.
 
 If discovery returns no rows and no explicit or existing keywords remain, do not create an empty watchlist. If an existing entry has history and the requested scope differs, explain that the series would be incomparable; proceed only after explicit confirmation, replace the saved scope, and clear history before recording the new baseline.
 
@@ -110,5 +133,7 @@ Use these sections:
 8. one evidence-based suggested action;
 9. methodology, DataForSEO call log, limitations, and official source links;
 10. Short take with concerns, opportunities, and the action.
+
+Identify the retrieval source as `direct DataForSEO API` or `MCP fallback`. When fallback was used, disclose that discovery was limited to 20 keywords instead of 100. Do not describe this limit as truncating explicit or previously saved terms.
 
 Do not claim that a null position is absent from Google. Say it was not found within the saved depth. Rankings are volatile point-in-time observations; one movement is not proof of a trend.

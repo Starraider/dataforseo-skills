@@ -2,7 +2,7 @@ slug: seo-ranking-watchlist
 display_name: SEO Ranking Watchlist
 summary:
   en: >
-    Maintains a local domain keyword watchlist, discovers current ranked keywords, checks live Google positions with DataForSEO MCP, and surfaces changes between saved runs.
+    Maintains a local domain keyword watchlist, discovers current ranked keywords, checks live Google positions with a compact direct DataForSEO API helper and MCP fallback, and surfaces changes between saved runs.
 category: marketing
 tags:
   - dataforseo
@@ -10,7 +10,7 @@ tags:
   - ranking-watchlist
   - seo-report
 use_cases:
-  - Create a persistent watchlist from optional target keywords and up to 100 discovered keywords a domain already ranks for.
+  - Create a persistent watchlist from optional target keywords and up to 100 directly discovered keywords, or 20 through MCP fallback.
   - Re-check saved Google organic positions and identify gains, declines, new rankings, and lost rankings.
   - List or remove tracked domains and keywords without making billable calls.
   - Create a detailed Markdown ranking-change report on request.
@@ -21,8 +21,9 @@ expected_outputs:
   - An optional dated Markdown report saved under the requested root or SEO/<domain>/ by default.
 context_requirements:
   - A target domain for add, check, and remove; target keywords are optional for add.
-  - The official DataForSEO MCP server with DATAFORSEO_LABS and SERP modules enabled.
-  - Filesystem write access and DataForSEO credentials configured in the MCP server.
+  - Python 3 and direct DataForSEO API credentials for the preferred helper workflow.
+  - The official DataForSEO MCP server with DATAFORSEO_LABS and SERP modules enabled for fallback.
+  - Filesystem write access.
 action_level: writes_files
 risk_level: medium
 related_skills:

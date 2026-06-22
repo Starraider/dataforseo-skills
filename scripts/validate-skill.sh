@@ -146,6 +146,8 @@ for path in (
     "skills/seo-full-report/references/report-contract.md",
     "skills/seo-full-report/templates/report-template.md",
     "skills/seo-full-report/scripts/select_reports.py",
+    "skills/seo-ranking-watchlist/scripts/rank_watchlist_api.py",
+    "skills/seo-ranking-watchlist/tests/test_rank_watchlist_api.py",
     "skills/seo-full-report/tests/test_select_reports.py",
 ):
     require(path)
@@ -209,3 +211,4 @@ PY
 python3 "$REPO_ROOT/skills/seo-technical-page-audit/tests/test_fetch_task_onpage_fixture.py"
 python3 "$REPO_ROOT/skills/seo-page-metadata/tests/test_metadata_support.py"
 python3 "$REPO_ROOT/skills/seo-full-report/tests/test_select_reports.py"
+python3 "$REPO_ROOT/skills/seo-ranking-watchlist/tests/test_rank_watchlist_api.py"

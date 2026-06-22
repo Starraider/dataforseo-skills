@@ -1,6 +1,6 @@
 # SEO Ranking Watchlist
 
-`seo-ranking-watchlist` maintains a local, file-based set of Google keyword rankings for one or more domains. It discovers keywords a domain already ranks for, combines them with optional target keywords, checks their live positions through the official DataForSEO MCP server, and compares each successful check with the preceding snapshot.
+`seo-ranking-watchlist` maintains a local, file-based set of Google keyword rankings for one or more domains. It discovers keywords a domain already ranks for, combines them with optional target keywords, checks their live positions through DataForSEO, and compares each successful check with the preceding snapshot.
 
 ## What the skill does
 
@@ -11,7 +11,7 @@ The skill supports four commands:
 - `check <domain>`: checks every saved keyword again, saves the snapshot, and reports Up, Down, Same, New, and Lost movements.
 - `remove <domain>` or `remove <domain> <keyword>`: removes a complete domain entry or one active keyword without deleting historical snapshots for other entries.
 
-Each discovery request retrieves up to 100 keywords per domain and unions them with all explicit target and existing watchlist terms. Discovery data identifies candidates; the saved baseline always comes from one live Google organic SERP check per final keyword.
+The primary Python workflow retrieves up to 100 discovered keywords per domain and unions them with all explicit target and existing watchlist terms. It saves completed checks to a durable local run manifest and atomically commits the watchlist only when every keyword succeeds. Interrupted runs can resume only missing checks, avoiding duplicate requests for already completed keywords. If Python or local API credentials are unavailable before a direct request, the skill uses the DataForSEO MCP server and limits discovery to the first 20 keywords. Explicit and previously saved terms are never removed by this fallback.
 
 ## Why this analysis matters
 
@@ -42,19 +42,21 @@ Every command ends with a short take that states the concerning drops, current o
 When a detailed ranking report is requested, the skill writes a Markdown file under the domain directory by default:
 
 ```text
-SEO/<domain>/<YYYY-MM-DD>_Ranking-Report_<domain>.md
+SEO/<domain>/<YYYY-MM-DD>_Rankink-Report_<domain>.md
 ```
 
 The report starts with the local ISO date and includes scope, cost, movement, current positions, concerns, opportunities, one suggested action, methodology, call log, and limitations.
 
 ## Requirements
 
-- The official DataForSEO MCP server with DataForSEO Labs and SERP modules enabled.
-- DataForSEO credentials configured securely in that MCP server.
+- Python 3 for the preferred compact direct API workflow.
+- `DATAFORSEO_USERNAME` (or `DATAFORSEO_LOGIN`) and `DATAFORSEO_PASSWORD` in the environment, `./.env`, or another file supplied with `--env-file`.
+- The official DataForSEO MCP server with DataForSEO Labs and SERP modules enabled as the fallback path.
+- DataForSEO credentials configured securely in the MCP server for fallback use.
 - Filesystem write access.
 - A valid domain for `add`, `check`, and `remove`.
 
-No credentials, authorization headers, or live customer response data are stored in the watchlist.
+The bundled `scripts/rank_watchlist_api.py` helper uses only the Python standard library. It sends Basic authentication directly to the fixed DataForSEO API host, filters live SERP checks to the target domain, and prints only a small status summary. When DataForSEO returns SERP task code `40102 No Search Results` for that filtered domain check, the helper records a successful `null` position instead of treating the keyword as a broken run. Normalized run data is staged under `.watchlist-runs/`; credentials, authorization headers, and raw API responses are never stored. Atomic replacement and concurrent-change detection protect existing watchlists.
 
 ## Examples
 
