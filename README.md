@@ -1,6 +1,6 @@
 # DataForSEO Skills
 
-## What this skill collection solves
+## What this skill solves
 
 This skill collection turns professional search data into clear, practical SEO recommendations. It helps businesses, consultants, and agencies understand how a website performs, find opportunities for growth, and decide what to improve next—from technical issues and keyword gaps to rankings, content, competitors, and international markets. Each skill follows a focused workflow and produces an actionable report, making reliable SEO analysis easier to run, repeat, and share.
 
@@ -35,6 +35,7 @@ Use this collection when you want reliable answers to practical SEO questions wi
 Each skill turns DataForSEO data into a report designed to support a decision—not a dump of technical metrics. Depending on the analysis you choose, you will receive:
 
 - **A clear summary of what matters most:** the main findings, the strongest opportunities, and a prioritized list of recommended next steps.
+- **A consolidated full SEO plan:** date-selected reports for one domain can be reconciled into one short action plan with owners, implementation steps, KPIs, and particularly attractive ranking opportunities.
 - **A practical website health check:** technical problems explained by importance, with affected pages or resources where available and a DataForSEO-derived Technical Score for quick orientation.
 - **A clearer view of the search market:** the competitors attracting the same audience, the keywords they rank for, and the gaps your website can realistically target. Competitor, keyword, and content scores make large result sets easier to compare.
 - **An actionable content plan:** topics worth creating, pages that need refreshing, and guidance for improving copy, metadata, social previews, and eligibility for prominent Google result features. Where several pages target the same search, the report explains which page should lead and whether the others should be combined, redirected, or made more distinct.
@@ -47,7 +48,7 @@ Each skill turns DataForSEO data into a report designed to support a decision—
 
 Before using these skills, you need a [DataForSEO account](https://dataforseo.com/?aff=292583) and the official DataForSEO MCP server must be installed and connected to it. Your account must have a positive balance so the skills can request data. A few dollars is usually enough to get started and run several typical analyses, although the exact cost depends on the amount and type of data requested.
 
-Most skills need only a few details from you. Website analyses require a domain or page URL, while ranking checks also need a keyword list. Keyword research needs either a topic to explore or a domain whose existing keywords should be analyzed. International analysis requires the website's current language and at least two country-and-language markets to compare. Growth forecasts also need a target country, language, and forecast period. Text optimization is the main exception: it needs the complete text and one to three starting keywords, but no website domain. The skills ask for any essential information that is missing before making chargeable requests.
+Most skills need only a few details from you. Website analyses require a domain or page URL, while ranking checks also need a keyword list. Keyword research needs either a topic to explore or a domain whose existing keywords should be analyzed. International analysis requires the website's current language and at least two country-and-language markets to compare. Growth forecasts also need a target country, language, and forecast period. Full SEO reports require a domain plus one date or an inclusive date range and use the matching date-prefixed files already stored under the domain's report folder. Text optimization is the main exception: it needs the complete text and one to three starting keywords, but no website domain. The skills ask for any essential information that is missing before making chargeable requests.
 
 For the most detailed results, the `seo-technical-page-audit` skill uses Python 3 to run a helper that accesses DataForSEO OnPage task endpoints not currently available through the MCP server. This provides richer crawl evidence and device-specific technical data. The audit can still run without Python 3 by using the available MCP tools, but the resulting report will contain less detailed data. Full-detail mode also needs DataForSEO credentials stored securely in a `.env` file; the skill asks only for the file's location when it cannot find one in the project folder.
 
@@ -89,6 +90,8 @@ Choose the skill that matches the SEO question you want to answer. Each skill sa
 
 - **`seo-growth-forecasting`** — Estimates how better Google rankings could affect future website traffic. This helps set realistic expectations, compare opportunities, and decide where SEO time and budget are most likely to produce value. [More details in the skill README](skills/seo-growth-forecasting/README.md).
 
+- **`seo-full-report`** — Combines all SEO analyses for one domain from a supplied date or date range into one prioritized implementation plan. This helps teams focus on the most critical fixes, coordinate overlapping recommendations, and act on the strongest ranking opportunities first. [More details in the skill README](skills/seo-full-report/README.md).
+
 ## Related skills
 
 - `dataforseo-skill`: general DataForSEO MCP tool selection, sequencing, validation, protocol guidance, and troubleshooting.
@@ -105,6 +108,7 @@ Choose the skill that matches the SEO question you want to answer. Each skill sa
 - `seo-serp-optimization`: live SERP-feature ownership, attainability, page-format comparison, and exact structural recommendations.
 - `seo-international-opportunities`: isolated country/language opportunity comparison, localized keyword clusters, market sequencing, and international URL planning.
 - `seo-growth-forecasting`: conservative, expected, and ambitious organic growth scenarios with page- and keyword-level derived traffic estimates and opportunity-versus-difficulty prioritization.
+- `seo-full-report`: date-scoped source reconciliation, current visibility validation, ranking-opportunity highlights, and an action-first 30/60/90-day SEO plan.
 
 ## Installation
 
@@ -135,6 +139,7 @@ npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-page-
 npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-serp-optimization
 npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-international-opportunities
 npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-growth-forecasting
+npx skills add https://github.com/Starraider/dataforseo-skills --skill seo-full-report
 npx skills add https://github.com/Starraider/dataforseo-skills --skill dataforseo-skill
 ```
 
@@ -155,8 +160,8 @@ git clone https://github.com/Starraider/dataforseo-skills.git
 - `agents/*.yaml` provides OpenAI-facing discovery metadata for each reporting skill.
 - All skills keep their runtime instructions in `SKILL.md`; all reporting skills include non-live evaluation cases.
 - GitHub Pages should remain disabled because the README and marketplace entry are sufficient.
-- Proposed GitHub description: `Agent skills for DataForSEO MCP analysis, technical audits, competitor gaps, keyword research, SEO growth forecasting, international SEO opportunities, content-decay refreshes, keyword cannibalization, internal linking, text optimization, page metadata, SERP features, topical authority, live rank checking, and ranking watchlists.`
-- Proposed GitHub topics: `agent-skill`, `dataforseo`, `mcp`, `seo`, `technical-seo`, `competitor-analysis`, `keyword-gap`, `keyword-research`, `seo-forecasting`, `organic-traffic-forecast`, `international-seo`, `seo-localization`, `content-decay`, `content-refresh`, `keyword-cannibalization`, `internal-linking`, `content-optimization`, `page-metadata`, `serp-features`, `featured-snippets`, `topical-authority`, `content-gap`, `rank-tracking`, `ranking-watchlist`.
+- Proposed GitHub description: `Agent skills for DataForSEO MCP analysis, technical audits, competitor gaps, keyword research, full SEO reports, SEO growth forecasting, international SEO opportunities, content-decay refreshes, keyword cannibalization, internal linking, text optimization, page metadata, SERP features, topical authority, live rank checking, and ranking watchlists.`
+- Proposed GitHub topics: `agent-skill`, `dataforseo`, `mcp`, `seo`, `technical-seo`, `competitor-analysis`, `keyword-gap`, `keyword-research`, `full-seo-report`, `seo-prioritization`, `seo-forecasting`, `organic-traffic-forecast`, `international-seo`, `seo-localization`, `content-decay`, `content-refresh`, `keyword-cannibalization`, `internal-linking`, `content-optimization`, `page-metadata`, `serp-features`, `featured-snippets`, `topical-authority`, `content-gap`, `rank-tracking`, `ranking-watchlist`.
 
 ## License
 

@@ -16,6 +16,7 @@
   - `skills/seo-serp-optimization/SKILL.md` finds feature opportunities in top-20 rankings, verifies approved keywords with live SERPs, compares target and winning page formats, and writes a detailed Markdown report with exact structural changes.
   - `skills/seo-international-opportunities/SKILL.md` compares isolated country/language datasets, identifies localized keyword and competitor opportunities, sequences market launches, and recommends international content and URL strategies.
   - `skills/seo-growth-forecasting/SKILL.md` models conservative, expected, and ambitious ranking scenarios, estimates derived incremental traffic, and prioritizes keywords and pages by opportunity versus difficulty.
+  - `skills/seo-full-report/SKILL.md` consolidates date-selected reports for one domain, reconciles overlapping evidence, validates current visibility and ranking opportunities, and writes an action-first full SEO report.
 - Every SEO analysis and reporting skill must use the DataForSEO MCP server.
 - Use the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/) and [DataForSEO White Papers and knowledge base](https://dataforseo.com/knowledgebase) when designing, implementing, or verifying skills.
 - Keep each skill under `skills/<skill-name>/SKILL.md` and register it in both plugin and distribution manifests.

@@ -1,0 +1,40 @@
+{
+  "skill_name": "seo-full-report",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Create the full SEO report for example.com from every report dated 2026-06-20 under SEO/example.com/. Focus on what we should do next and the strongest ranking opportunities.",
+      "expected_output": "Selects every date-prefixed source file for the exact date while excluding earlier full-report outputs, reads and reconciles all selected evidence, obtains the bounded current DataForSEO validation, and writes a concise action-first report under SEO/example.com/.",
+      "files": [],
+      "assertions": [
+        "The exact-date selection includes all regular files beginning 2026-06-20_ and excludes _Full-SEO-Report_ files by default.",
+        "The report distinguishes the selected-period evidence from the timestamped current DataForSEO snapshot.",
+        "The workflow calls Domain Rank Overview and one bounded Ranked Keywords request for organic positions 4-20 with positive search volume.",
+        "The report starts with no more than five prioritized next actions and gives each an owner, steps, effort, timing, KPI, and source references.",
+        "The filename follows SEO/example.com/YYYY-MM-DD_Full-SEO-Report_example.com_2026-06-20.md."
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Please combine our latest SEO analyses into a full report and tell me what to fix first.",
+      "expected_output": "Asks together for the missing domain and exact date or inclusive date range, then waits without reading a guessed directory, making a billable call, or writing a report.",
+      "files": [],
+      "assertions": [
+        "The workflow asks for both the domain and one ISO date or inclusive ISO date range in one clarification.",
+        "No DataForSEO request or output report is produced before the required inputs are supplied."
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Summarize all SEO files for https://www.example.org/shop from 2026-06-01 through 2026-06-15 and save the result below ./client-reports.",
+      "expected_output": "Normalizes the domain to example.org, selects the inclusive date range below ./client-reports/example.org/, stops without billable calls if no matching files exist, or otherwise reconciles the full source set and writes a range-labeled report.",
+      "files": [],
+      "assertions": [
+        "The domain is normalized to example.org and the inclusive range is 2026-06-01 through 2026-06-15.",
+        "When no file matches, the workflow reports the checked directory and selection and makes no DataForSEO call.",
+        "When files match, differing markets or devices remain separate and conflicting scores are not averaged.",
+        "The output filename ends with _Full-SEO-Report_example.org_2026-06-01_to_2026-06-15.md."
+      ]
+    }
+  ]
+}

@@ -94,6 +94,8 @@ for name in registered_skills:
 
     if readme_path.is_file() and not readme_path.read_text().startswith("# "):
         errors.append(f"skill README must begin with an H1: skills/{name}/README.md")
+    if readme_path.is_file() and "\n## Why this analysis matters\n" not in readme_path.read_text():
+        errors.append(f"skill README is missing '## Why this analysis matters': skills/{name}/README.md")
     if metadata_path.is_file() and f"slug: {name}\n" not in metadata_path.read_text():
         errors.append(f"distribution metadata slug mismatch: metadata/{name}.yaml")
     if agent_path.is_file() and "interface:\n" not in agent_path.read_text():
@@ -141,6 +143,10 @@ for path in (
     "skills/seo-page-metadata/tests/fixtures/onpage_success.json",
     "skills/seo-page-metadata/tests/fixtures/related_keywords_success.json",
     "skills/seo-page-metadata/tests/test_metadata_support.py",
+    "skills/seo-full-report/references/report-contract.md",
+    "skills/seo-full-report/templates/report-template.md",
+    "skills/seo-full-report/scripts/select_reports.py",
+    "skills/seo-full-report/tests/test_select_reports.py",
 ):
     require(path)
 
@@ -202,3 +208,4 @@ PY
 
 python3 "$REPO_ROOT/skills/seo-technical-page-audit/tests/test_fetch_task_onpage_fixture.py"
 python3 "$REPO_ROOT/skills/seo-page-metadata/tests/test_metadata_support.py"
+python3 "$REPO_ROOT/skills/seo-full-report/tests/test_select_reports.py"

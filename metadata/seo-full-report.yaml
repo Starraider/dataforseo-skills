@@ -1,0 +1,43 @@
+slug: seo-full-report
+display_name: SEO Full Report
+summary:
+  en: >
+    Reconciles date-selected SEO reports for one domain, validates current visibility and near-page-one opportunities with DataForSEO MCP, and produces a concise implementation-focused SEO plan.
+category: marketing
+tags:
+  - dataforseo
+  - seo-report
+  - seo-strategy
+  - seo-prioritization
+  - ranking-opportunities
+use_cases:
+  - Consolidate all SEO reports for one domain from a supplied date or inclusive date range.
+  - Remove duplicated findings and reconcile conflicting or differently scoped evidence.
+  - Prioritize the most critical fixes and strongest ranking opportunities into a 30/60/90-day plan.
+expected_outputs:
+  - No more than five immediate actions with implementation steps, owners, effort, timing, dependencies, and KPIs.
+  - A shortlist of particularly interesting ranking opportunities supported by source reports and a bounded current DataForSEO snapshot.
+  - A source inventory, reconciliation notes, measurement plan, call log, costs, and limitations.
+  - A dated Markdown report saved under the requested root or SEO/<domain>/ by default.
+context_requirements:
+  - A target domain and one ISO date or inclusive ISO date range.
+  - Existing date-prefixed SEO source files under the selected report root and domain folder.
+  - The official DataForSEO MCP server with the DATAFORSEO_LABS module enabled.
+  - Python 3 and filesystem read/write access.
+action_level: writes_files
+risk_level: medium
+related_skills:
+  - dataforseo-skill
+  - seo-technical-page-audit
+  - seo-competitor-gap-analysis
+  - seo-keyword-research
+  - seo-rankings
+  - seo-content-suggestions
+example_prompts:
+  - Combine all SEO reports for example.com dated 2026-06-20 and tell me what to do next.
+  - Create the full SEO report for example.org from 2026-06-01 through 2026-06-15.
+  - Reconcile this month's SEO analyses and highlight the best opportunities to improve rankings.
+primary_keywords:
+  - full-seo-report
+  - seo-report-summary
+  - seo-prioritization

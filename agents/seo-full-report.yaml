@@ -1,0 +1,4 @@
+interface:
+  display_name: SEO Full Report
+  short_description: Combine dated SEO analyses into an action-first plan.
+  default_prompt: Combine this domain's date-selected files under SEO/<domain>/ into a prioritized full SEO report, validate current visibility and ranking opportunities with DataForSEO MCP, and save the report beside its sources.
