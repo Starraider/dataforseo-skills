@@ -7,4 +7,6 @@ node_modules/
 vendor/
 dist/
 SEO/
+
+# Keep local research/reference files out of the repository.
 Resources/
