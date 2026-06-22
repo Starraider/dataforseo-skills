@@ -10,7 +10,5 @@ Create focused pull requests and explain the use case, behavior change, and veri
 - [ ] Plugin, Composer, npm, discovery, and README metadata remain aligned.
 - [ ] `scripts/validate-skill.sh` exits successfully.
 - [ ] Documentation links and example prompts are accurate.
-- [ ] Marketplace metadata is updated when discovery fields change, or the override is documented.
 
 By contributing, you agree that code is licensed under MIT and content under CC BY-SA 4.0.
-

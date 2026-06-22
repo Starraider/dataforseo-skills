@@ -1,10 +1,12 @@
 # DataForSEO Skills
 
-## What this skill solves
+## What this skill collection solves
 
-This collection of AI skills provides general DataForSEO MCP guidance plus practical SEO analysis and reporting tools as a cost-effective alternative to subscription services such as Semrush or Ahrefs. It is particularly useful for small businesses and independent professionals who need professional SEO data without committing to another recurring subscription. Instead, the skills use DataForSEO's pay-what-you-use model, so costs are tied to the analyses and API data actually requested.
+This skill collection turns professional search data into clear, practical SEO recommendations. It helps businesses, consultants, and agencies understand how a website performs, find opportunities for growth, and decide what to improve next—from technical issues and keyword gaps to rankings, content, competitors, and international markets. Each skill follows a focused workflow and produces an actionable report, making reliable SEO analysis easier to run, repeat, and share.
 
-Each analysis and reporting skill uses the DataForSEO MCP server and follows the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/) and [DataForSEO White Papers and knowledge base](https://dataforseo.com/knowledgebase).
+The goal is to provide the insight of established SEO platforms without requiring another expensive monthly subscription. The skills use DataForSEO's pay-as-you-go data, so you pay only for the API requests needed for each analysis. An individual SEO analysis typically costs just a few cents, and many cost less than one cent, depending on the data and endpoints used.
+
+To use this collection, you need an active DataForSEO account and must install and configure the DataForSEO MCP server. Every analysis and reporting skill uses that server and follows the official [DataForSEO API documentation](https://docs.dataforseo.com/v3/)
 
 ## Why DataForSEO
 
@@ -16,29 +18,40 @@ Simpler crawling tools such as Screaming Frog or On-Page-Crawler are useful for 
 
 ## Use when
 
-Use these skills to select and troubleshoot DataForSEO MCP tools, perform a custom evidence-based SEO analysis, audit one page for technical SEO, identify true Google organic competitors, research and score keyword opportunities, forecast achievable incremental organic traffic, compare international country/language opportunities, detect and refresh decaying content, resolve keyword cannibalization and sampled internal-link gaps, optimize supplied prose around low-difficulty keywords, generate evidence-based page and social metadata, optimize ranked pages for the live Google SERP composition, assess topical authority and content gaps, check live Google rankings for a supplied keyword list, or maintain a persistent ranking watchlist across runs.
+Use this collection when you want reliable answers to practical SEO questions without manually gathering and interpreting data from multiple sources. The skills can help you:
+
+- understand how well a website or individual page performs in Google;
+- find technical problems that may prevent a page from ranking well;
+- discover valuable keywords, realistic growth opportunities, and the competitors already winning those searches;
+- decide what content to create, improve, combine, or remove;
+- improve existing copy, page titles, descriptions, social previews, and page structure;
+- identify pages competing against each other for the same searches and strengthen internal links;
+- track current rankings, spot meaningful gains or losses, and estimate the traffic better rankings could generate;
+- compare opportunities in different countries and languages; or
+- plan a custom SEO analysis and choose the right DataForSEO tools when no ready-made workflow fits the question.
 
 ## Expected outputs
 
-- A scoped, cost-aware DataForSEO MCP call plan or custom SEO analysis with validated evidence, coverage, and limitations.
-- A prioritized technical SEO report with a provider-derived Technical Score.
-- A competitor report with up to 20 discovered domains, detailed top-five comparisons, and a 0-100 Competitive Score.
-- A keyword analysis with intent groups, top-20 opportunities, and a reproducible 0-100 Keyword Score.
-- A supplied-text optimization report with up to 20 low-hanging-fruit keywords and three distinct revision approaches.
-- A page-metadata report with five primary-content-derived seeds, explicit market/language provenance, up to 20 ranked keyword opportunities, and three coherent search and social metadata packages with one recommendation.
-- A SERP-feature opportunity report with current owners, target positions, attainability, exact page-format changes, and priority based on ranking proximity, volume, intent fit, and live feature prominence.
-- An international opportunity report with isolated market datasets, localized keyword clusters, competitor strength, a market launch order, translation-risk terms, and country/language URL recommendations.
-- An SEO growth forecast with a current visibility baseline, conservative/expected/ambitious ranking scenarios, derived incremental traffic by keyword and page, opportunity-versus-difficulty prioritization, explicit CTR assumptions, and confidence levels.
-- A live rankings report with search volume, tier, and one prioritized action per keyword.
-- A local ranking watchlist with optional target keywords plus up to 100 discovered terms, dated live snapshots, movement since the previous successful check, concerning-drop and near-page-one callouts, and an optional detailed Markdown report.
-- A topical-authority report with a 0-100 Content Score, cluster gaps, and five prioritized article briefs.
-- A content-decay report that separates ranking loss from seasonality and provides page-level refresh, consolidation, redirect, or unchanged recommendations.
-- A cannibalization and internal-linking report with multi-URL keywords, primary and competing page selections, merge/redirect/canonicalize/differentiate/retain decisions, and a sampled source-target-anchor map.
-- A per-call DataForSEO cost log and summed `Total cost: x,xx USD` value in every report's Scope section.
+Each skill turns DataForSEO data into a report designed to support a decision—not a dump of technical metrics. Depending on the analysis you choose, you will receive:
+
+- **A clear summary of what matters most:** the main findings, the strongest opportunities, and a prioritized list of recommended next steps.
+- **A practical website health check:** technical problems explained by importance, with affected pages or resources where available and a DataForSEO-derived Technical Score for quick orientation.
+- **A clearer view of the search market:** the competitors attracting the same audience, the keywords they rank for, and the gaps your website can realistically target. Competitor, keyword, and content scores make large result sets easier to compare.
+- **An actionable content plan:** topics worth creating, pages that need refreshing, and guidance for improving copy, metadata, social previews, and eligibility for prominent Google result features. Where several pages target the same search, the report explains which page should lead and whether the others should be combined, redirected, or made more distinct.
+- **Ranking and growth guidance:** current Google positions, important changes over time, terms close to page one, and the best action for each keyword. Forecasts show conservative, expected, and ambitious traffic scenarios so potential gains are easier to evaluate.
+- **International expansion guidance:** a comparison of countries and languages, including local demand, competitor strength, translation risks, recommended launch order, and suitable URL structures.
+- **Evidence you can review:** the market, language, assumptions, coverage, limitations, and supporting DataForSEO results used for the recommendations.
+- **Transparent usage costs:** every report records the cost of each DataForSEO request and shows the total in its Scope section.
 
 ## Context requirements
 
-Configure the official DataForSEO MCP server and credentials securely. Technical page audits also require Python 3 and a `.env` credential file so the skill can call task endpoints missing from MCP. The helper looks in the project root first and asks for the file path when it is absent. Page-metadata analysis requires Python 3 for deterministic response normalization and report-path generation. Domain- and page-based analyses require a website project domain or URL. Keyword research also requires a seed or uses the project domain as its analysis target. Growth forecasting requires a domain, country, language, and forecast period, and uses DataForSEO Labs plus Keywords Data. International opportunity analysis requires a domain, its current language, and at least two target country/language pairs, and uses DataForSEO Labs, Keywords Data, and SERP. Text keyword optimization requires complete supplied prose and one to three seeds, but no domain. Page-metadata analysis requires one absolute HTTP(S) page URL. SERP optimization requires a domain and uses DataForSEO Labs, SERP, and OnPage MCP modules; country, language, device, exact location, and report root are optional. Rank checking requires a keyword list. Ranking watchlists require a domain for add, check, and remove, use optional target keywords for add, and require filesystem access for persistent JSON state. Content suggestions optionally accept up to five competitor domains and discover them when omitted. Content-decay analysis requires DataForSEO Labs, Keywords Data, and OnPage MCP modules. Cannibalization and internal-linking analysis requires domain, country, and language, uses DataForSEO Labs and OnPage, and accepts optional priority URLs. Filesystem write access is required for Markdown reports.
+Before using these skills, you need a [DataForSEO account](https://dataforseo.com/?aff=292583) and the official DataForSEO MCP server must be installed and connected to it. Your account must have a positive balance so the skills can request data. A few dollars is usually enough to get started and run several typical analyses, although the exact cost depends on the amount and type of data requested.
+
+Most skills need only a few details from you. Website analyses require a domain or page URL, while ranking checks also need a keyword list. Keyword research needs either a topic to explore or a domain whose existing keywords should be analyzed. International analysis requires the website's current language and at least two country-and-language markets to compare. Growth forecasts also need a target country, language, and forecast period. Text optimization is the main exception: it needs the complete text and one to three starting keywords, but no website domain. The skills ask for any essential information that is missing before making chargeable requests.
+
+For the most detailed results, the `seo-technical-page-audit` skill uses Python 3 to run a helper that accesses DataForSEO OnPage task endpoints not currently available through the MCP server. This provides richer crawl evidence and device-specific technical data. The audit can still run without Python 3 by using the available MCP tools, but the resulting report will contain less detailed data. Full-detail mode also needs DataForSEO credentials stored securely in a `.env` file; the skill asks only for the file's location when it cannot find one in the project folder.
+
+The `seo-page-metadata` skill also requires Python 3. It uses a local helper to validate the supplied page URL, normalize the returned content, safely extract fallback page text when needed, and generate a consistent report path. All reporting skills require permission to save Markdown files, while the ranking watchlist additionally needs permission to maintain its local history file.
 
 ## Example prompts
 
@@ -46,136 +59,35 @@ See the individual skill READMEs for invocation examples.
 
 ## Available skills
 
-Each skill below has a dedicated README with the full behavior, invocation examples, and report expectations:
+Choose the skill that matches the SEO question you want to answer. Each skill saves a corresponding report. For requirements, examples, and full report contents, see the README linked with each description.
 
-- [seo-technical-page-audit](skills/seo-technical-page-audit/README.md)
-- [seo-competitor-gap-analysis](skills/seo-competitor-gap-analysis/README.md)
-- [seo-keyword-research](skills/seo-keyword-research/README.md)
-- [seo-rankings](skills/seo-rankings/README.md)
-- [seo-ranking-watchlist](skills/seo-ranking-watchlist/README.md)
-- [seo-content-suggestions](skills/seo-content-suggestions/README.md)
-- [seo-content-decay-refresh](skills/seo-content-decay-refresh/README.md)
-- [seo-cannibalization-internal-linking](skills/seo-cannibalization-internal-linking/README.md)
-- [seo-text-keyword-optimization](skills/seo-text-keyword-optimization/README.md)
-- [seo-page-metadata](skills/seo-page-metadata/README.md)
-- [seo-serp-optimization](skills/seo-serp-optimization/README.md)
-- [seo-international-opportunities](skills/seo-international-opportunities/README.md)
-- [seo-growth-forecasting](skills/seo-growth-forecasting/README.md)
-- [dataforseo-skill](skills/dataforseo-skill/README.md)
+- **`dataforseo-skill`** — Creates a custom, evidence-based SEO analysis when none of the specialized skills fits your question. This is useful for investigating a specific website challenge or opportunity with reliable search data. [More details in the skill README](skills/dataforseo-skill/README.md).
 
-### `dataforseo-skill`
+- **`seo-technical-page-audit`** — Checks one webpage for problems that could make it harder for search engines or visitors to use. This helps you focus first on the fixes most likely to improve the page's search performance. [More details in the skill README](skills/seo-technical-page-audit/README.md).
 
-Selects, sequences, calls, validates, and troubleshoots DataForSEO MCP tools for custom SEO analyses. It includes a captured catalog of 83 exposed tools with exact callable declarations and underlying REST mappings, plus protocol, authentication, response, error, rate-limit, pagination, batching, callback, SDK, and workflow references.
+- **`seo-competitor-gap-analysis`** — Shows which websites compete with yours in Google and where they attract search traffic that you do not. This reveals realistic opportunities to strengthen your website and win more relevant visitors. [More details in the skill README](skills/seo-competitor-gap-analysis/README.md).
 
-Detailed reference: [skills/dataforseo-skill/README.md](skills/dataforseo-skill/README.md)
+- **`seo-keyword-research`** — Finds the words and questions people use when searching for your products, services, or topics. This helps you choose subjects with genuine demand and create content your audience is more likely to discover. [More details in the skill README](skills/seo-keyword-research/README.md).
 
-The active MCP `tools/list` and input schema remain authoritative because enabled modules and deployed tool versions can differ from the captured catalog.
+- **`seo-rankings`** — Checks where your website currently appears in Google for the keywords that matter to you. This makes it easier to see what is performing well, what needs attention, and where improvement is most achievable. [More details in the skill README](skills/seo-rankings/README.md).
 
-### `seo-technical-page-audit`
+- **`seo-ranking-watchlist`** — Monitors important Google rankings over time and highlights meaningful gains, losses, and keywords close to the first page. This helps you react quickly to declining visibility and recognize promising opportunities. [More details in the skill README](skills/seo-ranking-watchlist/README.md).
 
-Audits one specific page through DataForSEO MCP and a direct REST bridge for task endpoints that MCP does not expose. It analyzes desktop and mobile by default, or only an explicitly requested device, with matching OnPage browser presets and Lighthouse contexts. Dual-device reports keep invariant SEO checks once and compare only meaningful rendering, resource, runtime, usability, performance, caching, and mobile-first-indexing differences. The report returns device-specific DataForSEO Technical Scores, lists exact affected URLs or assets where available, prioritizes fixes from P0 to P3, and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
+- **`seo-content-suggestions`** — Identifies subjects your website covers well, topics it is missing, and useful new article ideas. This helps build a more complete content offering that can attract the right audience and strengthen your authority in search. [More details in the skill README](skills/seo-content-suggestions/README.md).
 
-Detailed reference: [skills/seo-technical-page-audit/README.md](skills/seo-technical-page-audit/README.md)
+- **`seo-content-decay-refresh`** — Finds existing pages that are losing search visibility and recommends whether to update, combine, redirect, or leave them unchanged. This helps recover value from content you already own instead of always creating something new. [More details in the skill README](skills/seo-content-decay-refresh/README.md).
 
-The page URL supplies the project domain. If the prompt does not contain a URL or separate domain, the skill asks for the domain; it always asks for the URL when that is absent, before making billable DataForSEO requests.
+- **`seo-cannibalization-internal-linking`** — Finds pages on your website that compete with each other for the same searches and identifies opportunities to connect related content more effectively. This helps search engines understand which pages are most important and can concentrate ranking strength in the right places. [More details in the skill README](skills/seo-cannibalization-internal-linking/README.md).
 
-### `seo-competitor-gap-analysis`
+- **`seo-text-keyword-optimization`** — Reviews supplied text and suggests relevant search terms and practical ways to improve the wording. This helps the content match what potential visitors are looking for while preserving its purpose and readability. [More details in the skill README](skills/seo-text-keyword-optimization/README.md).
 
-Finds up to 20 true organic-search competitors through DataForSEO Labs, ranks them by SERP keyword overlap, and analyzes the top five for shared and unique keywords, average position gaps, defensive wins, traffic estimates, and strategic grouping. It calculates the requested 0-100 Competitive Score and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
+- **`seo-page-metadata`** — Recommends stronger page titles, search descriptions, and social-sharing text for one webpage. This helps search engines understand the page and can make its listing more appealing to potential visitors. [More details in the skill README](skills/seo-page-metadata/README.md).
 
-Detailed reference: [skills/seo-competitor-gap-analysis/README.md](skills/seo-competitor-gap-analysis/README.md)
+- **`seo-serp-optimization`** — Finds opportunities for a webpage to appear more prominently in Google and recommends content improvements that support those opportunities. This can help the page earn more attention and clicks from the search results. [More details in the skill README](skills/seo-serp-optimization/README.md).
 
-If the prompt does not contain a domain, the skill asks for one before making billable DataForSEO requests.
+- **`seo-international-opportunities`** — Compares search opportunities across countries and languages and identifies where expansion is most promising. This helps you choose markets carefully and create content that fits local search behavior rather than relying on direct translation alone. [More details in the skill README](skills/seo-international-opportunities/README.md).
 
-### `seo-keyword-research`
-
-Researches a seed keyword through up to 200 related terms and 100 long-tail suggestions, or finds up to 100 organic keywords for which a domain already ranks. It reports search volume, CPC, Ads competition, keyword difficulty, and intent; surfaces the top 20 by volume-to-difficulty opportunity; calculates a transparent 0-100 Keyword Score; and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
-
-Detailed reference: [skills/seo-keyword-research/README.md](skills/seo-keyword-research/README.md)
-
-The skill always requires a project domain and asks for it before making billable DataForSEO requests when it is absent, including seed-based research.
-
-### `seo-rankings`
-
-Checks live Google organic positions for a supplied domain and keyword list through DataForSEO MCP, adds search volume, and groups each keyword as Winning, Page 1, Close, Long-haul, or Not ranking. It assigns one next action per keyword, selects the single highest-leverage action overall, and writes a detailed dated Markdown report under the normalized project domain, using `SEO/<domain>/` by default.
-
-Detailed reference: [skills/seo-rankings/README.md](skills/seo-rankings/README.md)
-
-If the prompt omits the domain or keyword list, the skill asks for all missing required inputs before making billable DataForSEO requests. Location, language, device, and depth default to United States, `en`, desktop, and 100.
-
-### `seo-ranking-watchlist`
-
-Creates and maintains a file-based domain ranking watchlist, combining optional target keywords with up to 100 current organic terms discovered through DataForSEO Labs. Every successful add or check records live Google organic positions for the combined set under a stable location, language, device, and depth, then compares the snapshot with the immediately previous successful run. It reports Up, Down, Same, New, and Lost states; highlights drops of five or more positions and rankings lost beyond the tracked depth; and surfaces positions 11–20 as near-page-one opportunities. The default watchlist is `SEO/<domain>/watchlist.json`.
-
-Detailed reference: [skills/seo-ranking-watchlist/README.md](skills/seo-ranking-watchlist/README.md)
-
-The `list` and `remove` commands make no DataForSEO calls. When requested, a detailed report uses `SEO/<domain>/<YYYY-MM-DD>_Rankink-Report_<domain>.md` by default and preserves the requested `Rankink` filename spelling.
-
-### `seo-content-suggestions`
-
-Clusters up to 200 keywords for which a domain ranks into 8-15 topical groups, discovers or accepts up to five competitors, and uses DataForSEO Labs keyword gaps to classify each cluster as Strong, Building, Weak, or Missing. It calculates a reproducible 0-100 Content Score and recommends five specific commercial or transactional articles using search volume, keyword difficulty, intent, and competitor authority. The detailed dated Markdown report is saved under the normalized project domain, using `SEO/<domain>/` by default.
-
-Detailed reference: [skills/seo-content-suggestions/README.md](skills/seo-content-suggestions/README.md)
-
-If the prompt does not contain a domain, the skill asks for one before making billable DataForSEO requests.
-
-### `seo-content-decay-refresh`
-
-Measures recent domain visibility, identifies important pages and ranked keywords, samples up to ten keywords across 24 months of historical SERPs, and compares ranking loss with historical demand and Google Trends. It classifies sampled declines as Structural, Seasonal, Mixed, or Inconclusive/stable, estimates traffic impact from DataForSEO ETV changes, and parses up to five priority pages to produce refresh, consolidate, redirect, or leave-unchanged recommendations. Every actionable brief includes an updated outline and internal-link suggestions. The detailed dated Markdown report uses `SEO/<domain>/` by default.
-
-Detailed reference: [skills/seo-content-decay-refresh/README.md](skills/seo-content-decay-refresh/README.md)
-
-If the prompt does not contain a domain, the skill asks for one before making billable DataForSEO requests. Use `seo-content-suggestions` instead when the main goal is proposing new articles.
-
-### `seo-cannibalization-internal-linking`
-
-Discovers or accepts up to 20 priority pages, identifies keywords with multiple populated per-page organic results, and verifies the highest-priority overlaps with DataForSEO Instant Pages and Content Parsing. It selects a primary target for each same-intent cluster and recommends merge, redirect, canonicalize, differentiate, or retain actions. A sampled internal-link map supplies source pages, target pages, natural anchors, placement context, and verified existing-link status. The detailed dated Markdown report uses `SEO/<domain>/` by default.
-
-Detailed reference: [skills/seo-cannibalization-internal-linking/README.md](skills/seo-cannibalization-internal-linking/README.md)
-
-Domain, country, and language are required; the skill asks for all missing values before making billable calls. Specific URLs are optional. Without the task-based OnPage crawler, the report covers discovered or supplied priority pages and does not guarantee a complete site-wide internal-link graph.
-
-### `seo-text-keyword-optimization`
-
-Accepts complete supplied prose and one to three seed keywords, retrieves up to 50 related keywords per seed through DataForSEO Labs, deduplicates and relevance-filters the combined pool, and ranks up to 20 low-hanging-fruit terms using search volume and organic keyword difficulty. It then proposes three materially different optimization approaches with concrete keyword-to-text mappings and recommends one. The detailed dated Markdown report is saved under `SEO/text-keyword-optimization/` by default.
-
-Detailed reference: [skills/seo-text-keyword-optimization/README.md](skills/seo-text-keyword-optimization/README.md)
-
-The skill asks for missing text or seeds before making billable calls. It defaults to United States/English only when the supplied language does not conflict with that scope.
-
-### `seo-page-metadata`
-
-Analyzes one exact page with DataForSEO OnPage, derives five evidence-backed seed keywords from qualifying primary content, and requests up to 25 related keywords for each seed. It preserves nulls and provenance, records conflicts and exclusions, and ranks up to 20 complete relevant rows with a transparent volume-to-difficulty proxy. The report recommends one of three coherent Page Title, Meta Description, Open Graph, and Twitter Card packages with Unicode code-point counts. Legacy meta keywords are included only when explicitly requested. The report is saved under the normalized project domain, using `SEO/<domain>/` by default.
-
-Detailed reference: [skills/seo-page-metadata/README.md](skills/seo-page-metadata/README.md)
-
-If the prompt does not contain an absolute HTTP(S) page URL, the skill asks for one before making billable DataForSEO requests.
-
-### `seo-serp-optimization`
-
-Discovers feature-bearing keywords where a domain ranks in Google's top 20, proposes a bounded shortlist, and waits for approval before live SERP fan-out. For approved keywords it records result composition, current feature owners, target organic positions, and feature prominence, then parses target and representative winning pages. The report classifies attainability and specifies exact answer blocks, headings, lists, tables, imagery, video, supporting questions, structured-data eligibility, and external local or commerce dependencies. Priority combines ranking proximity, relative volume, intent fit, and live feature prominence. The default path is `SEO/<domain>/<YYYY-MM-DD>_Serp-Optimization_<domain>.md`.
-
-Detailed reference: [skills/seo-serp-optimization/README.md](skills/seo-serp-optimization/README.md)
-
-If the prompt does not contain a domain, the skill asks for one before making billable DataForSEO requests. Live SERP calls require approval of a bounded shortlist unless the prompt already supplies it.
-
-### `seo-international-opportunities`
-
-Compares two or more country/language markets without merging their keyword, search-volume, ranking, intent, competitor, terminology, Trends, or live SERP datasets. It measures market-local demand, existing visibility, competitor strength, and competitor-only gaps; creates native keyword clusters; flags terms that require localization rather than literal translation; and recommends a reproducible market launch order plus country/language URL and page strategies. The default path is `SEO/<domain>/<YYYY-MM-DD>_International-Opportunities_<domain>.md`.
-
-Detailed reference: [skills/seo-international-opportunities/README.md](skills/seo-international-opportunities/README.md)
-
-The skill requires a domain, the site's current language, and at least two complete target country/language combinations. It asks for all missing required inputs before making billable DataForSEO requests. Live SERP calls require approval of up to three native-term candidates per market unless the prompt pre-authorizes that bounded validation.
-
-### `seo-growth-forecasting`
-
-Establishes a current DataForSEO organic visibility baseline, models conservative, expected, and ambitious ranking scenarios over a supplied period, and estimates incremental traffic by keyword and page with a documented CTR curve, historical demand, seasonality, ranking targets, and ramp timing. It ranks work by expected gain, difficulty band, ranking proximity, and optional business-value tier. Every modeled value is labeled as a derived estimate and remains separate from DataForSEO ETV and other provider metrics. The default path is `SEO/<domain>/<YYYY-MM-DD>_Growth-Forecasting_<domain>.md`.
-
-Detailed reference: [skills/seo-growth-forecasting/README.md](skills/seo-growth-forecasting/README.md)
-
-The skill requires domain, country, language, and forecast period before making billable requests. Priority pages, business-value tiers, a custom CTR curve, and report root are optional. Backlinks and LLM Mentions endpoints are not used.
-
-Every generated report records each DataForSEO call's response cost and shows the summed value in its Scope section as `Total cost: x,xx USD`.
+- **`seo-growth-forecasting`** — Estimates how better Google rankings could affect future website traffic. This helps set realistic expectations, compare opportunities, and decide where SEO time and budget are most likely to produce value. [More details in the skill README](skills/seo-growth-forecasting/README.md).
 
 ## Related skills
 
@@ -238,21 +150,6 @@ composer require Starraider/dataforseo-skills
 git clone https://github.com/Starraider/dataforseo-skills.git
 ```
 
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md). Changes to discovery fields must document why an override is intentional.
-
-## License
-
-Code, scripts, workflows, and configuration are licensed under [MIT](LICENSE-MIT). Skill definitions and documentation are licensed under [CC BY-SA 4.0](LICENSE-CC-BY-SA-4.0).
-
-## Classification
-
-| Field | Value |
-| --- | --- |
-| Action level | `runs_commands` |
-| Risk level | `medium` |
-
 ## Repository extras
 
 - `agents/*.yaml` provides OpenAI-facing discovery metadata for each reporting skill.
@@ -261,4 +158,14 @@ Code, scripts, workflows, and configuration are licensed under [MIT](LICENSE-MIT
 - Proposed GitHub description: `Agent skills for DataForSEO MCP analysis, technical audits, competitor gaps, keyword research, SEO growth forecasting, international SEO opportunities, content-decay refreshes, keyword cannibalization, internal linking, text optimization, page metadata, SERP features, topical authority, live rank checking, and ranking watchlists.`
 - Proposed GitHub topics: `agent-skill`, `dataforseo`, `mcp`, `seo`, `technical-seo`, `competitor-analysis`, `keyword-gap`, `keyword-research`, `seo-forecasting`, `organic-traffic-forecast`, `international-seo`, `seo-localization`, `content-decay`, `content-refresh`, `keyword-cannibalization`, `internal-linking`, `content-optimization`, `page-metadata`, `serp-features`, `featured-snippets`, `topical-authority`, `content-gap`, `rank-tracking`, `ranking-watchlist`.
 
-Developed and maintained by [Sven Kalbhenn](https://www.skom.de/).
+## License
+
+Developed and maintained by Sven Kalbhenn.
+Code and scripts: [LICENSE-MIT](LICENSE-MIT) (Sven Kalbhenn)
+Skills and documentation: [LICENSE-CC-BY-SA-4.0](LICENSE-CC-BY-SA-4.0)
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Changes to discovery fields must document why an override is intentional.
+
+Questions and feedback welcome via GitHub issues or e-mail: sven@skom.de
